@@ -1,0 +1,12 @@
+#UNO project configuration file
+#Fri Feb 19 14:47:21 CST 2016
+project.srcdir=/source
+regclassname=com.chriswlucas.helloworld.comp.RegistrationHandler
+javaversion=java5
+project.sdk=5.0.5.2
+project.ooo=LibreOffice 5.0
+project.implementation=comp
+project.build=build
+project.language=Java
+project.prefix=com.chriswlucas.helloworld
+project.idl=/idl
