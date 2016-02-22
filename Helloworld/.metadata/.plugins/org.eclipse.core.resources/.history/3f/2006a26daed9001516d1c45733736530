@@ -1,0 +1,11 @@
+import java.util.ArrayList;
+/** Author(s)/Contributor(s): Fausto Tommasi
+ *  Date: 2/21/2016
+ *  Purpose: 
+ */
+public interface SynonymManager {
+	public ArrayList <String> getSynonym(String target);	
+	
+	
+
+}
