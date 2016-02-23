@@ -1,0 +1,24 @@
+/** Author(s)/Contributor(s): Fausto Tommasi
+ *  Date: 2/21/2016
+ *  Purpose: First implementation of SynonymManager that will use a Thesaurus
+ */
+
+import java.util.ArrayList;
+
+import edu.smu.tspell.wordnet.Synset;
+import edu.smu.tspell.wordnet.WordNetDatabase;
+
+
+public class SynonymGetter implements SynonymManager{
+	//private Synset[] mySyns;
+	@Override
+	public Synset[] getSynonym(String target) {
+		// TODO(Fausto): Implement and test against an open knowledge source 
+		WordNetDatabase database = WordNetDatabase.getFileInstance();
+		ArrayList<String>  currSyns = new ArrayList<String>();
+		Synset[] mySyns = database.getSynsets(target);
+		currSyns.add(database.getSynsets(target).toString());
+		return mySyns;
+	}
+
+}

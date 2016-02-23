@@ -1,0 +1,12 @@
+#ifndef __org_libreoffice_example_cass_idl__
+#define __org_libreoffice_example_cass_idl__
+
+#include <org/libreoffice/example/XCASS.idl>
+module org { module libreoffice { module example { 	
+
+	service CASS : org::libreoffice::example::XCASS {
+
+	};
+
+ }; }; };
+#endif

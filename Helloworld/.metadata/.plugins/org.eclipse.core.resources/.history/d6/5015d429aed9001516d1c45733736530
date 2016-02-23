@@ -1,0 +1,11 @@
+import java.util.ArrayList;
+
+public class SynonymGetter implements SynonymManager{
+
+	@Override
+	public ArrayList<String> getSynonym(String target) {
+		// TODO(Fausto): Implement and test against an open knowledge source 
+		return null;
+	}
+
+}

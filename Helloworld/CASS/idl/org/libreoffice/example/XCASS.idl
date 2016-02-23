@@ -1,0 +1,11 @@
+#ifndef __org_libreoffice_example_xcass_idl__
+#define __org_libreoffice_example_xcass_idl__
+
+module org { module libreoffice { module example { 	
+
+	interface XCASS {
+
+	};
+
+ }; }; };
+#endif
