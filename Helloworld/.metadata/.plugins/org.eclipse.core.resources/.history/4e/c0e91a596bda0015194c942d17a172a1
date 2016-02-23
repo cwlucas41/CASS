@@ -1,0 +1,13 @@
+#ifndef __SynonymManager__
+#define __SynonymManager__
+
+module HelloWorld{
+	interface XSynonymManager{
+		string getString([in] string target);			
+
+	};
+};
+
+
+
+#endif

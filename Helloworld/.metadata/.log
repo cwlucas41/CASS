@@ -84,3 +84,22 @@ java.lang.NullPointerException
 
 !ENTRY org.libreoffice.ide.eclipse.core 2 2 2016-02-22 15:43:54.405
 !MESSAGE The configuration cannot be saved because it's inconsistent
+!SESSION 2016-02-23 14:16:47.260 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.7.0_95
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-02-23 14:17:07.138
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-02-23 14:17:20.213
+!MESSAGE LOEclipseIntegration started
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-02-23 14:17:29.189
+!MESSAGE Resources changes are now listened
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-02-23 14:17:29.205
+!MESSAGE Java UNO resources changes are now listened

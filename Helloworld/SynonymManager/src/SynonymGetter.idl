@@ -1,0 +1,12 @@
+#ifndef __SynonymGetter__
+#define __SynonymGetter__
+
+#include <XSynonymManager>
+module HelloWorld{module SynonymGetter{
+	service SynonymGetter : HelloWorld::XHelloWorld{
+		
+	};
+  };
+};
+
+#endif

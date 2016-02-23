@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import edu.smu.tspell.wordnet.Synset;
 
 /** Author(s)/Contributor(s): Fausto Tommasi
@@ -11,9 +13,12 @@ public class SynonymTester {
 		System.setProperty(key, value);//initialize the Synset database
 		//TODO(TEAM): write tests for synonym Manager classes
 		SynonymGetter s= new SynonymGetter();
-		Synset[] mine = s.getSynonym("food");
-		for(int i=0; i<mine.length; i++){
-			System.out.println(mine[i].toString());
+		ArrayList<ArrayList<String>> mine = s.getSynonym("food");
+		for(int i=0; i<mine.size(); i++){
+			for(int j=0; j < mine.get(i).size(); j++){
+				String output = mine.get(i).get(j);
+				System.out.println(output);
+			}
 			
 		}
 	}
