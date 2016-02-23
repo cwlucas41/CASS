@@ -1,0 +1,105 @@
+!SESSION 2016-02-19 15:34:01.023 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.7.0_95
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-02-19 15:35:13.410
+!MESSAGE LOEclipseIntegration started
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-02-19 15:35:13.428
+!MESSAGE Resources changes are now listened
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-02-19 15:35:13.435
+!MESSAGE Java UNO resources changes are now listened
+!SESSION 2016-02-22 15:38:13.998 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.7.0_95
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-02-22 15:38:41.428
+!MESSAGE LOEclipseIntegration started
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-02-22 15:38:41.472
+!MESSAGE Resources changes are now listened
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-02-22 15:38:41.483
+!MESSAGE Java UNO resources changes are now listened
+
+!ENTRY org.libreoffice.ide.eclipse.core 2 2 2016-02-22 15:41:46.795
+!MESSAGE The configuration cannot be saved because it's inconsistent
+
+!ENTRY org.libreoffice.ide.eclipse.core 2 2 2016-02-22 15:41:46.811
+!MESSAGE The configuration cannot be saved because it's inconsistent
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-02-22 15:41:46.829
+!MESSAGE UNO-IDL nature set
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-02-22 15:41:47.040
+!MESSAGE Java nature set
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-02-22 15:41:47.040
+!MESSAGE Language specific nature added
+
+!ENTRY org.libreoffice.ide.eclipse.core 2 2 2016-02-22 15:41:47.960
+!MESSAGE The configuration cannot be saved because it's inconsistent
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-02-22 15:41:47.961
+!MESSAGE Creating unoidl packages
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-02-22 15:41:47.965
+!MESSAGE Unoidl base directory created
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-02-22 15:41:48.017
+!MESSAGE All the modules dir have been created
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-02-22 15:41:48.018
+!MESSAGE Creating source directories
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-02-22 15:41:48.018
+!MESSAGE OOo dependencies added
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-02-22 15:41:48.019
+!MESSAGE Creating ouput directories
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-02-22 15:41:48.024
+!MESSAGE build folder created
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-02-22 15:41:48.078
+!MESSAGE urd folder created
+
+!ENTRY org.libreoffice.ide.eclipse.core 4 4 2016-02-22 15:41:48.292
+!MESSAGE Error happened during service creation
+!STACK 0
+java.lang.NullPointerException
+	at org.libreoffice.ide.eclipse.core.internal.model.UnoFactory.makeSkeleton(Unknown Source)
+	at org.libreoffice.ide.eclipse.core.wizards.ServiceWizardSet.doFinish(Unknown Source)
+	at org.libreoffice.ide.eclipse.core.wizards.NewUnoProjectWizard$ProjectCreationJob.run(Unknown Source)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.libreoffice.ide.eclipse.core 2 2 2016-02-22 15:43:54.405
+!MESSAGE The configuration cannot be saved because it's inconsistent
+!SESSION 2016-02-23 14:16:47.260 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.7.0_95
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-02-23 14:17:07.138
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-02-23 14:17:20.213
+!MESSAGE LOEclipseIntegration started
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-02-23 14:17:29.189
+!MESSAGE Resources changes are now listened
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-02-23 14:17:29.205
+!MESSAGE Java UNO resources changes are now listened
