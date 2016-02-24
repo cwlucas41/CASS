@@ -1,8 +1,0 @@
-import java.util.ArrayList;
-
-public interface SynonymManager {
-	public ArrayList <String> getSynonym(String target);	
-	private ArrayList<String> currSyns;
-	
-
-}

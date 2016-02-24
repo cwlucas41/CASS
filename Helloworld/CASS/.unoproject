@@ -1,6 +1,0 @@
-#UNO project configuration file
-#Mon Feb 22 15:41:47 CST 2016
-project.build=build
-javaversion=java5
-regclassname=org.libreoffice.example.comp.RegistrationHandler
-project.idl=/idl
