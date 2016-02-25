@@ -24,9 +24,31 @@ public final class CASSImpl extends WeakBase
     private static final String m_implementationName = CASSImpl.class.getName();
     private static final String[] m_serviceNames = {
         "org.libreoffice.example.CASS" };
+    
+    private String wnKey = "";
+    private String wnValue = "";
 
+    @Override
+    public String getwnKey() {
+		return wnKey;
+	}
 
-    public CASSImpl( XComponentContext context )
+    @Override
+	public void setwnKey(String wnKey) {
+		this.wnKey = wnKey;
+	}
+
+    @Override
+	public String getwnValue() {
+		return wnValue;
+	}
+
+    @Override
+	public void setwnValue(String wnValue) {
+		this.wnValue = wnValue;
+	}
+
+	public CASSImpl( XComponentContext context )
     {
         m_xContext = context;
     };
@@ -66,9 +88,7 @@ public final class CASSImpl extends WeakBase
 
     public String[] getSynonym(String target) {
     	// initialize the Synset database
-    	String key = "wordnet.database.dir";
-		String value = "/home/design/Documents/WordNet-3.0/dict/"; 
-		System.setProperty(key, value);
+		System.setProperty(getwnKey(), getwnValue());
     	
 		// TODO(Fausto): Implement and test against an open knowledge source 
 		WordNetDatabase database = WordNetDatabase.getFileInstance();		
