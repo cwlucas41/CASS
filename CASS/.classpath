@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="build"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry kind="con" path="org.libreoffice.ide.eclipse.java.OOO_CONTAINER/LibreOffice 5.0"/>
 	<classpathentry exported="true" kind="lib" path="jaws-bin.jar"/>
+	<classpathentry kind="con" path="org.libreoffice.ide.eclipse.java.OOO_CONTAINER/LibreOffice 5.0"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
