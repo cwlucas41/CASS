@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_njJhAdqsEeWi37vHB8VYjg" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_njJhAtqsEeWi37vHB8VYjg" bindingContexts="_njKIEdqsEeWi37vHB8VYjg">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;workbench>&#xA;&lt;mruList>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;RegistrationHandler.classes&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/RegistrationHandler.classes&quot;>&#xA;&lt;persistable path=&quot;/CASS/source/org/libreoffice/example/comp/RegistrationHandler.classes&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;RegistrationHandler.classes&quot; tooltip=&quot;testc/source/org/libreoffice/example/comp/RegistrationHandler.classes&quot;>&#xA;&lt;persistable path=&quot;/testc/source/org/libreoffice/example/comp/RegistrationHandler.classes&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;TestcImpl.java&quot; tooltip=&quot;testc/source/org/libreoffice/example/comp/TestcImpl.java&quot;>&#xA;&lt;persistable path=&quot;/testc/source/org/libreoffice/example/comp/TestcImpl.java&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;RegistrationHandler.java&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/RegistrationHandler.java&quot;>&#xA;&lt;persistable path=&quot;/CASS/source/org/libreoffice/example/comp/RegistrationHandler.java&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ProjectTest.java&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/tests/ProjectTest.java&quot;>&#xA;&lt;persistable path=&quot;/CASS/source/org/libreoffice/example/comp/tests/ProjectTest.java&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;CASSImpl.java&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/CASSImpl.java&quot;>&#xA;&lt;persistable path=&quot;/CASS/source/org/libreoffice/example/comp/CASSImpl.java&quot;/>&#xA;&lt;/file>&#xA;&lt;/mruList>&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;workbench>&#xA;&lt;mruList>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;CASSImpl.java&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/CASSImpl.java&quot;>&#xA;&lt;persistable path=&quot;/CASS/source/org/libreoffice/example/comp/CASSImpl.java&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.libreoffice.ide.eclipse.core.editors.UnoidlEditor&quot; name=&quot;XCASS.idl&quot; tooltip=&quot;CASS/idl/org/libreoffice/example/XCASS.idl&quot;>&#xA;&lt;persistable path=&quot;/CASS/idl/org/libreoffice/example/XCASS.idl&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.libreoffice.ide.eclipse.core.editors.UnoidlEditor&quot; name=&quot;CASS.idl&quot; tooltip=&quot;CASS/idl/org/libreoffice/example/CASS.idl&quot;>&#xA;&lt;persistable path=&quot;/CASS/idl/org/libreoffice/example/CASS.idl&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;RegistrationHandler.classes&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/RegistrationHandler.classes&quot;>&#xA;&lt;persistable path=&quot;/CASS/source/org/libreoffice/example/comp/RegistrationHandler.classes&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;RegistrationHandler.classes&quot; tooltip=&quot;testc/source/org/libreoffice/example/comp/RegistrationHandler.classes&quot;>&#xA;&lt;persistable path=&quot;/testc/source/org/libreoffice/example/comp/RegistrationHandler.classes&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;TestcImpl.java&quot; tooltip=&quot;testc/source/org/libreoffice/example/comp/TestcImpl.java&quot;>&#xA;&lt;persistable path=&quot;/testc/source/org/libreoffice/example/comp/TestcImpl.java&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;RegistrationHandler.java&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/RegistrationHandler.java&quot;>&#xA;&lt;persistable path=&quot;/CASS/source/org/libreoffice/example/comp/RegistrationHandler.java&quot;/>&#xA;&lt;/file>&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ProjectTest.java&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/tests/ProjectTest.java&quot;>&#xA;&lt;persistable path=&quot;/CASS/source/org/libreoffice/example/comp/tests/ProjectTest.java&quot;/>&#xA;&lt;/file>&#xA;&lt;/mruList>&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_njJhAtqsEeWi37vHB8VYjg" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_oGVGkNqsEeWi37vHB8VYjg" label="%trimmedwindow.label.eclipseSDK" x="0" y="0" width="1280" height="1405">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_njJhAtqsEeWi37vHB8VYjg" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_oGVGkNqsEeWi37vHB8VYjg" label="%trimmedwindow.label.eclipseSDK" x="0" y="0" width="1276" height="1015">
     <persistedState key="coolBarVisible" value="true"/>
     <persistedState key="perspectiveBarVisible" value="true"/>
     <persistedState key="isRestored" value="true"/>
@@ -49,12 +49,10 @@
           <tags>persp.showIn:org.eclipse.ui.navigator.ProjectExplorer</tags>
           <tags>persp.viewSC:org.eclipse.pde.runtime.LogView</tags>
           <tags>persp.perspSC:org.eclipse.wst.xml.ui.perspective</tags>
-          <children xsi:type="basic:PartSashContainer" xmi:id="_ohgmsdqsEeWi37vHB8VYjg" selectedElement="_ohgmstqsEeWi37vHB8VYjg" horizontal="true">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_ohgmsdqsEeWi37vHB8VYjg" selectedElement="_ohgmu9qsEeWi37vHB8VYjg" horizontal="true">
             <children xsi:type="basic:PartSashContainer" xmi:id="_ohgmstqsEeWi37vHB8VYjg" containerData="2600" selectedElement="_ohgms9qsEeWi37vHB8VYjg">
               <children xsi:type="basic:PartStack" xmi:id="_ohgms9qsEeWi37vHB8VYjg" elementId="topLeft" containerData="5000" selectedElement="_ohgmtNqsEeWi37vHB8VYjg">
                 <tags>org.eclipse.e4.primaryNavigationStack</tags>
-                <tags>active</tags>
-                <tags>noFocus</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_ohgmtNqsEeWi37vHB8VYjg" elementId="org.eclipse.ui.navigator.ProjectExplorer" ref="_ohR9MNqsEeWi37vHB8VYjg"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_ohgmtdqsEeWi37vHB8VYjg" elementId="org.eclipse.ui.views.BookmarkView" toBeRendered="false" ref="_ohZR8NqsEeWi37vHB8VYjg"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_ohgmttqsEeWi37vHB8VYjg" elementId="org.eclipse.ui.views.ResourceNavigator" toBeRendered="false" ref="_ohZ5ANqsEeWi37vHB8VYjg"/>
@@ -109,43 +107,23 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_og3GcNqsEeWi37vHB8VYjg" elementId="org.eclipse.ui.editorss" selectedElement="_og3GcdqsEeWi37vHB8VYjg">
-      <children xsi:type="basic:PartStack" xmi:id="_og3GcdqsEeWi37vHB8VYjg" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_bBWQgNqwEeWi37vHB8VYjg">
+      <children xsi:type="basic:PartStack" xmi:id="_og3GcdqsEeWi37vHB8VYjg" elementId="org.eclipse.e4.primaryDataStack" selectedElement="__8G_sNv7EeWm7fuAaO1f7Q">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
-        <children xsi:type="basic:Part" xmi:id="_FuQNsNqtEeWi37vHB8VYjg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="CASSImpl.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;CASSImpl.java&quot; partName=&quot;CASSImpl.java&quot; title=&quot;CASSImpl.java&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/CASSImpl.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/CASS/source/org/libreoffice/example/comp/CASSImpl.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;1982&quot; selectionTopPixel=&quot;850&quot;/>&#xA;&lt;/editor>"/>
+        <tags>active</tags>
+        <tags>noFocus</tags>
+        <children xsi:type="basic:Part" xmi:id="__8G_sNv7EeWm7fuAaO1f7Q" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="CASSImpl.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;CASSImpl.java&quot; partName=&quot;CASSImpl.java&quot; title=&quot;CASSImpl.java&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/CASSImpl.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/CASS/source/org/libreoffice/example/comp/CASSImpl.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;867&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
+          <tags>active</tags>
+          <tags>activeOnClose</tags>
         </children>
-        <children xsi:type="basic:Part" xmi:id="_avEVENqtEeWi37vHB8VYjg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="ProjectTest.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ProjectTest.java&quot; partName=&quot;ProjectTest.java&quot; title=&quot;ProjectTest.java&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/tests/ProjectTest.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/CASS/source/org/libreoffice/example/comp/tests/ProjectTest.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;350&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
+        <children xsi:type="basic:Part" xmi:id="_BiOMcNv9EeWm7fuAaO1f7Q" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="XCASS.idl" iconURI="platform:/plugin/org.libreoffice.ide.eclipse.core/icons/idl_file.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.libreoffice.ide.eclipse.core.editors.UnoidlEditor&quot; name=&quot;XCASS.idl&quot; partName=&quot;XCASS.idl&quot; title=&quot;XCASS.idl&quot; tooltip=&quot;CASS/idl/org/libreoffice/example/XCASS.idl&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/CASS/idl/org/libreoffice/example/XCASS.idl&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;188&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
-          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
-          <tags>removeOnHide</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_3w724NqvEeWi37vHB8VYjg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="RegistrationHandler.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;RegistrationHandler.java&quot; partName=&quot;RegistrationHandler.java&quot; title=&quot;RegistrationHandler.java&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/RegistrationHandler.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/CASS/source/org/libreoffice/example/comp/RegistrationHandler.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;5230&quot; selectionTopPixel=&quot;1448&quot;/>&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
-          <tags>removeOnHide</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_VkOggNqwEeWi37vHB8VYjg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="TestcImpl.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;TestcImpl.java&quot; partName=&quot;TestcImpl.java&quot; title=&quot;TestcImpl.java&quot; tooltip=&quot;testc/source/org/libreoffice/example/comp/TestcImpl.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/testc/source/org/libreoffice/example/comp/TestcImpl.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
-          <tags>removeOnHide</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_YGqoENqwEeWi37vHB8VYjg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="RegistrationHandler.classes" iconURI="platform:/plugin/org.eclipse.ui.editors/icons/full/obj16/file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;RegistrationHandler.classes&quot; partName=&quot;RegistrationHandler.classes&quot; title=&quot;RegistrationHandler.classes&quot; tooltip=&quot;testc/source/org/libreoffice/example/comp/RegistrationHandler.classes&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/testc/source/org/libreoffice/example/comp/RegistrationHandler.classes&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;38&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.ui.DefaultTextEditor</tags>
-          <tags>removeOnHide</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_bBWQgNqwEeWi37vHB8VYjg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="RegistrationHandler.classes" iconURI="platform:/plugin/org.eclipse.ui.editors/icons/full/obj16/file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.ui.DefaultTextEditor&quot; name=&quot;RegistrationHandler.classes&quot; partName=&quot;RegistrationHandler.classes&quot; title=&quot;RegistrationHandler.classes&quot; tooltip=&quot;CASS/source/org/libreoffice/example/comp/RegistrationHandler.classes&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/CASS/source/org/libreoffice/example/comp/RegistrationHandler.classes&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;34&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.ui.DefaultTextEditor</tags>
+          <tags>org.libreoffice.ide.eclipse.core.editors.UnoidlEditor</tags>
           <tags>removeOnHide</tags>
         </children>
       </children>
@@ -154,8 +132,6 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;/>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
-      <tags>active</tags>
-      <tags>activeOnClose</tags>
       <menus xmi:id="_okcl8NqsEeWi37vHB8VYjg" elementId="org.eclipse.ui.navigator.ProjectExplorer">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -229,7 +205,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_oNI5MNqsEeWi37vHB8VYjg" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_oNznkNqsEeWi37vHB8VYjg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_nkQUSdqsEeWi37vHB8VYjg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_g5qbUNv7EeWm7fuAaO1f7Q" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_nkQUSdqsEeWi37vHB8VYjg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_oNJgQNqsEeWi37vHB8VYjg" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -253,7 +229,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_oNKHUNqsEeWi37vHB8VYjg" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_oN2q4NqsEeWi37vHB8VYjg" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_nkEHAdqsEeWi37vHB8VYjg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_g5uFsNv7EeWm7fuAaO1f7Q" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_nkEHAdqsEeWi37vHB8VYjg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_oNKHUdqsEeWi37vHB8VYjg" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>

@@ -4,8 +4,9 @@
 module org { module libreoffice { module example { 	
 
 	interface XCASS {
+		[attribute] string wnKey;
+		[attribute] string wnValue;
 		sequence<string> getSynonym([in] string target);
-
 	};
 
  }; }; };
