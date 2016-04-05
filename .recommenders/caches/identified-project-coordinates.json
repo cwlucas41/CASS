@@ -1,1 +1,1 @@
-[[{"location":"/usr/lib/libreoffice/program/classes/juh.jar","type":"JAR","hints":{}},"ABSENT"]]
+[[{"location":"/usr/lib/jvm/java-7-openjdk-amd64","type":"JRE","hints":{}},"jre:jre:7.0.0"],[{"location":"/home/design/Documents/CSCI_Capstone/WSD","type":"PROJECT","hints":{"PROJECT_NAME":"WSD"}},"ABSENT"]]
