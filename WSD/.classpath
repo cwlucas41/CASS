@@ -2,6 +2,5 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="/home/design/Documents/CSCI_Capstone/CASS/jaws-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
