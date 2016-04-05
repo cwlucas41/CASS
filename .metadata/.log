@@ -1762,3 +1762,56 @@ org.eclipse.core.runtime.CoreException: Cannot determine URI for '/WSD/src/cass/
 
 !ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-04-04 22:15:33.506
 !MESSAGE Running command: javamaker -T org.* -nD -Gc  -O "/home/design/Documents/CSCI_Capstone/CASS/build" "/home/design/Documents/CSCI_Capstone/CASS/types.rdb"  -X"/usr/lib/libreoffice/program/types.rdb" -X"/usr/lib/libreoffice/program/types/offapi.rdb" with env: [XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session0, XCURSOR_SIZE=0, UPSTART_SESSION=unix:abstract=/com/ubuntu/upstart-session/1002/1504, SESSION_MANAGER=local/cwlucas41-kubuntu-vm:@/tmp/.ICE-unix/2234,unix/cwlucas41-kubuntu-vm:/tmp/.ICE-unix/2234, GDMSESSION=kde-plasma, IM_CONFIG_PHASE=1, MANDATORY_PATH=/usr/share/gconf/kde-plasma.mandatory.path, PWD=/home/design, XCURSOR_THEME=oxy-zion, SESSIONTYPE=, XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/design, GDK_CORE_DEVICE_EVENTS=1, GS_LIB=/home/design/.fonts, TEXTDOMAIN=im-config, SELINUX_INIT=YES, XDG_CONFIG_DIRS=/etc/xdg/xdg-kde-plasma:/usr/share/upstart/xdg:/etc/xdg, XDG_CURRENT_DESKTOP=KDE, PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/libreoffice/sdk/bin:/usr/lib/libreoffice/program:/usr/lib/libreoffice/bin:/usr/lib/libreoffice/program, KDE_FULL_SESSION=true, LIBOVERLAY_SCROLLBAR=0, XAUTHORITY=/tmp/kde-design/xauth-1002-_0, GDM_LANG=en_US, XDG_SEAT=seat0, XDG_SESSION_ID=c1, XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0, XDG_VTNR=7, GNOME_KEYRING_CONTROL=/run/user/1002/keyring-1q0uV2, SHLVL=0, TEXTDOMAINDIR=/usr/share/locale/, JOB=dbus, UPSTART_JOB=startkde, XDG_DATA_DIRS=/usr/share:/usr/share/kde-plasma:/usr/local/share/:/usr/share/, UPSTART_INSTANCE=, LOGNAME=design, SESSION=kde-plasma, GPG_AGENT_INFO=/tmp/gpg-2Pw3L5/S.gpg-agent:1774:1, QT_PLUGIN_PATH=/home/design/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/, KDE_SESSION_VERSION=4, SSH_AUTH_SOCK=/run/user/1002/keyring-1q0uV2/ssh, KDE_MULTIHEAD=false, UPSTART_EVENTS=started xsession, SHELL=/bin/bash, DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-eIinEKmJkW, GNOME_KEYRING_PID=1758, LANGUAGE=en_US, GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/design/.gtkrc-2.0:/home/design/.kde/share/config/gtkrc-2.0, GTK_RC_FILES=/etc/gtk/gtkrc:/home/design/.gtkrc:/home/design/.kde/share/config/gtkrc, KDE_SESSION_UID=1002, INSTANCE=, DESKTOP_SESSION=kde-plasma, DISPLAY=:0, USER=design, HOME=/home/design, DEFAULTS_PATH=/usr/share/gconf/kde-plasma.default.path, XDG_RUNTIME_DIR=/run/user/1002, OXYGEN_DISABLE_INNER_SHADOWS_HACK=1, LANG=en_US.UTF-8, LD_LIBRARY_PATH=/usr/lib/libreoffice/program:/usr/lib/libreoffice/lib:/usr/lib/libreoffice/program] from dir: /home/design/Documents/CSCI_Capstone/CASS
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-04-04 22:28:03.292
+!MESSAGE Java nature set
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-04-04 22:28:03.292
+!MESSAGE Language specific nature added
+
+!ENTRY org.libreoffice.ide.eclipse.core 2 2 2016-04-04 22:28:03.303
+!MESSAGE The configuration cannot be saved because it's inconsistent
+!SESSION 2016-04-04 22:28:14.443 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.7.0_95
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-04-04 22:28:23.055
+!MESSAGE LOEclipseIntegration started
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-04-04 22:28:28.540
+!MESSAGE Java nature set
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-04-04 22:28:28.547
+!MESSAGE Language specific nature added
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-04-04 22:28:29.106
+!MESSAGE Resources changes are now listened
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-04-04 22:28:29.107
+!MESSAGE Java UNO resources changes are now listened
+!SESSION 2016-04-04 22:29:23.172 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.7.0_95
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-04-04 22:29:31.741
+!MESSAGE LOEclipseIntegration started
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-04-04 22:29:40.765
+!MESSAGE Java nature set
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-04-04 22:29:40.782
+!MESSAGE Language specific nature added
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-04-04 22:29:41.573
+!MESSAGE Resources changes are now listened
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-04-04 22:29:41.574
+!MESSAGE Java UNO resources changes are now listened

@@ -12,21 +12,10 @@
 		<list key="textEntries">
 		</list>
 	</section>
-	<section name="NewWizardAction">
-		<item value="org.eclipse.jdt.ui.wizards.NewEnumCreationWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
-		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
-			<item value="org.eclipse.jdt.ui.java"/>
-			<item value="org.libreoffice.ide.eclipse.core"/>
-		</list>
-	</section>
 	<section name="ImportExportAction">
 		<item value="org.eclipse.ui.wizards.import.ExternalProject" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
-		<item value="org.libreoffice.ide.eclipse.core.export.package" key="ImportExportPage.STORE_SELECTED_EXPORT_WIZARD_ID"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
-		</list>
-		<list key="ImportExportPage.STORE_EXPANDED_EXPORT_CATEGORIES">
-			<item value="org.libreoffice.ide.eclipse.core.uno"/>
 		</list>
 	</section>
 </section>

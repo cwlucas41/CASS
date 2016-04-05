@@ -1,65 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<section name="OptionalMessageDialog.hide.">
-		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
-	</section>
-	<section name="BuildPathsPropertyPage">
-		<item value="3" key="pageIndex"/>
-	</section>
-	<section name="DialogBounds_SuperInterfaceSelectionDialog">
-		<item value="372" key="DIALOG_WIDTH"/>
-		<item value="-25" key="DIALOG_Y_ORIGIN"/>
-		<item value="116" key="DIALOG_X_ORIGIN"/>
-		<item value="574" key="DIALOG_HEIGHT"/>
-		<item value="1|Ubuntu|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
-	</section>
-	<section name="RefactoringWizard.preview">
-		<item value="400" key="height"/>
-		<item value="600" key="width"/>
-	</section>
-	<section name="quick_assist_proposal_size">
-	</section>
-	<section name="SourceActionDialog.methods">
-		<item value="false" key="Comments"/>
-		<item value="1" key="VisibilityModifier"/>
-		<item value="2" key="InsertPosition.v2"/>
-		<item value="false" key="SynchronizedModifier"/>
-		<item value="false" key="FinalModifier"/>
-	</section>
-	<section name="org.eclipse.jdt.internal.ui.dialogs.OpenTypeSelectionDialog2">
-		<item value="true" key="ShowStatusLine"/>
-		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0A;&lt;History/&gt;" key="History"/>
-	</section>
-	<section name="NewPackageWizardPage">
-		<item value="false" key="create_package_info_java"/>
-	</section>
 	<section name="completion_proposal_size">
 	</section>
 	<section name="JavaElementSearchActions">
 	</section>
-	<section name="DialogBounds_GetterSetterTreeSelectionDialog">
-		<item value="564" key="DIALOG_WIDTH"/>
-		<item value="29" key="DIALOG_Y_ORIGIN"/>
-		<item value="725" key="DIALOG_HEIGHT"/>
-		<item value="356" key="DIALOG_X_ORIGIN"/>
-		<item value="1|Ubuntu|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
-	</section>
-	<section name="NewClassWizardPage">
-		<item value="false" key="create_constructor"/>
-		<item value="true" key="create_unimplemented"/>
-	</section>
-	<section name="org.eclipse.ltk.ui.refactoring.settings">
-		<item value="false" key="renameSubpackages"/>
-		<item value="false" key="updateQualifiedNames"/>
-		<item value="*" key="patterns"/>
-		<item value="1" key="updateSimilarElementsMatchStrategy"/>
-		<item value="false" key="updateTextualMatches"/>
-		<item value="false" key="updateSimilarElements"/>
-	</section>
-	<section name="RenameInformationPopup">
-	</section>
-	<section name="AddGetterSetterDialog">
-		<item value="false" key="RemoveFinal"/>
-		<item value="false" key="SortOrdering"/>
+	<section name="quick_assist_proposal_size">
 	</section>
 </section>
