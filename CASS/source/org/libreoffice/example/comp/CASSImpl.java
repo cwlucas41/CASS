@@ -25,8 +25,8 @@ public final class CASSImpl extends WeakBase
     private static final String[] m_serviceNames = {
         "org.libreoffice.example.CASS" };
     
-    private String wnKey = "";
-    private String wnValue = "";
+    private String wnKey = "wordnet.database.dir";
+    private String wnValue = "/home/design/Documents/WordNet-3.0/dict/";
 
     @Override
     public String getwnKey() {
