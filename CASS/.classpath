@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="source"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="build"/>
+	<classpathentry exported="true" kind="lib" path="build"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="con" path="org.libreoffice.ide.eclipse.java.OOO_CONTAINER/LibreOffice 5.0"/>
-	<classpathentry exported="true" kind="lib" path="/home/design/Documents/hhhh/JAWS/jaws-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="JAWS/jaws-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -26,7 +26,7 @@ public final class CASSImpl extends WeakBase
         "org.libreoffice.example.CASS" };
     
     private String wnKey = "wordnet.database.dir";
-    private String wnValue = "/home/design/Documents/test/WordNet-3.0/dict/";
+    private String wnValue = "/home/design/Documents/WordNet-3.0/dict/";
 
     @Override
     public String getwnKey() {
