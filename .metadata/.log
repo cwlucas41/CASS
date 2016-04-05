@@ -1442,3 +1442,25 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp
 
 !ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-04-04 20:03:37.737
 !MESSAGE Java UNO resources changes are now listened
+!SESSION 2016-04-04 21:09:41.872 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.7.0_95
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-04-04 21:09:50.567
+!MESSAGE LOEclipseIntegration started
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-04-04 21:09:58.095
+!MESSAGE Java nature set
+
+!ENTRY org.libreoffice.ide.eclipse.core 0 0 2016-04-04 21:09:58.096
+!MESSAGE Language specific nature added
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-04-04 21:09:58.578
+!MESSAGE Resources changes are now listened
+
+!ENTRY org.libreoffice.ide.eclipse.core 1 1 2016-04-04 21:09:58.589
+!MESSAGE Java UNO resources changes are now listened
