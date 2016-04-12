@@ -1,4 +1,4 @@
-package cass.WSD;
+package cass.wsd;
 
 import java.util.List;
 import java.util.ListIterator;
@@ -7,8 +7,8 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Collections;
 
-import cass.LanguageTool.*;
-import cass.LanguageTool.WordNet.Synset;
+import cass.languageTool.*;
+import cass.languageTool.wordNet.WordSense;
 
 public class WSD {
 	
@@ -26,10 +26,10 @@ public class WSD {
 		context.addAll(lTool.tokenizeAndLemmatize(rightContext));
 	}
 	
-	public List<Set<String>> rankSynsetsUsing(Algorithm algorithm) {
+	public List<WordSense> rankSynsetsUsing(Algorithm algorithm) {
 		switch (algorithm) {
-		case LESK_WITH_WORDNET:
-			return rankSynsetsUsingLeskAndWordNet();
+		case LESK:
+			return rankSynsetsUsingLesk();
 
 		default:
 			// TODO throw proper exception
@@ -37,20 +37,20 @@ public class WSD {
 		}
 	}
 	
-	private List<Set<String>> rankSynsetsUsingLeskAndWordNet() {
-		List<Synset> synsets = lTool.getSynsets(target);
+	private List<WordSense> rankSynsetsUsingLesk() {
+		List<WordSense> senses = lTool.getSenses(target);
 		
 		// context set is set of words in context
 		Set<String> contextSet = new HashSet<String>(context);
 		
 		Set<String> glossSet = new HashSet<String>();
-		List<ScoredSynset> scoredSynsets= new ArrayList<ScoredSynset>();
+		List<ScoredSense> scoredSynsets= new ArrayList<ScoredSense>();
 		
 		// for every set of synonyms in the list
-		for (Synset synset : synsets) {
+		for (WordSense sense : senses) {
 			// clear and add lemmatized tokens of gloss to set
 			glossSet.clear();
-			glossSet.addAll(lTool.tokenizeAndLemmatize(synset.getDefinition()));
+			glossSet.addAll(lTool.tokenizeAndLemmatize(lTool.getDefinition(sense)));
 			
 			// find intersection of sets
 			glossSet.retainAll(contextSet);
@@ -58,7 +58,7 @@ public class WSD {
 			// score is cardinality of intersection
 			int score = glossSet.size();
 			
-			scoredSynsets.add(new ScoredSynset(synset, score));
+			scoredSynsets.add(new ScoredSense(sense, score));
 		}
 		
 		// sort in descending order
@@ -66,27 +66,27 @@ public class WSD {
 		Collections.reverse(scoredSynsets);
 		
 		// build list of sets of synonyms sorted by score (score is discarded)
-		List<Set<String>> result = new ArrayList<Set<String>>();
-		ListIterator<ScoredSynset> iter = scoredSynsets.listIterator();
+		List<WordSense> result = new ArrayList<WordSense>();
+		ListIterator<ScoredSense> iter = scoredSynsets.listIterator();
 		while (iter.hasNext()) {
-			result.add(iter.next().getSynset().getSynonyms());
+			result.add(iter.next().getSense());
 		}
 		return result;
 	}
 	
-	class ScoredSynset implements Comparable<ScoredSynset> {
-		private Synset synset;
+	class ScoredSense implements Comparable<ScoredSense> {
+		private WordSense sense;
 		private int score;
-		public ScoredSynset(Synset synset, int score) {
-			this.synset = synset;
+		public ScoredSense(WordSense sense, int score) {
+			this.sense = sense;
 			this.score = score;
 		}
 		@Override
-		public int compareTo(ScoredSynset o) {
+		public int compareTo(ScoredSense o) {
 			return Integer.compare(this.score, o.score);
 		}
-		public Synset getSynset() {
-			return synset;
+		public WordSense getSense() {
+			return sense;
 		}
 		public int getScore() {
 			return score;

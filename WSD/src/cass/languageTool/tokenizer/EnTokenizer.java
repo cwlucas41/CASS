@@ -1,4 +1,4 @@
-package cass.LanguageTool.Tokenizer;
+package cass.languageTool.tokenizer;
 import java.util.List;
 
 public class EnTokenizer implements Tokenizer {

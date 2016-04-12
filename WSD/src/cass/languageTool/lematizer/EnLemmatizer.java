@@ -1,4 +1,4 @@
-package cass.LanguageTool.Lematizer;
+package cass.languageTool.lematizer;
 
 public class EnLemmatizer implements Lemmatizer {
 
