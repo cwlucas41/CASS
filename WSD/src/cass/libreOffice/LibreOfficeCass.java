@@ -1,10 +1,10 @@
-package cass.LO;
+package cass.libreOffice;
 
 import java.util.List;
-import java.util.Set;
 
-import cass.LanguageTool.Language;
-import cass.WSD.*;
+import cass.languageTool.Language;
+import cass.languageTool.wordNet.WordSense;
+import cass.wsd.*;
 
 public class LibreOfficeCass {
 	
@@ -26,20 +26,22 @@ public class LibreOfficeCass {
 	}
 	
 	public String[][] getSynonyms(String algorithm) {
-		Algorithm enumAlg = null;
+		List<WordSense> rankedSenses = null;
 		
 		switch (algorithm) {
 		case "LeskWithWordNet":
-			enumAlg = Algorithm.LESK_WITH_WORDNET;
+			rankedSenses = wsd.rankSynsetsUsing(Algorithm.LESK);
 			break;
 
 		default:
 			break;
 		}
-		return convertToArrayOfArrays(wsd.rankSynsetsUsing(enumAlg));
+		
+		return convert(rankedSenses);
 	}
-	
-	private String[][] convertToArrayOfArrays(List<Set<String>> sortedSynonymSets) {
+
+	private String[][] convert(List<WordSense> senses) {
 		return null;
 	}
+	
 }
