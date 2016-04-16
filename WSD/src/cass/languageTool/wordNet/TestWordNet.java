@@ -7,7 +7,7 @@ public class TestWordNet implements WordNet {
 
 	@Override
 	public Set<String> getSynonyms(WordSense sense) {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 
