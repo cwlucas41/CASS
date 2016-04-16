@@ -49,7 +49,8 @@ public class WSD {
 		for (WordSense sense : senses) {
 			// clear and add lemmatized tokens of gloss to set
 			glossSet.clear();
-			glossSet.addAll(lTool.tokenizeAndLemmatize(lTool.getDefinition(sense)));
+			String definition = lTool.getDefinition(sense);
+			glossSet.addAll(lTool.tokenizeAndLemmatize(definition));
 			
 			// find intersection of sets
 			glossSet.retainAll(contextSet);
@@ -64,12 +65,6 @@ public class WSD {
 		Collections.sort(scoredSynsets);
 		Collections.reverse(scoredSynsets);
 		
-		// build list of sets of synonyms sorted by score (score is discarded)
-//		List<WordSense> result = new ArrayList<WordSense>();
-//		ListIterator<ScoredSense> iter = scoredSynsets.listIterator();
-//		while (iter.hasNext()) {
-//			result.add(iter.next().getSense());
-//		}
 		return scoredSynsets;
 	}
 }
