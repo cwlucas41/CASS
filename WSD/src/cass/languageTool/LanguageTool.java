@@ -22,6 +22,12 @@ public class LanguageTool implements Lemmatizer, Tokenizer, WordNet {
 			tokenizer = new EnTokenizer();
 			lemmatizer = new EnLemmatizer();
 			break;
+			
+		case TEST:
+			wordNet = new TestWordNet();
+			tokenizer = new TestTokenizer();
+			lemmatizer = new TestLemmatizer();
+			break;
 
 		default:
 			break;
