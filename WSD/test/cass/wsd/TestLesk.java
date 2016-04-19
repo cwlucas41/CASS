@@ -14,7 +14,7 @@ public class TestLesk {
 	@Test
 	public void test() {
 		WSD wsd = new WSD("The", "bass", "makes low musical sounds", Language.TEST);
-		List<ScoredSense> ranked = wsd.rankSynsetsUsing(Algorithm.LESK);
+		List<ScoredSense> ranked = wsd.rankSensesUsingLesk();
 		
 		List<String> properID = Arrays.asList("bass0", "bass1");
 		List<Integer> properScore = Arrays.asList(3,1);

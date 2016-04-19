@@ -31,21 +31,34 @@ public class WSD {
 		targetSenses = lTool.getSenses(target);
 	}
 	
-	public List<ScoredSense> rankSynsetsUsing(Algorithm algorithm) {
+	public List<WordSense> rankSynsetsUsing(Algorithm algorithm) {
+		
+		List<ScoredSense> scoredSenses;
+		List<WordSense> rankedSenses = new ArrayList<WordSense>();
+		
 		switch (algorithm) {
 		case LESK:
-			return rankSensesUsingLesk();
+			scoredSenses = rankSensesUsingLesk();
+			break;
 
 		case STOCHASTIC_GRAPH:
-			return rankSensesUsingStochasticHypernymDistance();
+			scoredSenses = rankSensesUsingStochasticHypernymDistance();
+			break;
 			
 		default:
 			// TODO throw proper exception
 			return null;
 		}
+		
+		// convert ScoredSense to WordSense, discard score
+		for (ScoredSense wordSense : scoredSenses) {
+			rankedSenses.add(wordSense.getSense());
+		}
+		
+		return rankedSenses;
 	}
 	
-	private List<ScoredSense> rankSensesUsingLesk() {
+	List<ScoredSense> rankSensesUsingLesk() {
 		
 		// context set is set of words in context
 		Set<String> contextSet = new HashSet<String>(context);
@@ -76,7 +89,7 @@ public class WSD {
 		return scoredSenses;
 	}
 	
-	private List<ScoredSense> rankSensesUsingStochasticHypernymDistance() {
+	List<ScoredSense> rankSensesUsingStochasticHypernymDistance() {
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 		
 		for (WordSense targetSense : targetSenses) {
