@@ -1,5 +1,6 @@
 package cass.languageTool;
 
 public enum Language {
-	EN;
+	EN,
+	TEST;
 }
