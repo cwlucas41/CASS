@@ -81,12 +81,17 @@ public class WSD {
 		
 		for (WordSense targetSense : targetSenses) {
 			int senseScore = 0;
+		
 			for (String contextWord : context) {
+				
+				// for each sense of the current context word, find the sense with the minimum distance to the current target sense
 				Set<WordSense> contextWordSenses = lTool.getSenses(contextWord);
+				
 				int bestScore = 0;
 				for (WordSense contextWordSense : contextWordSenses) {
+					
 					int currentScore = getHypernymDistanceScore(targetSense, contextWordSense);
-					if (currentScore > bestScore) {
+					if (currentScore < bestScore) {
 						bestScore = currentScore;
 					}
 				}
@@ -95,8 +100,8 @@ public class WSD {
 			scoredSenses.add(new ScoredSense(targetSense, senseScore));
 		}
 		
+		// sort in ascending order
 		Collections.sort(scoredSenses);
-		Collections.reverse(scoredSenses);
 		
 		return scoredSenses;
 	}
