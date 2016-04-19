@@ -130,7 +130,7 @@ public class WSD {
 		// common ancestor has same ancestor path in both lists
 		int depthOfCommonAncestor = 0;
 		for (int i = 0; i < Math.min(ancestors1.size(), ancestors2.size()); i++) {
-			if (ancestors1.get(i) != ancestors2.get(i)) {
+			if (ancestors1.get(i).getId() != ancestors2.get(i).getId()) {
 				depthOfCommonAncestor = i-1;
 			}
 		}
