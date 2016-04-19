@@ -11,7 +11,7 @@ public class ScoredSense implements Comparable<ScoredSense> {
 	}
 	@Override
 	public int compareTo(ScoredSense o) {
-		return Integer.compare(this.score, o.score);
+		return Integer.compare(getScore(), o.getScore());
 	}
 	public WordSense getSense() {
 		return sense;

@@ -59,13 +59,18 @@ public class LanguageTool implements Lemmatizer, Tokenizer, WordNet {
 	}
 
 	@Override
-	public List<WordSense> getSenses(String word) {
+	public Set<WordSense> getSenses(String word) {
 		return wordNet.getSenses(word);
 	}
 
 	@Override
 	public String getDefinition(WordSense sense) {
 		return wordNet.getDefinition(sense);
+	}
+
+	@Override
+	public Set<WordSense> getHypernyms(WordSense sense) {
+		return wordNet.getHypernyms(sense);
 	}
 		
 }

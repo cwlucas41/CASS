@@ -1,5 +1,6 @@
 package cass.wsd;
 
 public enum Algorithm {
-	LESK;
+	LESK,
+	STOCHASTIC_GRAPH;
 }

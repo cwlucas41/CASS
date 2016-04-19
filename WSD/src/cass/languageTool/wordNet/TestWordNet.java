@@ -1,7 +1,6 @@
 package cass.languageTool.wordNet;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 public class TestWordNet implements WordNet {
@@ -15,12 +14,12 @@ public class TestWordNet implements WordNet {
 	}
 
 	@Override
-	public List<WordSense> getSenses(String word) {
-		List<WordSense> list = new ArrayList<>(numberOfSenses);
+	public Set<WordSense> getSenses(String word) {
+		Set<WordSense> set = new HashSet<>(numberOfSenses);
 		for (int i = 0; i < numberOfSenses; i++) {
-			list.add(new WordSense(word + i));
+			set.add(new WordSense(word + i));
 		}
-		return list;
+		return set;
 	}
 
 	@Override
@@ -40,6 +39,12 @@ public class TestWordNet implements WordNet {
 		}
 		
 		return gloss;
+	}
+
+	@Override
+	public Set<WordSense> getHypernyms(WordSense sense) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
