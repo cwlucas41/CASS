@@ -61,7 +61,8 @@ public class TestLesk {
 		for (ISentence sentence : context.getSentences()) {
 	
 			List<String> leftTokens = new ArrayList<String>();
-			String target = null, pos = null;
+			String target = null;
+			List<String> senses = null;
 			List<String> rightTokens = new ArrayList<String>();
 			
 			boolean targetIsFound = false;
@@ -70,7 +71,7 @@ public class TestLesk {
 				if (!targetIsFound) {
 					if (wf.getSemanticTag() != null) {
 						target = concatenateTokens(wf.getConstituentTokens());
-						pos = wf.getPOSTag().getValue();
+						senses = wf.getSemanticTag().getSenseKeys();
 						targetIsFound = true;
 					} else {
 						leftTokens.addAll(wf.getConstituentTokens());
@@ -84,7 +85,7 @@ public class TestLesk {
 			String rightContext = concatenateTokens(rightTokens);
 			
 			System.out.println(leftContext);
-			System.out.println(pos + "\t" + target);
+			System.out.println(senses + "\t" + target);
 			System.out.println(rightContext);
 			System.out.println();
 			
