@@ -1,4 +1,4 @@
-package partOfSpeech;
+package cass.languageTool.partOfSpeech;
 import edu.stanford.nlp.simple.Sentence;
 
 public class EN_PartOfSpeech implements I_PartOfSpeech {

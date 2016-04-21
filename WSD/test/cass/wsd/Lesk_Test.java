@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import cass.languageTool.Language;
 
-public class TestLesk {
+public class Lesk_Test {
 
 	@Test
 	public void test() {

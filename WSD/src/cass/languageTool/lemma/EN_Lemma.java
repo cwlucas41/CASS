@@ -1,4 +1,4 @@
-package cass.languageTool.lematizer;
+package cass.languageTool.lemma;
 import edu.stanford.nlp.simple.*;
 public class EN_Lemma implements I_Lemma {
 	

@@ -1,4 +1,4 @@
-package cass.wsd;
+package cass.languageTool.tokenizer;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package cass.wsd;
+package cass.languageTool.partOfSpeech;
 
 import static org.junit.Assert.*;
 
@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import partOfSpeech.EN_PartOfSpeech;
+import cass.languageTool.partOfSpeech.EN_PartOfSpeech;
 
 public class EN_PartOfSpeech_Test {
 	@Test

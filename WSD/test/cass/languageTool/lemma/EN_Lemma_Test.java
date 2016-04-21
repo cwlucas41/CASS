@@ -1,10 +1,10 @@
-package cass.wsd;
+package cass.languageTool.lemma;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import cass.languageTool.lematizer.EN_Lemma;
+import cass.languageTool.lemma.EN_Lemma;
 
 public class EN_Lemma_Test {
 	

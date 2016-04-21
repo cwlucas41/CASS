@@ -1,4 +1,4 @@
-package cass.languageTool.lematizer;
+package cass.languageTool.lemma;
 
 public class TestLemmatizer implements I_Lemma{
 

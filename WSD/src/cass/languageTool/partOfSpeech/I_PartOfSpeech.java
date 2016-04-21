@@ -1,4 +1,4 @@
-package partOfSpeech;
+package cass.languageTool.partOfSpeech;
 
 public interface I_PartOfSpeech {
 	

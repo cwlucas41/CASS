@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import cass.languageTool.lematizer.*;
+import cass.languageTool.lemma.*;
 import cass.languageTool.tokenizer.*;
 import cass.languageTool.wordNet.*;
 

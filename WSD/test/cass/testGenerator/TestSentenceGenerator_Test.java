@@ -7,11 +7,11 @@ import java.util.Iterator;
 
 import org.junit.Test;
 
-public class TestSentenceGeneratorTester {
+public class TestSentenceGenerator_Test {
 
 	Iterator<TestSentence> testSentences;
 	
-	public TestSentenceGeneratorTester() throws MalformedURLException {
+	public TestSentenceGenerator_Test() throws MalformedURLException {
 		testSentences = new TestSentenceGenerator("semcor3.0");
 	}
 	
