@@ -1,6 +1,19 @@
-package cass.languageTool.lematizer;
+package cass.wsd;
+
+import static org.junit.Assert.*;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Test;
+
+import cass.languageTool.Language;
+import cass.languageTool.lematizer.EN_Lemma;
+
 public class EN_Lemma_Test {
-	public static void main(String[] args){
+	
+	@Test
+	public static void test(){
 		boolean passed = true;
 		
 		EN_Lemma lem = new EN_Lemma();

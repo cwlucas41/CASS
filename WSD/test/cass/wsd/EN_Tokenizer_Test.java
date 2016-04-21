@@ -1,12 +1,22 @@
-package cass.languageTool.tokenizer;
-import java.util.ArrayList;
+package cass.wsd;
+
+import static org.junit.Assert.*;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Test;
+
+import cass.languageTool.Language;
+import cass.languageTool.tokenizer.EN_Tokenizer;
 
 public class EN_Tokenizer_Test {
-	public static void main(String[] args){
+	@Test
+	public static void test(){
 		boolean passed = true;
 		EN_Tokenizer tok = new EN_Tokenizer();
-		ArrayList<String> test = new ArrayList<String>();
-		ArrayList<String> result = new ArrayList<String>();
+		List<String> test = null;
+		List<String> result = null;
 		test.add("The");
 		test.add("cow");
 		test.add("jumped");
@@ -23,8 +33,8 @@ public class EN_Tokenizer_Test {
 			}
 		}
 		
-		test = new ArrayList<String>();
-		result = new ArrayList<String>();
+		test = null;
+		result = null;
 		test.add("asjdgasfhjbas");		
 		result = tok.tokenize("asjdgasfhjbas");
 		for(int i=0; i<test.size();i++){
@@ -35,8 +45,8 @@ public class EN_Tokenizer_Test {
 			}
 		}
 		
-		test = new ArrayList<String>();
-		result = new ArrayList<String>();
+		test = null;
+		result = null;
 		test.add("hello");	
 		test.add(",");
 		test.add("how");

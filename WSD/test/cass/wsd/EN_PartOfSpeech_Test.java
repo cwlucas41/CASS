@@ -1,12 +1,22 @@
-package partOfSpeech;
-import java.util.ArrayList;
+package cass.wsd;
+
+import static org.junit.Assert.*;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.Test;
+
+import cass.languageTool.Language;
+import partOfSpeech.EN_PartOfSpeech;
 
 public class EN_PartOfSpeech_Test {
-	public static void main(String[] args){
+	@Test
+	public static void test(){
 		boolean passed = true;
 		EN_PartOfSpeech pos = new EN_PartOfSpeech();
-		ArrayList<String> test = new ArrayList<String>();
-		ArrayList<String> known = new ArrayList<String>();
+		List<String> test = null;
+		List<String> known = null;
 		
 		test.add("What");
 		test.add("part");

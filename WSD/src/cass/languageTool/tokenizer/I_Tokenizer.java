@@ -1,6 +1,6 @@
 package cass.languageTool.tokenizer;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface I_Tokenizer {
-  public ArrayList<String> tokenize(String body);
+  public List<String> tokenize(String body);
 }

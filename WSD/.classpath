@@ -4,8 +4,6 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/Fausto/workspace/WSD/CSCI_Capstone/WSD/Dependencies/stanford-corenlp-full-2015-12-09.zip"/>
-	<classpathentry kind="lib" path="C:/Users/Fausto/workspace/WSD/CSCI_Capstone/WSD/Dependencies/stanford-english-corenlp-2016-01-10-models.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/ejml-0.23.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/javax.json.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/javax.json-api-1.0-sources.jar"/>
@@ -22,5 +20,7 @@
 	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/stanford-corenlp-3.6.0-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/xom.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/xom-1.2.10-src.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09.zip"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-english-corenlp-2016-01-10-models.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

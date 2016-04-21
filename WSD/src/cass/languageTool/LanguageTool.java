@@ -25,8 +25,8 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, WordNet {
 			
 		case TEST:
 			wordNet = new TestWordNet();
-			tokenizer = new EN_Tokenizer();
-			lemmatizer = new EN_Lemma();
+			tokenizer = new TestTokenizer();
+			lemmatizer = new TestLemmatizer();
 			break;
 
 		default:
@@ -38,7 +38,7 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, WordNet {
 		return lemmatizer.Lemmatize(string);
 	}
 
-	public ArrayList<String> tokenize(String string) {
+	public List<String> tokenize(String string) {
 		return tokenizer.tokenize(string);
 	}
 	
