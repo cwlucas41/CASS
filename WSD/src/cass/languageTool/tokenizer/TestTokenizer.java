@@ -3,7 +3,7 @@ package cass.languageTool.tokenizer;
 import java.util.Arrays;
 import java.util.List;
 
-public class TestTokenizer implements Tokenizer {
+public class TestTokenizer implements I_Tokenizer {
 
 	@Override
 	public List<String> tokenize(String string) {
