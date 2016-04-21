@@ -16,11 +16,21 @@ public class TestSentenceGenerator_Test {
 	}
 	
 	@Test
-	public void allTargetsAreTagged() {
+	public void fieldsAreValid() {
 		while (testSentences.hasNext()) {
 			TestSentence testSentence = testSentences.next();
-			assertTrue(testSentence.getSenses().size() > 0);
+			assertNotNull(testSentence.getLeftContext());
+			assertNotNull(testSentence.getRightContext());
+			assertNotNull(testSentence.getTarget());
+			assertNotNull(testSentence.getSenses());
+			assertTrue(testSentence.getSenses().size() >= 1);
 		}
+	}
+	
+	@Test
+	public void testFirstSentence() {
+		TestSentence testSentence = testSentences.next();
+		System.out.println(testSentence);
 	}
 
 }

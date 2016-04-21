@@ -47,50 +47,50 @@ public class TestSentenceGenerator implements Iterable<TestSentence>, Iterator<T
 	@Override
 	public TestSentence next() {
 		
-		// get a sentence with at least on tagged word and save the number of tagged words
-		ISentence sentence;
-		int numberOfTaggedWords;
-		do {
-			sentence = getNextISentence();
-			
-			numberOfTaggedWords = 0;
-			for (IWordform wf : sentence.getWordList()) {
-				if (wf.getSemanticTag() != null) {
-					numberOfTaggedWords++;
-				}
-			}
-		} while (numberOfTaggedWords == 0);
-		
-		// make target a random tagged word in the sentence and generate the left and right context strings
-		int randTaggedWordIndex = rand.nextInt(numberOfTaggedWords);
-		int foundTaggedWords = 0;
-		
 		List<String> leftTokens = new ArrayList<String>();
 		String target = null;
 		List<String> senses = null;
 		List<String> rightTokens = new ArrayList<String>();
 		
-		boolean isTarget = false;
+		// get a sentence with at least on tagged word
+		ISentence sentence;
+		boolean foundTaggedWord = false;
+		do {
+			sentence = getNextISentence();
+			
+			foundTaggedWord = false;
+			for (IWordform wf : sentence.getWordList()) {
+				if (wf.getSemanticTag() != null) {
+					foundTaggedWord = true;
+				}
+			}
+		} while (!foundTaggedWord);
+		
+		// get all the tagged words
+		List<IWordform> taggedWords = new ArrayList<IWordform>();
 		for (IWordform wf : sentence.getWordList()) {
-			
 			if (wf.getSemanticTag() != null) {
-				if (randTaggedWordIndex == foundTaggedWords) {
-					isTarget = true;
-					target = concatenateTokens(wf.getConstituentTokens());
-					senses = wf.getSemanticTag().getSenseKeys();
-				}
-				foundTaggedWords++;
+				taggedWords.add(wf);
 			}
-			
-			if (!isTarget) {
-				if (foundTaggedWords < randTaggedWordIndex) {
-					leftTokens.addAll(wf.getConstituentTokens());
-				} else if (foundTaggedWords == randTaggedWordIndex) {
-					rightTokens.addAll(wf.getConstituentTokens());
-				}
+		}
+		
+		// get the index of a random tagged word
+		int numberOfTaggedWords = taggedWords.size();
+		int randTaggedWordIndex = rand.nextInt(numberOfTaggedWords);
+
+		// sort all words into either leftContext, target, or rightContext
+		int targetNumber = taggedWords.get(randTaggedWordIndex).getNumber();
+		int currentNumber;
+		for (IWordform wf : sentence.getWordList()) {
+			currentNumber = wf.getNumber();
+			if (currentNumber < targetNumber) {
+				leftTokens.addAll(wf.getConstituentTokens());
+			} else if (targetNumber < currentNumber) {
+				rightTokens.addAll(wf.getConstituentTokens());
+			} else {
+				target = concatenateTokens(wf.getConstituentTokens());
+				senses = wf.getSemanticTag().getSenseKeys();
 			}
-			
-			isTarget = false;
 		}
 		
 		String leftContext = concatenateTokens(leftTokens);
