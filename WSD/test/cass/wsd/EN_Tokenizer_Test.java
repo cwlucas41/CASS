@@ -2,21 +2,20 @@ package cass.wsd;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import cass.languageTool.Language;
 import cass.languageTool.tokenizer.EN_Tokenizer;
 
 public class EN_Tokenizer_Test {
 	@Test
-	public static void test(){
-		boolean passed = true;
+	public void test(){
+		
 		EN_Tokenizer tok = new EN_Tokenizer();
-		List<String> test = null;
-		List<String> result = null;
+		List<String> test = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
 		test.add("The");
 		test.add("cow");
 		test.add("jumped");
@@ -26,27 +25,19 @@ public class EN_Tokenizer_Test {
 		result = tok.tokenize("The cow jumped over the moon");
 		
 		for(int i=0; i<test.size();i++){
-			if(!test.get(i).equals(result.get(i))){
-				System.out.println("Error at index" + Integer.toString(i));
-				System.out.println(test.get(i)+"!="+result.get(i));
-				passed = false;
-			}
+			assertEquals(test.get(i), result.get(i));
 		}
 		
-		test = null;
-		result = null;
+		test.clear();
+		result.clear();
 		test.add("asjdgasfhjbas");		
 		result = tok.tokenize("asjdgasfhjbas");
 		for(int i=0; i<test.size();i++){
-			if(!test.get(i).equals(result.get(i))){
-				System.out.println("Error at index" + Integer.toString(i));
-				System.out.println(test.get(i)+"!="+result.get(i));
-				passed = false;
-			}
+			assertEquals(test.get(i), result.get(i));
 		}
 		
-		test = null;
-		result = null;
+		test.clear();
+		result.clear();
 		test.add("hello");	
 		test.add(",");
 		test.add("how");
@@ -57,16 +48,7 @@ public class EN_Tokenizer_Test {
 		result = tok.tokenize("hello, how. are you?");
 		
 		for(int i=0; i<test.size();i++){
-			if(!test.get(i).equals(result.get(i))){
-				System.out.println("Error at index" + Integer.toString(i));
-				System.out.println(test.get(i)+"!="+result.get(i));
-				passed = false;
-			}
+			assertEquals(test.get(i), result.get(i));
 		}
-		if(passed){
-			System.out.println("All test passed successfully");
-		}
-	 	
 	}
-
 }

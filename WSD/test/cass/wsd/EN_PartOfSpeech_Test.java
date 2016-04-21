@@ -2,21 +2,20 @@ package cass.wsd;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import cass.languageTool.Language;
 import partOfSpeech.EN_PartOfSpeech;
 
 public class EN_PartOfSpeech_Test {
 	@Test
-	public static void test(){
-		boolean passed = true;
+	public void test(){
+		
 		EN_PartOfSpeech pos = new EN_PartOfSpeech();
-		List<String> test = null;
-		List<String> known = null;
+		List<String> test = new ArrayList<String>();
+		List<String> known = new ArrayList<String>();
 		
 		test.add("What");
 		test.add("part");
@@ -34,16 +33,7 @@ public class EN_PartOfSpeech_Test {
 		
 		//TODO - Make better test
 		for(int i=0; i < test.size(); i++){
-			
-			if(!pos.getPOStag(test.get(i)).equals(known.get(i))){
-				System.out.println("Incorrect POS for word " + test.get(i));
-				passed = false;
-			}
-			
-		}
-		if(passed){
-			System.out.println("All tests passed successfully");
+			assertEquals(pos.getPOStag(test.get(i)), known.get(i));	
 		}
 	}
-
 }

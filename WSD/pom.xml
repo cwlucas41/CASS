@@ -13,8 +13,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.3</version>
         <configuration>
-          <source/>
-          <target/>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
     </plugins>
@@ -25,5 +25,21 @@
   		<artifactId>stanford-corenlp</artifactId>
   		<version>3.6.0</version>
   	</dependency>
+  	<dependency>
+  		<groupId>edu.stanford.nlp</groupId>
+  		<artifactId>stanford-corenlp</artifactId>
+  		<version>3.6.0</version>
+  		<classifier>models</classifier>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.slf4j</groupId>
+  		<artifactId>slf4j-simple</artifactId>
+  		<version>1.7.12</version>
+  	</dependency>
+  	<dependency>
+		<groupId>com.google.protobuf</groupId>
+		<artifactId>protobuf-java</artifactId>
+		<version>2.6.1</version>
+	</dependency>
   </dependencies>
 </project>
