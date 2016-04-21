@@ -5,5 +5,23 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry exported="true" kind="lib" path="JSemcor/edu.mit.jsemcor_1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/ejml-0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/javax.json.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/javax.json-api-1.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/joda-time.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/joda-time-2.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/jollyday.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/jollyday-0.4.7-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/protobuf.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/slf4j-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/slf4j-simple.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/stanford-corenlp-3.6.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/stanford-corenlp-3.6.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/stanford-corenlp-3.6.0-models.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/stanford-corenlp-3.6.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/xom.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09/xom-1.2.10-src.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-corenlp-full-2015-12-09.zip"/>
+	<classpathentry kind="lib" path="C:/Users/Fausto/Downloads/stanford-english-corenlp-2016-01-10-models.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
