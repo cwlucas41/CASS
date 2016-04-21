@@ -10,23 +10,23 @@ import cass.languageTool.wordNet.*;
 
 import java.util.ListIterator;
 
-public class LanguageTool implements Lemmatizer, Tokenizer, WordNet {
+public class LanguageTool implements I_Lemma, I_Tokenizer, WordNet {
 	private WordNet wordNet;
-	private Tokenizer tokenizer;
-	private Lemmatizer lemmatizer;
+	private I_Tokenizer tokenizer;
+	private I_Lemma lemmatizer;
 	
 	public LanguageTool(Language language) {
 		switch (language) {
 		case EN:
 			wordNet = new EnWordNet();
-			tokenizer = new EnTokenizer();
-			lemmatizer = new EnLemmatizer();
+			tokenizer = new EN_Tokenizer();
+			lemmatizer = new EN_Lemma();
 			break;
 			
 		case TEST:
 			wordNet = new TestWordNet();
-			tokenizer = new TestTokenizer();
-			lemmatizer = new TestLemmatizer();
+			tokenizer = new EN_Tokenizer();
+			lemmatizer = new EN_Lemma();
 			break;
 
 		default:
@@ -34,11 +34,11 @@ public class LanguageTool implements Lemmatizer, Tokenizer, WordNet {
 		}
 	}
 
-	public String lemmatize(String string) {
-		return lemmatizer.lemmatize(string);
+	public String Lemmatize(String string) {
+		return lemmatizer.Lemmatize(string);
 	}
 
-	public List<String> tokenize(String string) {
+	public ArrayList<String> tokenize(String string) {
 		return tokenizer.tokenize(string);
 	}
 	
@@ -48,7 +48,7 @@ public class LanguageTool implements Lemmatizer, Tokenizer, WordNet {
 		
 		ListIterator<String> iter = tokenized.listIterator();
 		while (iter.hasNext()) {
-			tokenizedAndLemmatized.add(lemmatize(iter.next()));
+			tokenizedAndLemmatized.add(Lemmatize(iter.next()));
 		}
 		return tokenizedAndLemmatized;
 	}
@@ -72,5 +72,7 @@ public class LanguageTool implements Lemmatizer, Tokenizer, WordNet {
 	public Set<WordSense> getHypernyms(WordSense sense) {
 		return wordNet.getHypernyms(sense);
 	}
+
+	
 		
 }
