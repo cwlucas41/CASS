@@ -1,9 +1,9 @@
 package cass.languageTool.lematizer;
 
-public class TestLemmatizer implements Lemmatizer {
+public class TestLemmatizer implements I_Lemma{
 
 	@Override
-	public String lemmatize(String string) {
+	public String Lemmatize(String string) {
 		String lemma;
 		
 		switch (string) {
@@ -25,5 +25,7 @@ public class TestLemmatizer implements Lemmatizer {
 		
 		return lemma;
 	}
+
+	
 
 }
