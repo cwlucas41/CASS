@@ -89,7 +89,9 @@ public class EN_WordNet implements I_WordNet {
         IIndexWord indexWord = getPartOfSpeech(sense);
         
         List<IWordID> wordIDList = new ArrayList<IWordID>();
-    	wordIDList.addAll(indexWord.getWordIDs());
+        if (indexWord != null) {
+		    wordIDList.addAll(indexWord.getWordIDs());
+		}
     	for (IWordID wid : wordIDList) {
     		IWord w = dict.getWord(wid);
     		if (w.getSenseKey().toString() == sense.getId()) {
@@ -138,17 +140,23 @@ public class EN_WordNet implements I_WordNet {
 	
 	private IIndexWord getPartOfSpeech(CASSWordSense sense) {
 		IIndexWord indexWord = null;
-        switch (sense.getPOS()) {
-        case "NOUN":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.NOUN);
-        case "VERB":
+        switch (sense.getPOS().toString()) {
+        case "noun":
+        	System.out.println(POS.NOUN);
+        	indexWord = dict.getIndexWord(sense.getTarget(), POS.NOUN); // This line should not return null!
+        	break;
+        case "verb":
         	indexWord = dict.getIndexWord(sense.getTarget(), POS.VERB);
-        case "ADJECTIVE":
+        	break;
+        case "adjective":
         	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADJECTIVE);
-        case "ADVERB":
+        	break;
+        case "adverb":
         	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADVERB);
+        	break;
         default:
-        	//TODO exception handling
+        	System.out.println(indexWord);
+        	System.out.println("No Part of Speech Recognized");
         }
         
         return indexWord;
