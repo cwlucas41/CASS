@@ -54,22 +54,22 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, WordNet {
 	}
 
 	@Override
-	public Set<String> getSynonyms(WordSense sense) {
+	public Set<String> getSynonyms(CASSWordSense sense) {
 		return wordNet.getSynonyms(sense);
 	}
 
 	@Override
-	public Set<WordSense> getSenses(String word) {
+	public Set<CASSWordSense> getSenses(String word) {
 		return wordNet.getSenses(word);
 	}
 
 	@Override
-	public String getDefinition(WordSense sense) {
+	public String getDefinition(CASSWordSense sense) {
 		return wordNet.getDefinition(sense);
 	}
 
 	@Override
-	public Set<WordSense> getHypernyms(WordSense sense) {
+	public Set<CASSWordSense> getHypernyms(CASSWordSense sense) {
 		return wordNet.getHypernyms(sense);
 	}
 

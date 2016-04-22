@@ -1,11 +1,11 @@
 package cass.wsd;
 
-import cass.languageTool.wordNet.WordSense;
+import cass.languageTool.wordNet.CASSWordSense;
 
 public class ScoredSense implements Comparable<ScoredSense> {
-	private WordSense sense;
+	private CASSWordSense sense;
 	private int score;
-	public ScoredSense(WordSense sense, int score) {
+	public ScoredSense(CASSWordSense sense, int score) {
 		this.sense = sense;
 		this.score = score;
 	}
@@ -13,7 +13,7 @@ public class ScoredSense implements Comparable<ScoredSense> {
 	public int compareTo(ScoredSense o) {
 		return Integer.compare(getScore(), o.getScore());
 	}
-	public WordSense getSense() {
+	public CASSWordSense getSense() {
 		return sense;
 	}
 	public int getScore() {

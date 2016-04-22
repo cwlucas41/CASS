@@ -8,22 +8,22 @@ public class TestWordNet implements WordNet {
 	int numberOfSenses = 2;
 	
 	@Override
-	public Set<String> getSynonyms(WordSense sense) {
+	public Set<String> getSynonyms(CASSWordSense sense) {
 	
 		return null;
 	}
 
 	@Override
-	public Set<WordSense> getSenses(String word) {
-		Set<WordSense> set = new HashSet<>(numberOfSenses);
+	public Set<CASSWordSense> getSenses(String word) {
+		Set<CASSWordSense> set = new HashSet<>(numberOfSenses);
 		for (int i = 0; i < numberOfSenses; i++) {
-			set.add(new WordSense(word + i));
+			set.add(new CASSWordSense(null, word + i, null));
 		}
 		return set;
 	}
 
 	@Override
-	public String getDefinition(WordSense sense) {
+	public String getDefinition(CASSWordSense sense) {
 		String id = sense.getId();
 		String gloss = null;
 		switch (id) {
@@ -42,7 +42,7 @@ public class TestWordNet implements WordNet {
 	}
 
 	@Override
-	public Set<WordSense> getHypernyms(WordSense sense) {
+	public Set<CASSWordSense> getHypernyms(CASSWordSense sense) {
 		// TODO Auto-generated method stub
 		return null;
 	}
