@@ -5,28 +5,32 @@ import java.util.List;
 import java.util.Set;
 
 import cass.languageTool.lemma.*;
+import cass.languageTool.partOfSpeech.EN_PartOfSpeech;
+import cass.languageTool.partOfSpeech.I_PartOfSpeech;
 import cass.languageTool.tokenizer.*;
 import cass.languageTool.wordNet.*;
 
 import java.util.ListIterator;
 
-public class LanguageTool implements I_Lemma, I_Tokenizer, WordNet {
-	private WordNet wordNet;
+public class LanguageTool implements I_Lemma, I_Tokenizer, I_WordNet, I_PartOfSpeech {
+	private I_WordNet wordNet;
 	private I_Tokenizer tokenizer;
 	private I_Lemma lemmatizer;
+	private I_PartOfSpeech pos;
 	
 	public LanguageTool(Language language) {
 		switch (language) {
 		case EN:
-			wordNet = new EnWordNet();
+			wordNet = new EN_WordNet();
 			tokenizer = new EN_Tokenizer();
 			lemmatizer = new EN_Lemma();
+			pos = new EN_PartOfSpeech();
 			break;
 			
 		case TEST:
-			wordNet = new TestWordNet();
-			tokenizer = new TestTokenizer();
-			lemmatizer = new TestLemmatizer();
+			wordNet = new TEST_WordNet();
+			tokenizer = new TEST_Tokenizer();
+			lemmatizer = new TEST_Lemmatizer();
 			break;
 
 		default:
@@ -71,6 +75,11 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, WordNet {
 	@Override
 	public Set<CASSWordSense> getHypernyms(CASSWordSense sense) {
 		return wordNet.getHypernyms(sense);
+	}
+
+	@Override
+	public String getPOStag(String word) {
+		return pos.getPOStag(word);
 	}
 
 	
