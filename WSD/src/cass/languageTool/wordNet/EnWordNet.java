@@ -33,31 +33,7 @@ public class EnWordNet implements WordNet {
 	@Override
 	public Set<String> getSynonyms(CASSWordSense sense) {
 		Set<String> synonyms = new HashSet<String>();
-        IIndexWord indexWord = null;
-        switch (sense.getPOS()) {
-        case "NOUN":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.NOUN);
-        case "VERB":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.VERB);
-        case "ADJECTIVE":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADJECTIVE);
-        case "ADVERB":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADVERB);
-        default:
-        	//TODO exception handling
-        }
-        
-        List<IWordID> wordIDList = new ArrayList<IWordID>();
-    	wordIDList.addAll(indexWord.getWordIDs());
-    	
-    	ISynset synset = null;
-    	for (IWordID wid : wordIDList) {
-    		IWord w = dict.getWord(wid);
-    		if (w.getSenseKey().toString() == sense.getId()) {
-    			synset = w.getSynset();
-    			break;
-    		}
-    	}
+        ISynset synset = getSynset(sense);
     	
     	for (IWord w : synset.getWords()) {
     		synonyms.add(w.getLemma());
@@ -95,19 +71,7 @@ public class EnWordNet implements WordNet {
 	@Override
 	public String getDefinition(CASSWordSense sense) {
         String gloss = null;
-        IIndexWord indexWord = null;
-        switch (sense.getPOS()) {
-        case "NOUN":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.NOUN);
-        case "VERB":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.VERB);
-        case "ADJECTIVE":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADJECTIVE);
-        case "ADVERB":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADVERB);
-        default:
-        	//TODO exception handling
-        }
+        IIndexWord indexWord = getPartOfSpeech(sense);
         
         List<IWordID> wordIDList = new ArrayList<IWordID>();
     	wordIDList.addAll(indexWord.getWordIDs());
@@ -125,20 +89,23 @@ public class EnWordNet implements WordNet {
 	
 	public Set<CASSWordSense> getHypernyms(CASSWordSense sense) {
 		Set<CASSWordSense> hypernyms = new HashSet<CASSWordSense>();
-        IIndexWord indexWord = null;
-        switch (sense.getPOS()) {
-        case "NOUN":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.NOUN);
-        case "VERB":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.VERB);
-        case "ADJECTIVE":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADJECTIVE);
-        case "ADVERB":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADVERB);
-        default:
-        	//TODO exception handling
-        }
-        	
+		ISynset synset = getSynset(sense);
+    	
+    	List<ISynsetID> hyperlist = synset.getRelatedSynsets(Pointer.HYPERNYM);
+    	List<IWord> wordlist = new ArrayList<IWord>();
+    	for (ISynsetID synsetID : hyperlist) {
+    		wordlist.addAll(dict.getSynset(synsetID).getWords());
+    	}
+    	for (IWord w : wordlist) {
+    		CASSWordSense s = new CASSWordSense(w.getLemma(), w.getSenseKey().toString(), w.getPOS().toString());
+    		hypernyms.add(s);
+    	}
+    	
+		return hypernyms;
+	}
+	
+	private ISynset getSynset(CASSWordSense sense) {
+		IIndexWord indexWord = getPartOfSpeech(sense);
         
         List<IWordID> wordIDList = new ArrayList<IWordID>();
     	wordIDList.addAll(indexWord.getWordIDs());
@@ -151,18 +118,25 @@ public class EnWordNet implements WordNet {
     			break;
     		}
     	}
-    	
-    	List<ISynsetID> hyperlist = synset.getRelatedSynsets(Pointer.HYPERNYM);
-    	List<IWord> wordlist = new ArrayList<IWord>();
-    	for (ISynsetID synsetID : hyperlist) {
-    		wordlist.addAll(dict.getSynset(synsetID).getWords());
-    	}
-    	for (IWord w : wordlist) {
-    		CASSWordSense s = new CASSWordSense(w.getLemma(), w.getSenseKey().toString(), w.getPOS().toString());
-    		hypernyms.add(sense);
-    	}
-    	
-		return hypernyms;
+    	return synset;
+	}
+	
+	private IIndexWord getPartOfSpeech(CASSWordSense sense) {
+		IIndexWord indexWord = null;
+        switch (sense.getPOS()) {
+        case "NOUN":
+        	indexWord = dict.getIndexWord(sense.getTarget(), POS.NOUN);
+        case "VERB":
+        	indexWord = dict.getIndexWord(sense.getTarget(), POS.VERB);
+        case "ADJECTIVE":
+        	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADJECTIVE);
+        case "ADVERB":
+        	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADVERB);
+        default:
+        	//TODO exception handling
+        }
+        
+        return indexWord;
 	}
 	
 }
