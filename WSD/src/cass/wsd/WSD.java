@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Collections;
 
 import cass.languageTool.*;
-import cass.languageTool.wordNet.WordSense;
+import cass.languageTool.wordNet.CASSWordSense;
 
 public class WSD {
 	
@@ -17,7 +17,7 @@ public class WSD {
 	@SuppressWarnings("unused")
 	private String target;
 	private Random rand = new Random();
-	Set<WordSense> targetSenses;
+	Set<CASSWordSense> targetSenses;
 	
 	public WSD(String leftContext, String target, String rightContext, Language language) {
 		lTool = new LanguageTool(language);
@@ -31,10 +31,10 @@ public class WSD {
 		targetSenses = lTool.getSenses(target);
 	}
 	
-	public List<WordSense> rankSynsetsUsing(Algorithm algorithm) {
+	public List<CASSWordSense> rankSynsetsUsing(Algorithm algorithm) {
 		
 		List<ScoredSense> scoredSenses;
-		List<WordSense> rankedSenses = new ArrayList<WordSense>();
+		List<CASSWordSense> rankedSenses = new ArrayList<CASSWordSense>();
 		
 		switch (algorithm) {
 		case LESK:
@@ -67,7 +67,7 @@ public class WSD {
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 		
 		// for every set of synonyms in the list
-		for (WordSense targetSense : targetSenses) {
+		for (CASSWordSense targetSense : targetSenses) {
 			// clear and add lemmatized tokens of gloss to set
 			glossSet.clear();
 			String definition = lTool.getDefinition(targetSense);
@@ -92,16 +92,16 @@ public class WSD {
 	List<ScoredSense> rankSensesUsingStochasticHypernymDistance() {
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 		
-		for (WordSense targetSense : targetSenses) {
+		for (CASSWordSense targetSense : targetSenses) {
 			int senseScore = 0;
 		
 			for (String contextWord : context) {
 				
 				// for each sense of the current context word, find the sense with the minimum distance to the current target sense
-				Set<WordSense> contextWordSenses = lTool.getSenses(contextWord);
+				Set<CASSWordSense> contextWordSenses = lTool.getSenses(contextWord);
 				
 				int bestScore = 0;
-				for (WordSense contextWordSense : contextWordSenses) {
+				for (CASSWordSense contextWordSense : contextWordSenses) {
 					
 					int currentScore = getHypernymDistanceScore(targetSense, contextWordSense);
 					if (currentScore < bestScore) {
@@ -119,10 +119,10 @@ public class WSD {
 		return scoredSenses;
 	}
 	
-	private int getHypernymDistanceScore(WordSense sense1, WordSense sense2) {
+	private int getHypernymDistanceScore(CASSWordSense sense1, CASSWordSense sense2) {
 		
-		List<WordSense> ancestors1 = getHypernymAncestors(sense1);
-		List<WordSense> ancestors2 = getHypernymAncestors(sense2);
+		List<CASSWordSense> ancestors1 = getHypernymAncestors(sense1);
+		List<CASSWordSense> ancestors2 = getHypernymAncestors(sense2);
 		
 		Collections.reverse(ancestors1);
 		Collections.reverse(ancestors2);
@@ -141,14 +141,14 @@ public class WSD {
 		return distanceBetweenSenses;
 	}
 	
-	private List<WordSense> getHypernymAncestors(WordSense sense) {
-		List<WordSense> ancestors = new ArrayList<WordSense>();
+	private List<CASSWordSense> getHypernymAncestors(CASSWordSense sense) {
+		List<CASSWordSense> ancestors = new ArrayList<CASSWordSense>();
 		int size, randomIndex;
 		while (sense.getId() != "entity") {
-			Set<WordSense> hypernyms = lTool.getHypernyms(sense);
+			Set<CASSWordSense> hypernyms = lTool.getHypernyms(sense);
 			size = hypernyms.size();
 			randomIndex = rand.nextInt(size);
-			WordSense[] hypernymArray = new WordSense[size];
+			CASSWordSense[] hypernymArray = new CASSWordSense[size];
 			hypernyms.toArray(hypernymArray);
 			sense = hypernymArray[randomIndex];
 			ancestors.add(sense);

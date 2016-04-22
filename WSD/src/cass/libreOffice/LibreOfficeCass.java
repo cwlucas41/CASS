@@ -3,7 +3,7 @@ package cass.libreOffice;
 import java.util.List;
 
 import cass.languageTool.Language;
-import cass.languageTool.wordNet.WordSense;
+import cass.languageTool.wordNet.CASSWordSense;
 import cass.wsd.*;
 
 public class LibreOfficeCass {
@@ -26,7 +26,7 @@ public class LibreOfficeCass {
 	}
 	
 	public String[][] getSynonyms(String algorithm) {
-		List<WordSense> rankedSenses = null;
+		List<CASSWordSense> rankedSenses = null;
 		
 		switch (algorithm) {
 		case "LeskWithWordNet":
@@ -40,7 +40,7 @@ public class LibreOfficeCass {
 		return convert(rankedSenses);
 	}
 
-	private String[][] convert(List<WordSense> senses) {
+	private String[][] convert(List<CASSWordSense> senses) {
 		return null;
 	}
 	
