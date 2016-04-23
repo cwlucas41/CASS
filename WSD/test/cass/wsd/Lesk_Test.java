@@ -4,8 +4,10 @@ import static org.junit.Assert.*;
 
 import java.net.MalformedURLException;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -15,6 +17,8 @@ import cass.testGenerator.TestSentenceGenerator;
 
 public class Lesk_Test {
 
+	int numToKeep = 3;
+	
 	@Test
 	public void test() {
 		WSD wsd = new WSD("The", "bass", "makes low musical sounds", Language.TEST);
@@ -41,14 +45,26 @@ public class Lesk_Test {
 			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
 			List<ScoredSense> results = wsd.rankSensesUsingLesk();
 
-			if ((results.size() > 0) && ts.getTarget().equals(results.get(0).getSense().getId())) {
+			Set<String> predicted = new HashSet<String>();
+			
+			for (int i = 0; i < results.size(); i++) {
+				if (i < numToKeep) {
+					predicted.add(results.get(i).getSense().getId());
+				} else {
+					break;
+				}
+			}
+						
+			predicted.retainAll(ts.getSenses());
+			if (predicted.size() > 0) {
 				numCorrect++;
-				System.out.println("great success");
 			}
 			numSentences++;
-			System.out.println(numSentences);
+			if (numSentences % 10 == 0) {
+				System.out.println(numCorrect + " / " + numSentences);
+				System.out.println((float) numCorrect / numSentences);
+				System.out.println();
+			}
 		}
-		
-		System.out.println(numCorrect/numSentences);
 	}
 }
