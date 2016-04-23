@@ -12,7 +12,8 @@ import java.util.Set;
 import org.junit.Test;
 
 import cass.languageTool.Language;
-import cass.testGenerator.TestSentence;
+import cass.testGenerator.TestData;
+import cass.testGenerator.TestParagraphGenerator;
 import cass.testGenerator.TestSentenceGenerator;
 
 public class Lesk_Test {
@@ -36,12 +37,12 @@ public class Lesk_Test {
 	
 	@Test
 	public void systemTest() throws MalformedURLException {
-		Iterator<TestSentence> tsg = new TestSentenceGenerator("semcor3.0");
+		Iterator<TestData> tsg = new TestParagraphGenerator("semcor3.0");
 		
 		int numCorrect = 0;
 		int numSentences = 0;
 		while (tsg.hasNext()) {
-			TestSentence ts = tsg.next();
+			TestData ts = tsg.next();
 			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
 			List<ScoredSense> results = wsd.rankSensesUsingLesk();
 

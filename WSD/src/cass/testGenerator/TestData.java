@@ -2,14 +2,14 @@ package cass.testGenerator;
 
 import java.util.List;
 
-public class TestSentence {
+public class TestData {
 	
 	private String leftContext;
 	private String target;
 	private List<String> senses;
 	private String rightContext;
 	
-	public TestSentence(String leftContext, String target, List<String> senses, String rightContext) {
+	public TestData(String leftContext, String target, List<String> senses, String rightContext) {
 		super();
 		this.leftContext = leftContext;
 		this.target = target;
