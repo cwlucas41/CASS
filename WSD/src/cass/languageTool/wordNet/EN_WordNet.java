@@ -63,21 +63,19 @@ public class EN_WordNet implements I_WordNet {
 		indexWords.add(dict.getIndexWord(word, POS.ADJECTIVE));
 		indexWords.add(dict.getIndexWord(word, POS.ADVERB));
 		
-		List<IWordID> wordIDList = new ArrayList<IWordID>();
+		Set<IWordID> wordIDList = new HashSet<IWordID>();
 		for (IIndexWord indexWord : indexWords) {
 			if (indexWord != null) {
 				wordIDList.addAll(indexWord.getWordIDs());
 			}
 		}
-		
+				
 		for (IWordID wordID : wordIDList) {
-			IWord tempword = dict.getWord(wordID);
-			ISynset synset = tempword.getSynset();
-			for (IWord w : synset.getWords()) {
-				//TODO: check if the output for .getPOS().toString() is as expected (NOUN, VERB...)
-				CASSWordSense sense = new CASSWordSense(w.getLemma(), w.getSenseKey().toString(), w.getPOS().toString());
-				senses.add(sense);
-			}
+			IWord iword = dict.getWord(wordID);
+			
+			String senseKey = iword.getSenseKey().toString();
+			CASSWordSense sense = new CASSWordSense(iword.getLemma(), senseKey, iword.getPOS().toString());
+			senses.add(sense);
 		}
 		
 		return senses;
@@ -92,14 +90,15 @@ public class EN_WordNet implements I_WordNet {
         if (indexWord != null) {
 		    wordIDList.addAll(indexWord.getWordIDs());
 		}
+        
+        IWord w = null;
     	for (IWordID wid : wordIDList) {
-    		IWord w = dict.getWord(wid);
-    		if (w.getSenseKey().toString() == sense.getId()) {
+    		w = dict.getWord(wid);
+    		if (w.getSenseKey().toString().equals(sense.getId())) {
     			gloss = w.getSynset().getGloss();
-    			return gloss;
+    			break;
     		}
     	}
-    	gloss = "NO GLOSS FOUND";
     	return gloss;
     	
 	}
@@ -140,9 +139,9 @@ public class EN_WordNet implements I_WordNet {
 	
 	private IIndexWord getPartOfSpeech(CASSWordSense sense) {
 		IIndexWord indexWord = null;
-        switch (sense.getPOS().toString()) {
+		
+        switch (sense.getPOS()) {
         case "noun":
-        	System.out.println(POS.NOUN);
         	indexWord = dict.getIndexWord(sense.getTarget(), POS.NOUN); // This line should not return null!
         	break;
         case "verb":
@@ -155,8 +154,7 @@ public class EN_WordNet implements I_WordNet {
         	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADVERB);
         	break;
         default:
-        	System.out.println(indexWord);
-        	System.out.println("No Part of Speech Recognized");
+        	break;
         }
         
         return indexWord;

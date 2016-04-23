@@ -10,24 +10,25 @@ public class EN_WordNet_Test {
 
 	I_WordNet wn = new EN_WordNet();
 	
+	String testString = "java";
+	
 	@Test
 	public void getSensesTest() {
-		Set<CASSWordSense> senses = wn.getSenses("basketball");
+		Set<CASSWordSense> senses = wn.getSenses(testString);
 		for (CASSWordSense sense : senses) {
 			assertNotNull(sense);
-			System.out.println(sense.getId());
-			System.out.println(sense.getPOS());
+			assertNotNull(sense.getId());
+			assertNotNull(sense.getPOS());
+			assertNotNull(sense.getTarget());
 		}
 	}
 
 	@Test
 	public void getDefinitionTest() {
-		Set<CASSWordSense> senses = wn.getSenses("basketball");
+		Set<CASSWordSense> senses = wn.getSenses(testString);
 		for (CASSWordSense sense : senses) {
 			String gloss = wn.getDefinition(sense);
 			assertNotNull(gloss);
-			System.out.println(gloss);
 		}
-	}
-	
+	}	
 }
