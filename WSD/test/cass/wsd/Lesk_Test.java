@@ -33,16 +33,22 @@ public class Lesk_Test {
 	@Test
 	public void systemTest() throws MalformedURLException {
 		Iterator<TestSentence> tsg = new TestSentenceGenerator("semcor3.0");
-		TestSentence ts = tsg.next();
-		WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
-		List<ScoredSense> results = wsd.rankSensesUsingLesk();
-		System.out.println(ts.getTarget());
-		System.out.println(ts.getSenses());
-		System.out.println();
-		System.out.println(results);
-		for (ScoredSense sense : results) {
-			System.out.println(sense.getSense().getId());
+		
+		int numCorrect = 0;
+		int numSentences = 0;
+		while (tsg.hasNext()) {
+			TestSentence ts = tsg.next();
+			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
+			List<ScoredSense> results = wsd.rankSensesUsingLesk();
+
+			if ((results.size() > 0) && ts.getTarget().equals(results.get(0).getSense().getId())) {
+				numCorrect++;
+				System.out.println("great success");
+			}
+			numSentences++;
+			System.out.println(numSentences);
 		}
 		
+		System.out.println(numCorrect/numSentences);
 	}
 }

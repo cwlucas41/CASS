@@ -33,6 +33,12 @@ public class TestSentenceGenerator implements Iterable<TestSentence>, Iterator<T
 		sentenceIter = contextIter.next().getSentences().listIterator();
 	}
 	
+	@Override
+	protected void finalize() throws Throwable {
+		semcor.close();
+		super.finalize();
+	}
+	
 
 	@Override
 	public Iterator<TestSentence> iterator() {

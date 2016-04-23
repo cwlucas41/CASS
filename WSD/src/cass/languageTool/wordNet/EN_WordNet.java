@@ -40,6 +40,12 @@ public class EN_WordNet implements I_WordNet {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	protected void finalize() throws Throwable {
+		dict.close();
+		super.finalize();
+	}
 
 	@Override
 	public Set<String> getSynonyms(CASSWordSense sense) {
