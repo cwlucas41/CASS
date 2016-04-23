@@ -36,8 +36,10 @@ public class Lesk_Test {
 		TestSentence ts = tsg.next();
 		WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
 		List<ScoredSense> results = wsd.rankSensesUsingLesk();
-		//System.out.println(ts.getSenses());
-		//System.out.println();
+		System.out.println(ts.getTarget());
+		System.out.println(ts.getSenses());
+		System.out.println();
+		System.out.println(results);
 		for (ScoredSense sense : results) {
 			System.out.println(sense.getSense().getId());
 		}
