@@ -9,12 +9,11 @@ import org.junit.Test;
 public class EN_WordNet_Test {
 
 	I_WordNet wn = new EN_WordNet();
-	
-	String testString = "java";
+	String testString = "basketball";
+	Set<CASSWordSense> senses = wn.getSenses(testString);
 	
 	@Test
 	public void getSensesTest() {
-		Set<CASSWordSense> senses = wn.getSenses(testString);
 		for (CASSWordSense sense : senses) {
 			assertNotNull(sense);
 			assertNotNull(sense.getId());
@@ -25,10 +24,30 @@ public class EN_WordNet_Test {
 
 	@Test
 	public void getDefinitionTest() {
-		Set<CASSWordSense> senses = wn.getSenses(testString);
 		for (CASSWordSense sense : senses) {
 			String gloss = wn.getDefinition(sense);
 			assertNotNull(gloss);
 		}
-	}	
+	}
+	
+	@Test
+	public void getSynonymsTest() {
+		for (CASSWordSense sense : senses) {
+			Set<String> synonyms = wn.getSynonyms(sense);
+			assertNotNull(synonyms);
+//			System.out.println(synonyms);
+		}
+	}
+	
+	@Test
+	public void getHypernymsTest() {
+		for (CASSWordSense sense : senses) {
+			Set<CASSWordSense> hypernyms = wn.getHypernyms(sense);
+			assertNotNull(hypernyms);
+			for (CASSWordSense hypernym : hypernyms) {
+				assertNotNull(hypernym.getTarget());
+//				System.out.println(hypernym.getTarget());
+			}
+		}
+	}
 }

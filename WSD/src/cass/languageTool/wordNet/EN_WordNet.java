@@ -84,7 +84,7 @@ public class EN_WordNet implements I_WordNet {
 	@Override
 	public String getDefinition(CASSWordSense sense) {
         String gloss = null;
-        IIndexWord indexWord = getPartOfSpeech(sense);
+        IIndexWord indexWord = getIndexWord(sense);
         
         List<IWordID> wordIDList = new ArrayList<IWordID>();
         if (indexWord != null) {
@@ -121,15 +121,15 @@ public class EN_WordNet implements I_WordNet {
 	}
 	
 	private ISynset getSynset(CASSWordSense sense) {
-		IIndexWord indexWord = getPartOfSpeech(sense);
+		IIndexWord indexWord = getIndexWord(sense);
         
         List<IWordID> wordIDList = new ArrayList<IWordID>();
     	wordIDList.addAll(indexWord.getWordIDs());
-    	
+    	    	
     	ISynset synset = null;
     	for (IWordID wid : wordIDList) {
     		IWord w = dict.getWord(wid);
-    		if (w.getSenseKey().toString() == sense.getId()) {
+    		if (w.getSenseKey().toString().equals(sense.getId())) {
     			synset = w.getSynset();
     			break;
     		}
@@ -137,7 +137,7 @@ public class EN_WordNet implements I_WordNet {
     	return synset;
 	}
 	
-	private IIndexWord getPartOfSpeech(CASSWordSense sense) {
+	private IIndexWord getIndexWord(CASSWordSense sense) {
 		IIndexWord indexWord = null;
 		
         switch (sense.getPOS()) {
