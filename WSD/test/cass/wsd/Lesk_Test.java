@@ -13,7 +13,6 @@ import org.junit.Test;
 
 import cass.languageTool.Language;
 import cass.testGenerator.TestData;
-import cass.testGenerator.TestParagraphGenerator;
 import cass.testGenerator.TestSentenceGenerator;
 
 public class Lesk_Test {
@@ -37,7 +36,7 @@ public class Lesk_Test {
 	
 	@Test
 	public void systemTest() throws MalformedURLException {
-		Iterator<TestData> tsg = new TestParagraphGenerator("semcor3.0");
+		Iterator<TestData> tsg = new TestSentenceGenerator("semcor3.0");
 		
 		int numCorrect = 0;
 		int numSentences = 0;
