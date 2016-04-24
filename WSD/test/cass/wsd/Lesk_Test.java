@@ -2,7 +2,6 @@ package cass.wsd;
 
 import static org.junit.Assert.*;
 
-import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -22,7 +21,7 @@ public class Lesk_Test {
 	@Test
 	public void test() {
 		WSD wsd = new WSD("The", "bass", "makes low musical sounds", Language.TEST);
-		List<ScoredSense> ranked = wsd.rankSensesUsingLesk();
+		List<ScoredSense> ranked = wsd.scoreSensesUsing(Algorithm.LESK);
 		
 		List<String> properID = Arrays.asList("bass0", "bass1");
 		List<Integer> properScore = Arrays.asList(3,1);
@@ -35,7 +34,7 @@ public class Lesk_Test {
 	}
 	
 	@Test
-	public void systemTest() throws MalformedURLException {
+	public void systemTest() {
 		Iterator<TestData> tsg = new TestSentenceGenerator("semcor3.0");
 		
 		int numCorrect = 0;
@@ -43,7 +42,7 @@ public class Lesk_Test {
 		while (tsg.hasNext()) {
 			TestData ts = tsg.next();
 			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
-			List<ScoredSense> results = wsd.rankSensesUsingLesk();
+			List<ScoredSense> results = wsd.scoreSensesUsing(Algorithm.LESK);
 
 			Set<String> predicted = new HashSet<String>();
 			
