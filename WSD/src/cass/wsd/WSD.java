@@ -33,22 +33,8 @@ public class WSD {
 	
 	public List<CASSWordSense> rankSynsetsUsing(Algorithm algorithm) {
 		
-		List<ScoredSense> scoredSenses;
+		List<ScoredSense> scoredSenses = scoreSensesUsing(algorithm);
 		List<CASSWordSense> rankedSenses = new ArrayList<CASSWordSense>();
-		
-		switch (algorithm) {
-		case LESK:
-			scoredSenses = rankSensesUsingLesk();
-			break;
-
-		case STOCHASTIC_GRAPH:
-			scoredSenses = rankSensesUsingStochasticHypernymDistance();
-			break;
-			
-		default:
-			// TODO throw proper exception
-			return null;
-		}
 		
 		// convert ScoredSense to WordSense, discard score
 		for (ScoredSense wordSense : scoredSenses) {
@@ -58,7 +44,28 @@ public class WSD {
 		return rankedSenses;
 	}
 	
-	List<ScoredSense> rankSensesUsingLesk() {
+	List<ScoredSense> scoreSensesUsing(Algorithm algorithm) {
+		
+		List<ScoredSense> scoredSenses;
+		
+		switch (algorithm) {
+		case LESK:
+			scoredSenses = scoreSensesUsingLesk();
+			break;
+
+		case STOCHASTIC_GRAPH:
+			scoredSenses = scoreSensesUsingStochasticHypernymDistance();
+			break;
+			
+		default:
+			// TODO throw proper exception
+			return null;
+		}
+		
+		return scoredSenses;
+	}
+	
+	private List<ScoredSense> scoreSensesUsingLesk() {
 		
 		// context set is set of words in context
 		Set<String> contextSet = new HashSet<String>(context);
@@ -89,7 +96,7 @@ public class WSD {
 		return scoredSenses;
 	}
 	
-	List<ScoredSense> rankSensesUsingStochasticHypernymDistance() {
+	private List<ScoredSense> scoreSensesUsingStochasticHypernymDistance() {
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 		
 		for (CASSWordSense targetSense : targetSenses) {
