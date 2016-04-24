@@ -6,13 +6,13 @@ import java.util.Iterator;
 
 import org.junit.Test;
 
-public class TestSentenceGenerator_Test {
+public class TestParagraphGenerator_Test {
 	
 	@Test
 	public void fieldsAreValid() {
-		Iterator<TestData> testSentences = new TestSentenceGenerator("semcor3.0");
-		while (testSentences.hasNext()) {
-			TestData testSentence = testSentences.next();
+		Iterator<TestData> testParagraphs = new TestParagraphGenerator("semcor3.0");
+		while (testParagraphs.hasNext()) {
+			TestData testSentence = testParagraphs.next();
 			assertNotNull(testSentence.getLeftContext());
 			assertNotNull(testSentence.getRightContext());
 			assertNotNull(testSentence.getTarget());
@@ -23,9 +23,9 @@ public class TestSentenceGenerator_Test {
 	
 	@Test
 	public void testFirstSentence() {
-		Iterator<TestData> testSentences = new TestSentenceGenerator("semcor3.0");
-		TestData testSentence = testSentences.next();
-		System.out.println(testSentence);
+		Iterator<TestData> testParagraphs = new TestParagraphGenerator("semcor3.0");
+		TestData testParagraph = testParagraphs.next();
+		System.out.println(testParagraph);
 	}
 
 }
