@@ -1,7 +1,5 @@
 package cass.testGenerator;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,35 +7,21 @@ import java.util.ListIterator;
 import java.util.Random;
 
 import edu.mit.jsemcor.detokenize.DefaultDetokenizer;
-import edu.mit.jsemcor.element.IContext;
 import edu.mit.jsemcor.element.IParagraph;
 import edu.mit.jsemcor.element.ISentence;
 import edu.mit.jsemcor.element.IWordform;
-import edu.mit.jsemcor.main.IConcordanceSet;
-import edu.mit.jsemcor.main.Semcor;
 
-public class TestParagraphGenerator implements Iterable<TestData>, Iterator<TestData> {
+public class TestParagraphGenerator extends TestDataGenerator {
 	
-	private IConcordanceSet semcor;
-	private Iterator<IContext> contextIter;
 	private ListIterator<IParagraph> paragraphIter;
 	
 	private Random rand = new Random();
 	
 	private DefaultDetokenizer detokenizer =  new DefaultDetokenizer();
 	
-	public TestParagraphGenerator(String path) throws MalformedURLException {
-		semcor = new Semcor(new URL("file", null, path));
-		semcor.open();
-		
-		contextIter = semcor.iterator();
-		paragraphIter = contextIter.next().getParagraphs().listIterator();
-	}
-	
-	@Override
-	protected void finalize() throws Throwable {
-		semcor.close();
-		super.finalize();
+	public TestParagraphGenerator(String path) {
+		super(path);
+		paragraphIter = getContextIter().next().getParagraphs().listIterator();
 	}
 	
 
@@ -48,7 +32,7 @@ public class TestParagraphGenerator implements Iterable<TestData>, Iterator<Test
 
 	@Override
 	public boolean hasNext() {
-		return (paragraphIter.hasNext() || contextIter.hasNext());
+		return (paragraphIter.hasNext() || getContextIter().hasNext());
 	}
 
 	@Override
@@ -137,9 +121,9 @@ public class TestParagraphGenerator implements Iterable<TestData>, Iterator<Test
 		
 		IParagraph nextParagraph = null;
 		
-		if (!paragraphIter.hasNext() && contextIter.hasNext()) {
+		if (!paragraphIter.hasNext() && getContextIter().hasNext()) {
 			// if there is not another sentence but there is another context, update the context and get new sentenceIter
-			paragraphIter = contextIter.next().getParagraphs().listIterator();
+			paragraphIter = getContextIter().next().getParagraphs().listIterator();
 		}
 		
 		if (paragraphIter.hasNext()) {
