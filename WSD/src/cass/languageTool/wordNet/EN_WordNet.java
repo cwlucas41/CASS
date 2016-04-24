@@ -40,6 +40,12 @@ public class EN_WordNet implements I_WordNet {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	protected void finalize() throws Throwable {
+		dict.close();
+		super.finalize();
+	}
 
 	@Override
 	public Set<String> getSynonyms(CASSWordSense sense) {
@@ -63,21 +69,19 @@ public class EN_WordNet implements I_WordNet {
 		indexWords.add(dict.getIndexWord(word, POS.ADJECTIVE));
 		indexWords.add(dict.getIndexWord(word, POS.ADVERB));
 		
-		List<IWordID> wordIDList = new ArrayList<IWordID>();
+		Set<IWordID> wordIDList = new HashSet<IWordID>();
 		for (IIndexWord indexWord : indexWords) {
 			if (indexWord != null) {
 				wordIDList.addAll(indexWord.getWordIDs());
 			}
 		}
-		
+				
 		for (IWordID wordID : wordIDList) {
-			IWord tempword = dict.getWord(wordID);
-			ISynset synset = tempword.getSynset();
-			for (IWord w : synset.getWords()) {
-				//TODO: check if the output for .getPOS().toString() is as expected (NOUN, VERB...)
-				CASSWordSense sense = new CASSWordSense(w.getLemma(), w.getSenseKey().toString(), w.getPOS().toString());
-				senses.add(sense);
-			}
+			IWord iword = dict.getWord(wordID);
+			
+			String senseKey = iword.getSenseKey().toString();
+			CASSWordSense sense = new CASSWordSense(iword.getLemma(), senseKey, iword.getPOS().toString());
+			senses.add(sense);
 		}
 		
 		return senses;
@@ -86,18 +90,21 @@ public class EN_WordNet implements I_WordNet {
 	@Override
 	public String getDefinition(CASSWordSense sense) {
         String gloss = null;
-        IIndexWord indexWord = getPartOfSpeech(sense);
+        IIndexWord indexWord = getIndexWord(sense);
         
         List<IWordID> wordIDList = new ArrayList<IWordID>();
-    	wordIDList.addAll(indexWord.getWordIDs());
+        if (indexWord != null) {
+		    wordIDList.addAll(indexWord.getWordIDs());
+		}
+        
+        IWord w = null;
     	for (IWordID wid : wordIDList) {
-    		IWord w = dict.getWord(wid);
-    		if (w.getSenseKey().toString() == sense.getId()) {
+    		w = dict.getWord(wid);
+    		if (w.getSenseKey().toString().equals(sense.getId())) {
     			gloss = w.getSynset().getGloss();
-    			return gloss;
+    			break;
     		}
     	}
-    	gloss = "NO GLOSS FOUND";
     	return gloss;
     	
 	}
@@ -120,15 +127,15 @@ public class EN_WordNet implements I_WordNet {
 	}
 	
 	private ISynset getSynset(CASSWordSense sense) {
-		IIndexWord indexWord = getPartOfSpeech(sense);
+		IIndexWord indexWord = getIndexWord(sense);
         
         List<IWordID> wordIDList = new ArrayList<IWordID>();
     	wordIDList.addAll(indexWord.getWordIDs());
-    	
+    	    	
     	ISynset synset = null;
     	for (IWordID wid : wordIDList) {
     		IWord w = dict.getWord(wid);
-    		if (w.getSenseKey().toString() == sense.getId()) {
+    		if (w.getSenseKey().toString().equals(sense.getId())) {
     			synset = w.getSynset();
     			break;
     		}
@@ -136,19 +143,24 @@ public class EN_WordNet implements I_WordNet {
     	return synset;
 	}
 	
-	private IIndexWord getPartOfSpeech(CASSWordSense sense) {
+	private IIndexWord getIndexWord(CASSWordSense sense) {
 		IIndexWord indexWord = null;
+		
         switch (sense.getPOS()) {
-        case "NOUN":
-        	indexWord = dict.getIndexWord(sense.getTarget(), POS.NOUN);
-        case "VERB":
+        case "noun":
+        	indexWord = dict.getIndexWord(sense.getTarget(), POS.NOUN); // This line should not return null!
+        	break;
+        case "verb":
         	indexWord = dict.getIndexWord(sense.getTarget(), POS.VERB);
-        case "ADJECTIVE":
+        	break;
+        case "adjective":
         	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADJECTIVE);
-        case "ADVERB":
+        	break;
+        case "adverb":
         	indexWord = dict.getIndexWord(sense.getTarget(), POS.ADVERB);
+        	break;
         default:
-        	//TODO exception handling
+        	break;
         }
         
         return indexWord;

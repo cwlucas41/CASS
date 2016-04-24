@@ -15,7 +15,7 @@ import edu.mit.jsemcor.element.IWordform;
 import edu.mit.jsemcor.main.IConcordanceSet;
 import edu.mit.jsemcor.main.Semcor;
 
-public class TestSentenceGenerator implements Iterable<TestSentence>, Iterator<TestSentence> {
+public class TestSentenceGenerator implements Iterable<TestData>, Iterator<TestData> {
 	
 	private IConcordanceSet semcor;
 	private Iterator<IContext> contextIter;
@@ -33,9 +33,15 @@ public class TestSentenceGenerator implements Iterable<TestSentence>, Iterator<T
 		sentenceIter = contextIter.next().getSentences().listIterator();
 	}
 	
+	@Override
+	protected void finalize() throws Throwable {
+		semcor.close();
+		super.finalize();
+	}
+	
 
 	@Override
-	public Iterator<TestSentence> iterator() {
+	public Iterator<TestData> iterator() {
 		return this;
 	}
 
@@ -45,7 +51,7 @@ public class TestSentenceGenerator implements Iterable<TestSentence>, Iterator<T
 	}
 
 	@Override
-	public TestSentence next() {
+	public TestData next() {
 		
 		List<String> leftTokens = new ArrayList<String>();
 		String target = null;
@@ -96,7 +102,7 @@ public class TestSentenceGenerator implements Iterable<TestSentence>, Iterator<T
 		String leftContext = concatenateTokens(leftTokens);
 		String rightContext = concatenateTokens(rightTokens);
 		
-		return new TestSentence(leftContext, target, senses, rightContext);
+		return new TestData(leftContext, target, senses, rightContext);
 	}
 	
 	private ISentence getNextISentence() {
