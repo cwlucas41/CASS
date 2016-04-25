@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Collections;
+import java.util.Comparator;
 
 import cass.languageTool.*;
 import cass.languageTool.wordNet.CASSWordSense;
@@ -43,6 +44,10 @@ public class WSD {
 
 		case STOCHASTIC_GRAPH:
 			scoredSenses = rankSensesUsingStochasticHypernymDistance();
+			break;
+			
+		case FREQUENCY:
+			scoredSenses = rankSensesUsingTagFrequency();
 			break;
 			
 		default:
@@ -122,6 +127,16 @@ public class WSD {
 	List<ScoredSense> rankSensesUsingTagFrequency() {
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 
+		Collections.sort(scoredSenses, new
+			Comparator<ScoredSense>() {
+				@Override
+				public int compare(ScoredSense o1, ScoredSense o2) {
+					return o1.getSense().getTagFrequency().compareTo(o2.getSense().getTagFrequency());
+				}
+				
+			}
+		);
+		
 		return scoredSenses;
 	}
 	
