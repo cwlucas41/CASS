@@ -119,6 +119,12 @@ public class WSD {
 		return scoredSenses;
 	}
 	
+	List<ScoredSense> rankSensesUsingTagFrequency() {
+		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
+
+		return scoredSenses;
+	}
+	
 	private int getHypernymDistanceScore(CASSWordSense sense1, CASSWordSense sense2) {
 		
 		List<CASSWordSense> ancestors1 = getHypernymAncestors(sense1);
