@@ -4,16 +4,13 @@ import java.net.MalformedURLException;
 import java.util.Iterator;
 import java.util.List;
 
-import org.junit.Test;
-
 import cass.languageTool.Language;
 import cass.testGenerator.TestData;
 import cass.testGenerator.TestSentenceGenerator;
 
-public class Random_Test {
-
-	@Test
-	public void systemTest() throws MalformedURLException {
+public class WSDBenchmark {
+	
+	public void benchmark(Algorithm algorithm) throws MalformedURLException {
 		Iterator<TestData> tsg = new TestSentenceGenerator("semcor3.0");
 		
 		int numCorrect = 0;
@@ -22,7 +19,7 @@ public class Random_Test {
 		while (tsg.hasNext()) {
 			TestData ts = tsg.next();
 			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
-			List<ScoredSense> results = wsd.scoreSensesUsing(Algorithm.FREQUENCY);
+			List<ScoredSense> results = wsd.scoreSensesUsing(algorithm);
 			
 			if (!results.isEmpty() && ts.getSenses().contains(results.get(0).getSense().getId())) {
 				numCorrect++;
@@ -37,5 +34,4 @@ public class Random_Test {
 			}
 		}
 	}
-
 }

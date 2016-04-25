@@ -22,7 +22,7 @@ public class Frequency_Test {
 		while (tsg.hasNext()) {
 			TestData ts = tsg.next();
 			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
-			List<ScoredSense> results = wsd.rankSensesUsingTagFrequency();
+			List<ScoredSense> results = wsd.scoreSensesUsing(Algorithm.FREQUENCY);
 			
 			if (!results.isEmpty() && ts.getSenses().contains(results.get(0).getSense().getId())) {
 				numCorrect++;

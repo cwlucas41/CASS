@@ -31,7 +31,7 @@ public class WSD {
 		targetSenses = lTool.getSenses(target);
 		}
 	
-	public List<CASSWordSense> rankSynsetsUsing(Algorithm algorithm) {
+	public List<CASSWordSense> rankSensesUsing(Algorithm algorithm) {
 		
 		List<ScoredSense> scoredSenses = scoreSensesUsing(algorithm);
 		List<CASSWordSense> rankedSenses = new ArrayList<CASSWordSense>();
@@ -58,11 +58,11 @@ public class WSD {
 			break;
 			
 		case FREQUENCY:
-			scoredSenses = rankSensesUsingTagFrequency();
+			scoredSenses = scoreSensesUsingTagFrequency();
 			break;
 			
 		case RANDOM:
-			scoredSenses = rankSensesRandomly();
+			scoredSenses = scoreSensesRandomly();
 			break;
 			
 		default:
@@ -134,7 +134,7 @@ public class WSD {
 		return scoredSenses;
 	}
 	
-	List<ScoredSense> rankSensesUsingTagFrequency() {
+	private List<ScoredSense> scoreSensesUsingTagFrequency() {
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 				
 		for (CASSWordSense sense : targetSenses) {
@@ -147,7 +147,7 @@ public class WSD {
 		return scoredSenses;
 	}
 	
-	List<ScoredSense> rankSensesRandomly() {
+	private List<ScoredSense> scoreSensesRandomly() {
 		Random rand = new Random();
 		
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
