@@ -126,7 +126,7 @@ public class EN_WordNet implements I_WordNet {
     	for (IWord w : wordlist) {
     		ISenseKey senseKey = w.getSenseKey();
 			ISenseEntry senseEntry = dict.getSenseEntry(senseKey);
-    		CASSWordSense s = new CASSWordSense(w.getLemma(), senseKey.toString(), w.getPOS().toString(),senseEntry.getTagCount());
+    		CASSWordSense s = new CASSWordSense(w.getLemma(), senseKey.toString(), w.getPOS().toString(), senseEntry.getTagCount());
     		hypernyms.add(s);
     	}
     	

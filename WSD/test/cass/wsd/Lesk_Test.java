@@ -11,6 +11,8 @@ import java.util.Set;
 import org.junit.Test;
 
 import cass.languageTool.Language;
+import cass.languageTool.LanguageTool;
+import cass.languageTool.wordNet.CASSWordSense;
 import cass.testGenerator.TestData;
 import cass.testGenerator.TestSentenceGenerator;
 
@@ -41,28 +43,32 @@ public class Lesk_Test {
 		int numSentences = 0;
 		while (tsg.hasNext()) {
 			TestData ts = tsg.next();
-			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
-			List<ScoredSense> results = wsd.scoreSensesUsing(Algorithm.LESK);
-
-			Set<String> predicted = new HashSet<String>();
-			
-			for (int i = 0; i < results.size(); i++) {
-				if (i < numToKeep) {
-					predicted.add(results.get(i).getSense().getId());
-				} else {
-					break;
+			LanguageTool lTool = new LanguageTool(Language.EN);
+			Set<CASSWordSense> senses = lTool.getSenses(ts.getTarget());
+			if (!senses.isEmpty()) {
+				WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
+				List<ScoredSense> results = wsd.scoreSensesUsing(Algorithm.LESK);
+	
+				Set<String> predicted = new HashSet<String>();
+				
+				for (int i = 0; i < results.size(); i++) {
+					if (i < numToKeep) {
+						predicted.add(results.get(i).getSense().getId());
+					} else {
+						break;
+					}
 				}
-			}
-						
-			predicted.retainAll(ts.getSenses());
-			if (predicted.size() > 0) {
-				numCorrect++;
-			}
-			numSentences++;
-			if (numSentences % 10 == 0) {
-				System.out.println(numCorrect + " / " + numSentences);
-				System.out.println((float) numCorrect / numSentences);
-				System.out.println();
+							
+				predicted.retainAll(ts.getSenses());
+				if (predicted.size() > 0) {
+					numCorrect++;
+				}
+				numSentences++;
+				if (numSentences % 10 == 0) {
+					System.out.println(numCorrect + " / " + numSentences);
+					System.out.println((float) numCorrect / numSentences);
+					System.out.println();
+				}
 			}
 		}
 	}
