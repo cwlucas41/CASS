@@ -10,7 +10,7 @@ import cass.languageTool.Language;
 import cass.testGenerator.TestData;
 import cass.testGenerator.TestSentenceGenerator;
 
-public class SensesNotEmpty_Test {
+public class Random_Test {
 
 	@Test
 	public void systemTest() throws MalformedURLException {
@@ -22,11 +22,12 @@ public class SensesNotEmpty_Test {
 		while (tsg.hasNext()) {
 			TestData ts = tsg.next();
 			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
-			List<ScoredSense> results = wsd.rankSensesUsingTagFrequency();
+			List<ScoredSense> results = wsd.rankSensesRandomly();
 			
-			if (!results.isEmpty()) {
+			if (!results.isEmpty() && ts.getSenses().contains(results.get(0).getSense().getId())) {
 				numCorrect++;
 			}
+
 			numSentences++;
 			
 			if (numSentences % 10 == 0) {
@@ -36,4 +37,5 @@ public class SensesNotEmpty_Test {
 			}
 		}
 	}
+
 }

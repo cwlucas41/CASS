@@ -1,7 +1,5 @@
 package cass.wsd;
 
-import static org.junit.Assert.*;
-
 import java.net.MalformedURLException;
 import java.util.Iterator;
 import java.util.List;
