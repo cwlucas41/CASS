@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Collections;
-import java.util.Comparator;
 
 import cass.languageTool.*;
 import cass.languageTool.wordNet.CASSWordSense;
@@ -48,6 +47,10 @@ public class WSD {
 			
 		case FREQUENCY:
 			scoredSenses = rankSensesUsingTagFrequency();
+			break;
+			
+		case RANDOM:
+			scoredSenses = rankSensesRandomly();
 			break;
 			
 		default:
@@ -131,15 +134,22 @@ public class WSD {
 			scoredSenses.add(new ScoredSense(sense, sense.getTagFrequency()));
 		}
 
-		Collections.sort(scoredSenses, new
-			Comparator<ScoredSense>() {
-				@Override
-				public int compare(ScoredSense o1, ScoredSense o2) {
-					return o1.getSense().getTagFrequency().compareTo(o2.getSense().getTagFrequency());
-				}
-				
-			}
-		);
+		Collections.sort(scoredSenses);
+		Collections.reverse(scoredSenses);
+		
+		return scoredSenses;
+	}
+	
+	List<ScoredSense> rankSensesRandomly() {
+		Random rand = new Random();
+		
+		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
+		
+		for (CASSWordSense sense : targetSenses) {
+			scoredSenses.add(new ScoredSense(sense, rand.nextInt()));
+		}
+
+		Collections.sort(scoredSenses);
 		Collections.reverse(scoredSenses);
 		
 		return scoredSenses;
