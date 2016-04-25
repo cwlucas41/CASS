@@ -30,7 +30,7 @@ public class WSD {
 		context.addAll(lTool.tokenizeAndLemmatize(rightContext));
 		
 		targetSenses = lTool.getSenses(target);
-	}
+		}
 	
 	public List<CASSWordSense> rankSynsetsUsing(Algorithm algorithm) {
 		
@@ -126,6 +126,10 @@ public class WSD {
 	
 	List<ScoredSense> rankSensesUsingTagFrequency() {
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
+				
+		for (CASSWordSense sense : targetSenses) {
+			scoredSenses.add(new ScoredSense(sense, sense.getTagFrequency()));
+		}
 
 		Collections.sort(scoredSenses, new
 			Comparator<ScoredSense>() {
@@ -136,6 +140,7 @@ public class WSD {
 				
 			}
 		);
+		Collections.reverse(scoredSenses);
 		
 		return scoredSenses;
 	}
