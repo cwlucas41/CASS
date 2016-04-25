@@ -10,6 +10,8 @@ import java.net.URL;
 
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.item.IIndexWord;
+import edu.mit.jwi.item.ISenseEntry;
+import edu.mit.jwi.item.ISenseKey;
 import edu.mit.jwi.item.IWordID;
 import edu.mit.jwi.item.IWord;
 import edu.mit.jwi.item.ISynset;
@@ -79,8 +81,11 @@ public class EN_WordNet implements I_WordNet {
 		for (IWordID wordID : wordIDList) {
 			IWord iword = dict.getWord(wordID);
 			
-			String senseKey = iword.getSenseKey().toString();
-			CASSWordSense sense = new CASSWordSense(iword.getLemma(), senseKey, iword.getPOS().toString());
+			ISenseKey senseKey = iword.getSenseKey();
+			
+			ISenseEntry senseEntry = dict.getSenseEntry(senseKey);
+			
+			CASSWordSense sense = new CASSWordSense(iword.getLemma(), senseKey.toString(), iword.getPOS().toString(), senseEntry.getTagCount());
 			senses.add(sense);
 		}
 		
@@ -119,7 +124,9 @@ public class EN_WordNet implements I_WordNet {
     		wordlist.addAll(dict.getSynset(synsetID).getWords());
     	}
     	for (IWord w : wordlist) {
-    		CASSWordSense s = new CASSWordSense(w.getLemma(), w.getSenseKey().toString(), w.getPOS().toString());
+    		ISenseKey senseKey = w.getSenseKey();
+			ISenseEntry senseEntry = dict.getSenseEntry(senseKey);
+    		CASSWordSense s = new CASSWordSense(w.getLemma(), senseKey.toString(), w.getPOS().toString(), senseEntry.getTagCount());
     		hypernyms.add(s);
     	}
     	

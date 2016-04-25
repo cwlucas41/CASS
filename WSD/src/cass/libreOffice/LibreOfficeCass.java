@@ -30,7 +30,7 @@ public class LibreOfficeCass {
 		
 		switch (algorithm) {
 		case "LeskWithWordNet":
-			rankedSenses = wsd.rankSynsetsUsing(Algorithm.LESK);
+			rankedSenses = wsd.rankSensesUsing(Algorithm.LESK);
 			break;
 
 		default:

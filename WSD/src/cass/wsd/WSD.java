@@ -16,7 +16,6 @@ public class WSD {
 	private List<String> context;
 	@SuppressWarnings("unused")
 	private String target;
-	private Random rand = new Random();
 	Set<CASSWordSense> targetSenses;
 	
 	public WSD(String leftContext, String target, String rightContext, Language language) {
@@ -29,26 +28,12 @@ public class WSD {
 		context.addAll(lTool.tokenizeAndLemmatize(rightContext));
 		
 		targetSenses = lTool.getSenses(target);
-	}
-	
-	public List<CASSWordSense> rankSynsetsUsing(Algorithm algorithm) {
-		
-		List<ScoredSense> scoredSenses;
-		List<CASSWordSense> rankedSenses = new ArrayList<CASSWordSense>();
-		
-		switch (algorithm) {
-		case LESK:
-			scoredSenses = rankSensesUsingLesk();
-			break;
-
-		case STOCHASTIC_GRAPH:
-			scoredSenses = rankSensesUsingStochasticHypernymDistance();
-			break;
-			
-		default:
-			// TODO throw proper exception
-			return null;
 		}
+	
+	public List<CASSWordSense> rankSensesUsing(Algorithm algorithm) {
+		
+		List<ScoredSense> scoredSenses = scoreSensesUsing(algorithm);
+		List<CASSWordSense> rankedSenses = new ArrayList<CASSWordSense>();
 		
 		// convert ScoredSense to WordSense, discard score
 		for (ScoredSense wordSense : scoredSenses) {
@@ -58,7 +43,36 @@ public class WSD {
 		return rankedSenses;
 	}
 	
-	List<ScoredSense> rankSensesUsingLesk() {
+	List<ScoredSense> scoreSensesUsing(Algorithm algorithm) {
+		
+		List<ScoredSense> scoredSenses;
+		
+		switch (algorithm) {
+		case LESK:
+			scoredSenses = scoreSensesUsingLesk();
+			break;
+
+		case STOCHASTIC_GRAPH:
+			scoredSenses = scoreSensesUsingStochasticHypernymDistance();
+			break;
+			
+		case FREQUENCY:
+			scoredSenses = scoreSensesUsingTagFrequency();
+			break;
+			
+		case RANDOM:
+			scoredSenses = scoreSensesRandomly();
+			break;
+			
+		default:
+			// TODO throw proper exception
+			return null;
+		}
+		
+		return scoredSenses;
+	}
+	
+	private List<ScoredSense> scoreSensesUsingLesk() {
 		
 		// context set is set of words in context
 		Set<String> contextSet = new HashSet<String>(context);
@@ -89,7 +103,7 @@ public class WSD {
 		return scoredSenses;
 	}
 	
-	List<ScoredSense> rankSensesUsingStochasticHypernymDistance() {
+	private List<ScoredSense> scoreSensesUsingStochasticHypernymDistance() {
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 		
 		for (CASSWordSense targetSense : targetSenses) {
@@ -103,7 +117,7 @@ public class WSD {
 				int bestScore = 0;
 				for (CASSWordSense contextWordSense : contextWordSenses) {
 					
-					int currentScore = getHypernymDistanceScore(targetSense, contextWordSense);
+					int currentScore = lTool.getHypernymDistanceScore(targetSense, contextWordSense);
 					if (currentScore < bestScore) {
 						bestScore = currentScore;
 					}
@@ -119,40 +133,31 @@ public class WSD {
 		return scoredSenses;
 	}
 	
-	private int getHypernymDistanceScore(CASSWordSense sense1, CASSWordSense sense2) {
-		
-		List<CASSWordSense> ancestors1 = getHypernymAncestors(sense1);
-		List<CASSWordSense> ancestors2 = getHypernymAncestors(sense2);
-		
-		Collections.reverse(ancestors1);
-		Collections.reverse(ancestors2);
-		
-		// common ancestor has same ancestor path in both lists
-		int depthOfCommonAncestor = 0;
-		while(ancestors1.get(depthOfCommonAncestor+1).getId() != ancestors2.get(depthOfCommonAncestor+1).getId()) {
-			depthOfCommonAncestor++;
+	private List<ScoredSense> scoreSensesUsingTagFrequency() {
+		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
+				
+		for (CASSWordSense sense : targetSenses) {
+			scoredSenses.add(new ScoredSense(sense, sense.getTagFrequency()));
 		}
+
+		Collections.sort(scoredSenses);
+		Collections.reverse(scoredSenses);
 		
-		int distanceFromAncestorToS1 = ancestors1.size() - depthOfCommonAncestor;
-		int distanceFromAncestorToS2 = ancestors2.size() - depthOfCommonAncestor;
-		
-		int distanceBetweenSenses = distanceFromAncestorToS1 + distanceFromAncestorToS2;
-		
-		return distanceBetweenSenses;
+		return scoredSenses;
 	}
 	
-	private List<CASSWordSense> getHypernymAncestors(CASSWordSense sense) {
-		List<CASSWordSense> ancestors = new ArrayList<CASSWordSense>();
-		int size, randomIndex;
-		while (sense.getId() != "entity") {
-			Set<CASSWordSense> hypernyms = lTool.getHypernyms(sense);
-			size = hypernyms.size();
-			randomIndex = rand.nextInt(size);
-			CASSWordSense[] hypernymArray = new CASSWordSense[size];
-			hypernyms.toArray(hypernymArray);
-			sense = hypernymArray[randomIndex];
-			ancestors.add(sense);
+	private List<ScoredSense> scoreSensesRandomly() {
+		Random rand = new Random();
+		
+		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
+		
+		for (CASSWordSense sense : targetSenses) {
+			scoredSenses.add(new ScoredSense(sense, rand.nextInt()));
 		}
-		return ancestors;
+
+		Collections.sort(scoredSenses);
+		Collections.reverse(scoredSenses);
+		
+		return scoredSenses;
 	}
 }

@@ -2,5 +2,7 @@ package cass.wsd;
 
 public enum Algorithm {
 	LESK,
-	STOCHASTIC_GRAPH;
+	STOCHASTIC_GRAPH,
+	FREQUENCY,
+	RANDOM;
 }
