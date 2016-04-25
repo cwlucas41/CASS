@@ -16,7 +16,6 @@ public class WSD {
 	private List<String> context;
 	@SuppressWarnings("unused")
 	private String target;
-	private Random rand = new Random();
 	Set<CASSWordSense> targetSenses;
 	
 	public WSD(String leftContext, String target, String rightContext, Language language) {
@@ -118,7 +117,7 @@ public class WSD {
 				int bestScore = 0;
 				for (CASSWordSense contextWordSense : contextWordSenses) {
 					
-					int currentScore = getHypernymDistanceScore(targetSense, contextWordSense);
+					int currentScore = lTool.getHypernymDistanceScore(targetSense, contextWordSense);
 					if (currentScore < bestScore) {
 						bestScore = currentScore;
 					}
@@ -160,42 +159,5 @@ public class WSD {
 		Collections.reverse(scoredSenses);
 		
 		return scoredSenses;
-	}
-	
-	private int getHypernymDistanceScore(CASSWordSense sense1, CASSWordSense sense2) {
-		
-		List<CASSWordSense> ancestors1 = getHypernymAncestors(sense1);
-		List<CASSWordSense> ancestors2 = getHypernymAncestors(sense2);
-		
-		Collections.reverse(ancestors1);
-		Collections.reverse(ancestors2);
-		
-		// common ancestor has same ancestor path in both lists
-		int depthOfCommonAncestor = 0;
-		while(ancestors1.get(depthOfCommonAncestor+1).getId() != ancestors2.get(depthOfCommonAncestor+1).getId()) {
-			depthOfCommonAncestor++;
-		}
-		
-		int distanceFromAncestorToS1 = ancestors1.size() - depthOfCommonAncestor;
-		int distanceFromAncestorToS2 = ancestors2.size() - depthOfCommonAncestor;
-		
-		int distanceBetweenSenses = distanceFromAncestorToS1 + distanceFromAncestorToS2;
-		
-		return distanceBetweenSenses;
-	}
-	
-	private List<CASSWordSense> getHypernymAncestors(CASSWordSense sense) {
-		List<CASSWordSense> ancestors = new ArrayList<CASSWordSense>();
-		int size, randomIndex;
-		while (sense.getId() != "entity") {
-			Set<CASSWordSense> hypernyms = lTool.getHypernyms(sense);
-			size = hypernyms.size();
-			randomIndex = rand.nextInt(size);
-			CASSWordSense[] hypernymArray = new CASSWordSense[size];
-			hypernyms.toArray(hypernymArray);
-			sense = hypernymArray[randomIndex];
-			ancestors.add(sense);
-		}
-		return ancestors;
 	}
 }
