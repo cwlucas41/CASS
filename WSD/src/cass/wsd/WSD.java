@@ -14,9 +14,7 @@ public class WSD {
 	
 	private LanguageTool lTool;
 	private List<String> context;
-	@SuppressWarnings("unused")
 	private String target;
-	Set<CASSWordSense> targetSenses;
 	
 	public WSD(String leftContext, String target, String rightContext, Language language) {
 		lTool = new LanguageTool(language);
@@ -26,8 +24,6 @@ public class WSD {
 		context = new ArrayList<String>();
 		context.addAll(lTool.tokenizeAndLemmatize(leftContext));
 		context.addAll(lTool.tokenizeAndLemmatize(rightContext));
-		
-		targetSenses = lTool.getSenses(target);
 		}
 	
 	public List<CASSWordSense> rankSensesUsing(Algorithm algorithm) {
@@ -77,12 +73,17 @@ public class WSD {
 	}
 	
 	private List<ScoredSense> scoreSensesUsingLeskAndFilter() {
+		Set<CASSWordSense> allTargetSenses = lTool.getSenses(target);
+		Set<CASSWordSense> filteredSenses = new HashSet<CASSWordSense>();
+		
+		// filter allTargetSenses, save to filteredSenses
+		
 		// TODO: FAUSTO
-		return null;
+		return leskIntenal(filteredSenses);
 	}
 	
 	private List<ScoredSense> scoreSensesUsingLesk() {
-		return leskIntenal(targetSenses);
+		return leskIntenal(lTool.getSenses(target));
 	}
 	
 	private List<ScoredSense> leskIntenal(Set<CASSWordSense> targetSenses) {
@@ -118,7 +119,7 @@ public class WSD {
 	private List<ScoredSense> scoreSensesUsingStochasticHypernymDistance() {
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 				
-		for (CASSWordSense targetSense : targetSenses) {
+		for (CASSWordSense targetSense : lTool.getSenses(target)) {
 			
 			Integer senseScore = null;
 			
@@ -175,7 +176,7 @@ public class WSD {
 	private List<ScoredSense> scoreSensesUsingTagFrequency() {
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 				
-		for (CASSWordSense sense : targetSenses) {
+		for (CASSWordSense sense : lTool.getSenses(target)) {
 			scoredSenses.add(new ScoredSense(sense, sense.getTagFrequency()));
 		}
 
@@ -190,7 +191,7 @@ public class WSD {
 		
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 		
-		for (CASSWordSense sense : targetSenses) {
+		for (CASSWordSense sense : lTool.getSenses(target)) {
 			scoredSenses.add(new ScoredSense(sense, rand.nextInt()));
 		}
 
