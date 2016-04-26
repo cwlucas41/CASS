@@ -1,6 +1,5 @@
 package cass.wsd;
 
-import java.net.MalformedURLException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import cass.testGenerator.TestSentenceGenerator;
 public class SensesNotEmpty_Test {
 
 	@Test
-	public void systemTest() throws MalformedURLException {
+	public void systemTest() {
 		Iterator<TestData> tsg = new TestSentenceGenerator("semcor3.0");
 		
 		int numCorrect = 0;

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import cass.languageTool.Language;
+import cass.languageTool.LanguageTool;
 import cass.testGenerator.TestData;
 import cass.testGenerator.TestSentenceGenerator;
 
@@ -60,5 +61,39 @@ public class WSDBenchmark {
 				System.out.println("\t" + innerKey + "\t" + bin.get(innerKey));
 			}
 		}
+	}
+	
+	public void simpleBenchmark(Algorithm algorithm) {
+		Iterator<TestData> tsg = new TestSentenceGenerator("semcor3.0");
+		
+		int numCorrect = 0;
+		int numSentences = 0;
+		
+		while (tsg.hasNext()) {
+			TestData ts = tsg.next();
+			
+			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
+			LanguageTool lt = new LanguageTool(Language.EN);
+			
+			if (!lt.getSenses(ts.getTarget()).isEmpty()) {				
+				List<ScoredSense> results = wsd.scoreSensesUsing(algorithm);
+				
+				if (!results.isEmpty() && ts.getSenses().contains(results.get(0).getSense().getId())) {
+					numCorrect++;
+				}
+	
+				numSentences++;
+				
+				if (numSentences % 50 == 0) {
+					System.out.println(numCorrect + " / " + numSentences);
+					System.out.println((float) numCorrect / numSentences);
+					System.out.println();
+				}
+			}
+		}
+		
+		System.out.println(numCorrect + " / " + numSentences);
+		System.out.println((float) numCorrect / numSentences);
+		System.out.println();
 	}
 }
