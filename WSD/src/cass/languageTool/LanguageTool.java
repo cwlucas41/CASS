@@ -87,18 +87,29 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, I_WordNet, I_PartOfSp
 		return pos.getPOStag(word);
 	}
 
-	public int getHypernymDistanceScore(CASSWordSense sense1, CASSWordSense sense2) {
+	public Integer getHypernymDistanceScore(List<CASSWordSense> ancestors1, List<CASSWordSense> ancestors2) {
 		
-		List<CASSWordSense> ancestors1 = getHypernymAncestors(sense1);
-		List<CASSWordSense> ancestors2 = getHypernymAncestors(sense2);
+		if ((ancestors1 == null) || (ancestors2 == null) || ancestors1.isEmpty() || ancestors2.isEmpty()) {
+			return null;
+		}
 		
 		Collections.reverse(ancestors1);
 		Collections.reverse(ancestors2);
 		
 		// common ancestor has same ancestor path in both lists
 		int depthOfCommonAncestor = 0;
-		while(ancestors1.get(depthOfCommonAncestor+1).getId() != ancestors2.get(depthOfCommonAncestor+1).getId()) {
-			depthOfCommonAncestor++;
+		
+		int lengthOfShorterChain = Math.min(ancestors1.size(), ancestors2.size());
+		
+		// make sure roots are the same
+		if (!ancestors1.get(0).getId().equals(ancestors2.get(0).getId())) {
+			return null;
+		}
+		
+		for (int i = 0; i < lengthOfShorterChain; i++) {
+			if (ancestors1.get(i).getId().equals(ancestors2.get(i).getId())) {
+				depthOfCommonAncestor++;
+			}
 		}
 		
 		int distanceFromAncestorToS1 = ancestors1.size() - depthOfCommonAncestor;
@@ -109,18 +120,20 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, I_WordNet, I_PartOfSp
 		return distanceBetweenSenses;
 	}
 	
-	private List<CASSWordSense> getHypernymAncestors(CASSWordSense sense) {
+	public List<CASSWordSense> getHypernymAncestors(CASSWordSense sense) {
 		List<CASSWordSense> ancestors = new ArrayList<CASSWordSense>();
-		int size, randomIndex;
-		while (sense.getId() != "entity") {
-			Set<CASSWordSense> hypernyms = getHypernyms(sense);
-			size = hypernyms.size();
-			randomIndex = rand.nextInt(size);
-			CASSWordSense[] hypernymArray = new CASSWordSense[size];
-			hypernyms.toArray(hypernymArray);
-			sense = hypernymArray[randomIndex];
+		
+		Set<CASSWordSense> hypernyms = getHypernyms(sense);
+		
+		while (!hypernyms.isEmpty()) {
+			int size = hypernyms.size();
+			int randomIndex = rand.nextInt(size);
+			List<CASSWordSense> hypernymList = new ArrayList<CASSWordSense>(hypernyms);
+			sense = hypernymList.get(randomIndex);
 			ancestors.add(sense);
+			hypernyms = getHypernyms(sense);
 		}
+		
 		return ancestors;
 	}	
 }

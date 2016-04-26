@@ -2,6 +2,7 @@ package cass.languageTool.wordNet;
 
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Test;
@@ -48,6 +49,31 @@ public class EN_WordNet_Test {
 				assertNotNull(hypernym.getTarget());
 //				System.out.println(hypernym.getTarget());
 			}
+		}
+	}
+	
+	@Test
+	public void exampleHypernymsTest() {
+		Set<CASSWordSense> senses = wn.getSenses("basketball");
+		
+		Set<String> actualHypernymSenseKeys = new HashSet<String>();
+		actualHypernymSenseKeys.add("ball%1:06:01::");
+		actualHypernymSenseKeys.add("basketball_equipment%1:06:00::");
+
+		
+		CASSWordSense chosenSense = null;
+		for (CASSWordSense sense : senses) {
+			if (sense.getId().equals("basketball%1:06:00::")) {
+				chosenSense = sense;
+				break;
+			}
+		}
+		
+		assertNotNull(chosenSense);
+		
+		Set<CASSWordSense> hypernyms = wn.getHypernyms(chosenSense);
+		for (CASSWordSense hypernymn : hypernyms) {
+			assertTrue(actualHypernymSenseKeys.contains(hypernymn.getId()));
 		}
 	}
 }
