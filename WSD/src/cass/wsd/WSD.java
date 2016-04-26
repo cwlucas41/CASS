@@ -64,6 +64,10 @@ public class WSD {
 			scoredSenses = scoreSensesRandomly();
 			break;
 			
+		case LESK_WITH_FREQUENCY_FILTER:
+			scoredSenses = scoreSensesUsingLeskAndFilter();
+			break;
+			
 		default:
 			// TODO throw proper exception
 			break;
@@ -72,35 +76,43 @@ public class WSD {
 		return scoredSenses;
 	}
 	
+	private List<ScoredSense> scoreSensesUsingLeskAndFilter() {
+		// TODO: FAUSTO
+		return null;
+	}
+	
 	private List<ScoredSense> scoreSensesUsingLesk() {
-		
+		return leskIntenal(targetSenses);
+	}
+	
+	private List<ScoredSense> leskIntenal(Set<CASSWordSense> targetSenses) {
 		// context set is set of words in context
-		Set<String> contextSet = new HashSet<String>(context);
-		
-		Set<String> glossSet = new HashSet<String>();
-		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
-		
-		// for every set of synonyms in the list
-		for (CASSWordSense targetSense : targetSenses) {
-			// clear and add lemmatized tokens of gloss to set
-			glossSet.clear();
-			String definition = lTool.getDefinition(targetSense);
-			glossSet.addAll(lTool.tokenizeAndLemmatize(definition));
-			
-			// find intersection of sets
-			glossSet.retainAll(contextSet);
-			
-			// score is cardinality of intersection
-			int score = glossSet.size();
-			
-			scoredSenses.add(new ScoredSense(targetSense, score));
-		}
-		
-		// sort in descending order
-		Collections.sort(scoredSenses);
-		Collections.reverse(scoredSenses);
-		
-		return scoredSenses;
+				Set<String> contextSet = new HashSet<String>(context);
+				
+				Set<String> glossSet = new HashSet<String>();
+				List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
+				
+				// for every set of synonyms in the list
+				for (CASSWordSense targetSense : targetSenses) {
+					// clear and add lemmatized tokens of gloss to set
+					glossSet.clear();
+					String definition = lTool.getDefinition(targetSense);
+					glossSet.addAll(lTool.tokenizeAndLemmatize(definition));
+					
+					// find intersection of sets
+					glossSet.retainAll(contextSet);
+					
+					// score is cardinality of intersection
+					int score = glossSet.size();
+					
+					scoredSenses.add(new ScoredSense(targetSense, score));
+				}
+				
+				// sort in descending order
+				Collections.sort(scoredSenses);
+				Collections.reverse(scoredSenses);
+				
+				return scoredSenses;
 	}
 	
 	private List<ScoredSense> scoreSensesUsingStochasticHypernymDistance() {
