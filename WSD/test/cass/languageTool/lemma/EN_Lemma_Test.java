@@ -26,6 +26,9 @@ public class EN_Lemma_Test {
 		
 		test = lem.Lemmatize("Fausto");
 		assertEquals(test, "Fausto");
+		
+		test = lem.Lemmatize("aren't");
+		assertEquals(test, "are");
 
 		
 	}

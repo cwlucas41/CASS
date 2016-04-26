@@ -45,7 +45,7 @@ public class EN_Tokenizer_Test {
 		test.add("are");
 		test.add("you");
 		test.add("?");
-		result = tok.tokenize("hello, how. are you?");
+		result = tok.tokenize("hello, how.  are you?");
 		
 		for(int i=0; i<test.size();i++){
 			assertEquals(test.get(i), result.get(i));
