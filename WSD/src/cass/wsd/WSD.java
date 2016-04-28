@@ -73,12 +73,21 @@ public class WSD {
 	}
 	
 	private List<ScoredSense> scoreSensesUsingLeskAndFilter() {
+		// filter allTargetSenses, save to filteredSenses
 		Set<CASSWordSense> allTargetSenses = lTool.getSenses(target);
 		Set<CASSWordSense> filteredSenses = new HashSet<CASSWordSense>();
+		int total =0;
+		for(CASSWordSense sense : allTargetSenses){			
+			total+=sense.getTagFrequency();
+		}
+		int threshold =  (int)( total * 0.1); // Floor of 10% of total usage
 		
-		// filter allTargetSenses, save to filteredSenses
+		for(CASSWordSense sense : allTargetSenses){			
+			if(sense.getTagFrequency()>=threshold){
+				filteredSenses.add(sense);
+			}
+		}
 		
-		// TODO: FAUSTO
 		return leskIntenal(filteredSenses);
 	}
 	
