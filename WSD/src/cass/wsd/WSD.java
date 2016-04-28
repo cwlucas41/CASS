@@ -86,9 +86,12 @@ public class WSD {
 			scoredSenses = scoreSensesRandomly();
 			break;
 			
-		case LESK_WITH_FREQUENCY_FILTER:
+		case LESK_WITH_FILTER:
 			scoredSenses = scoreSensesUsingLeskAndFilter();
 			break;
+			
+		case RANDOM_WITH_FILTER:
+			scoredSenses = scoreFilteredSensesRandomly();
 			
 		default:
 			// TODO throw proper exception
@@ -99,18 +102,36 @@ public class WSD {
 	}
 	
 	/**
+	 * filters target senses to some threshold
+	 * @return filtered set of target senses
+	 */
+	private Set<CASSWordSense> filterTargetSensesToFrequencyThreshold() {
+		// filter allTargetSenses, save to filteredSenses
+		double threshold = 0.3;
+
+		Set<CASSWordSense> allTargetSenses = lTool.getSenses(target);
+		Set<CASSWordSense> filteredSenses = new HashSet<CASSWordSense>();
+		int total =0;
+		for(CASSWordSense sense : allTargetSenses){			
+			total+=sense.getTagFrequency();
+		}
+		int minFrequency =  (int)( total * threshold); // Floor of threshold of total usage
+		
+		for(CASSWordSense sense : allTargetSenses){			
+			if(sense.getTagFrequency() >= minFrequency){
+				filteredSenses.add(sense);
+			}
+		}
+		return filteredSenses;
+	}
+	
+	/**
 	 * Custom WSD algorithm that filters the target senses to get a more fine-grained sense inventory before
 	 * running Lesk's algorithm on the target senses.
 	 * @return sorted List of ScoredSenses scored on intersection of filtered target sense gloss and context
 	 */
 	private List<ScoredSense> scoreSensesUsingLeskAndFilter() {
-		Set<CASSWordSense> allTargetSenses = lTool.getSenses(target);
-		Set<CASSWordSense> filteredSenses = new HashSet<CASSWordSense>();
-		
-		// filter allTargetSenses, save to filteredSenses
-		
-		// TODO: FAUSTO
-		return leskIntenal(filteredSenses);
+		return leskIntenal(filterTargetSensesToFrequencyThreshold());
 	}
 	
 	/**
@@ -243,15 +264,32 @@ public class WSD {
 	}
 	
 	/**
+	 * Simple baseline algorithm for other algorithms that use filter. Similar to random.
+	 * @return
+	 */
+	private List<ScoredSense> scoreFilteredSensesRandomly() {
+		return scoreRandomlyInternal(filterTargetSensesToFrequencyThreshold());
+	}
+	
+	/**
 	 * Simple baseline algorithm. Chooses a random score for each sense and then sorts the senses based on the score.
 	 * @return sorted List of ScoredSenses with randomly generated scores
 	 */
 	private List<ScoredSense> scoreSensesRandomly() {
+		return scoreRandomlyInternal(lTool.getSenses(target));
+	}
+	
+	/**
+	 * Internal details for randomly selecting a sense
+	 * @param Set of senses to consider
+	 * @return List of senses scored randomly
+	 */
+	private List<ScoredSense> scoreRandomlyInternal(Set<CASSWordSense> senses) {
 		Random rand = new Random();
 		
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 		
-		for (CASSWordSense sense : lTool.getSenses(target)) {
+		for (CASSWordSense sense : senses) {
 			scoredSenses.add(new ScoredSense(sense, rand.nextInt()));
 		}
 		
