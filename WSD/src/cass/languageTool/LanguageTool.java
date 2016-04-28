@@ -43,8 +43,8 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, I_WordNet, I_PartOfSp
 		}
 	}
 
-	public String Lemmatize(String string) {
-		return lemmatizer.Lemmatize(string);
+	public String lemmatize(String string) {
+		return lemmatizer.lemmatize(string);
 	}
 
 	public List<String> tokenize(String string) {
@@ -57,7 +57,7 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, I_WordNet, I_PartOfSp
 		
 		ListIterator<String> iter = tokenized.listIterator();
 		while (iter.hasNext()) {
-			tokenizedAndLemmatized.add(Lemmatize(iter.next()));
+			tokenizedAndLemmatized.add(lemmatize(iter.next()));
 		}
 		return tokenizedAndLemmatized;
 	}
