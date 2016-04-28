@@ -60,9 +60,12 @@ public class WSD {
 			scoredSenses = scoreSensesRandomly();
 			break;
 			
-		case LESK_WITH_FREQUENCY_FILTER:
+		case LESK_WITH_FILTER:
 			scoredSenses = scoreSensesUsingLeskAndFilter();
 			break;
+			
+		case RANDOM_WITH_FILTER:
+			scoredSenses = scoreFilteredSensesRandomly();
 			
 		default:
 			// TODO throw proper exception
@@ -72,23 +75,27 @@ public class WSD {
 		return scoredSenses;
 	}
 	
-	private List<ScoredSense> scoreSensesUsingLeskAndFilter() {
+	private Set<CASSWordSense> filterTargetSensesToFrequencyThreshold() {
 		// filter allTargetSenses, save to filteredSenses
+		double threshold = 0.3;
 		Set<CASSWordSense> allTargetSenses = lTool.getSenses(target);
 		Set<CASSWordSense> filteredSenses = new HashSet<CASSWordSense>();
 		int total =0;
 		for(CASSWordSense sense : allTargetSenses){			
 			total+=sense.getTagFrequency();
 		}
-		int threshold =  (int)( total * 0.1); // Floor of 10% of total usage
+		int minFrequency =  (int)( total * threshold); // Floor of threshold of total usage
 		
 		for(CASSWordSense sense : allTargetSenses){			
-			if(sense.getTagFrequency()>=threshold){
+			if(sense.getTagFrequency() >= minFrequency){
 				filteredSenses.add(sense);
 			}
 		}
-		
-		return leskIntenal(filteredSenses);
+		return filteredSenses;
+	}
+	
+	private List<ScoredSense> scoreSensesUsingLeskAndFilter() {
+		return leskIntenal(filterTargetSensesToFrequencyThreshold());
 	}
 	
 	private List<ScoredSense> scoreSensesUsingLesk() {
@@ -195,12 +202,20 @@ public class WSD {
 		return scoredSenses;
 	}
 	
+	private List<ScoredSense> scoreFilteredSensesRandomly() {
+		return scoreRandomlyInternal(filterTargetSensesToFrequencyThreshold());
+	}
+	
 	private List<ScoredSense> scoreSensesRandomly() {
+		return scoreRandomlyInternal(lTool.getSenses(target));
+	}
+	
+	private List<ScoredSense> scoreRandomlyInternal(Set<CASSWordSense> senses) {
 		Random rand = new Random();
 		
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 		
-		for (CASSWordSense sense : lTool.getSenses(target)) {
+		for (CASSWordSense sense : senses) {
 			scoredSenses.add(new ScoredSense(sense, rand.nextInt()));
 		}
 
