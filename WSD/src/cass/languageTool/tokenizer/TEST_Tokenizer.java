@@ -3,6 +3,11 @@ package cass.languageTool.tokenizer;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Simple tokenizer used for limited testing
+ * @author cwlucas41
+ *
+ */
 public class TEST_Tokenizer implements I_Tokenizer {
 
 	@Override

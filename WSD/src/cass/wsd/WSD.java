@@ -10,12 +10,28 @@ import java.util.Collections;
 import cass.languageTool.*;
 import cass.languageTool.wordNet.CASSWordSense;
 
+/**
+ * General purpose Word Sense Disambiguation class. It has been designed not only to 
+ * give a best sense for a word, but also to rank senses of a word with respect to 
+ * each other. The output of the WSD algorithms is a List of senses that are in sorted
+ * order.
+ * 
+ * @author cwlucas41
+ *
+ */
 public class WSD {
 	
 	private LanguageTool lTool;
 	private List<String> context;
 	private String target;
 	
+	/**
+	 * Constructor for WSD. 
+	 * @param leftContext - String of words left of the target word in corpus
+	 * @param target - target word String
+	 * @param rightContext - String of words right of the target word in corpus
+	 * @param language - Language of text, member of Language enumeration
+	 */
 	public WSD(String leftContext, String target, String rightContext, Language language) {
 		lTool = new LanguageTool(language);
 		
@@ -26,6 +42,11 @@ public class WSD {
 		context.addAll(lTool.tokenizeAndLemmatize(rightContext));
 		}
 	
+	/**
+	 * public WSD method
+	 * @param algorithm - member of Algorithm enumeration representing which algorithm to run
+	 * @return sorted List of senses scored with algorithm of choice
+	 */
 	public List<CASSWordSense> rankSensesUsing(Algorithm algorithm) {
 		
 		List<ScoredSense> scoredSenses = scoreSensesUsing(algorithm);
@@ -39,6 +60,11 @@ public class WSD {
 		return rankedSenses;
 	}
 	
+	/**
+	 * Converts Algorithm parameter to WSD method call. Package visibility so that score information can be used in JUint tests.
+	 * @param algorithm - member of Algorithm enumeration representing which algorithm to run
+	 * @return sorted List of ScoredSenses scored according to alforithm of choice
+	 */
 	List<ScoredSense> scoreSensesUsing(Algorithm algorithm) {
 		
 		List<ScoredSense> scoredSenses = null;
@@ -75,9 +101,14 @@ public class WSD {
 		return scoredSenses;
 	}
 	
+	/**
+	 * filters target senses to some threshold
+	 * @return filtered set of target senses
+	 */
 	private Set<CASSWordSense> filterTargetSensesToFrequencyThreshold() {
 		// filter allTargetSenses, save to filteredSenses
 		double threshold = 0.3;
+
 		Set<CASSWordSense> allTargetSenses = lTool.getSenses(target);
 		Set<CASSWordSense> filteredSenses = new HashSet<CASSWordSense>();
 		int total =0;
@@ -94,14 +125,29 @@ public class WSD {
 		return filteredSenses;
 	}
 	
+	/**
+	 * Custom WSD algorithm that filters the target senses to get a more fine-grained sense inventory before
+	 * running Lesk's algorithm on the target senses.
+	 * @return sorted List of ScoredSenses scored on intersection of filtered target sense gloss and context
+	 */
 	private List<ScoredSense> scoreSensesUsingLeskAndFilter() {
 		return leskIntenal(filterTargetSensesToFrequencyThreshold());
 	}
 	
+	/**
+	 * WSD implementation of Lesk's algorithm
+	 * @return sorted List of ScoredSenses scored on intersection of target sense gloss and context
+	 */
 	private List<ScoredSense> scoreSensesUsingLesk() {
 		return leskIntenal(lTool.getSenses(target));
 	}
 	
+	/**
+	 * Implements the details of Lesk's algorithm.
+	 * score is the cardinality of the  intersection of the tokens the the gloss set of each target sense and the tokens of the context.
+	 * @param targetSenses - senses that are to be considered
+	 * @return sorted List of ScoredSenses scored on token intersection
+	 */
 	private List<ScoredSense> leskIntenal(Set<CASSWordSense> targetSenses) {
 		// context set is set of words in context
 				Set<String> contextSet = new HashSet<String>(context);
@@ -131,7 +177,12 @@ public class WSD {
 				
 				return scoredSenses;
 	}
-	
+	 /**
+	  * WSD algorithm to score senses based on lowest common hypernym ancestor to senses of context words.
+	  * The algorithm assigns a score to a target sense that is the sum of the minimum distances between it and the senses of the context words.
+	  * The stochastic part of this algorithm relies on randomly selecting a hypernym in the case there are multiple.
+	  * @return sorted List of ScoredSenses scored by hypernym traversals to the senses of each context word.
+	  */
 	private List<ScoredSense> scoreSensesUsingStochasticHypernymDistance() {
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 				
@@ -156,6 +207,11 @@ public class WSD {
 		return scoredSenses;
 	}
 	
+	/**
+	 * Helper method to hypernym distance algorithm.
+	 * @param targetSense - some sense to score against context by hypernym distance
+	 * @return - Integer score, smaller is better
+	 */
 	private Integer scoreTargetSensesUsingHypernymDistance(CASSWordSense targetSense) {
 		
 		List<CASSWordSense> targetHypernymChain = lTool.getHypernymAncestors(targetSense);
@@ -189,6 +245,11 @@ public class WSD {
 		return senseScore;
 	}
 	
+	/**
+	 * Real baseline algorithm. Implements selection of sense based on sense frequency. The results of this algorithm are the baseline
+	 * that the WSD algorithms should beat.
+	 * @return sorted List of ScoredSenses scored by frequency distribution of sense
+	 */
 	private List<ScoredSense> scoreSensesUsingTagFrequency() {
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 				
@@ -202,14 +263,27 @@ public class WSD {
 		return scoredSenses;
 	}
 	
+	/**
+	 * Simple baseline algorithm for other algorithms that use filter. Similar to random.
+	 * @return
+	 */
 	private List<ScoredSense> scoreFilteredSensesRandomly() {
 		return scoreRandomlyInternal(filterTargetSensesToFrequencyThreshold());
 	}
 	
+	/**
+	 * Simple baseline algorithm. Chooses a random score for each sense and then sorts the senses based on the score.
+	 * @return sorted List of ScoredSenses with randomly generated scores
+	 */
 	private List<ScoredSense> scoreSensesRandomly() {
 		return scoreRandomlyInternal(lTool.getSenses(target));
 	}
 	
+	/**
+	 * Internal details for randomly selecting a sense
+	 * @param Set of senses to consider
+	 * @return List of senses scored randomly
+	 */
 	private List<ScoredSense> scoreRandomlyInternal(Set<CASSWordSense> senses) {
 		Random rand = new Random();
 		
@@ -218,7 +292,7 @@ public class WSD {
 		for (CASSWordSense sense : senses) {
 			scoredSenses.add(new ScoredSense(sense, rand.nextInt()));
 		}
-
+		
 		Collections.sort(scoredSenses);
 		Collections.reverse(scoredSenses);
 		
