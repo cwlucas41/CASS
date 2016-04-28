@@ -14,15 +14,22 @@ import cass.languageTool.wordNet.*;
 import java.util.ListIterator;
 import java.util.Random;
 
+/**
+ * Class that provides all necessary language tools for WSD classes.
+ * Instantiates required tools given any supported language.
+ * @author cwlucas41
+ *
+ */
 public class LanguageTool implements I_Lemma, I_Tokenizer, I_WordNet, I_PartOfSpeech {
 	private I_WordNet wordNet;
 	private I_Tokenizer tokenizer;
 	private I_Lemma lemmatizer;
 	private I_PartOfSpeech pos;
-	
-	private Random rand = new Random();
 
-	
+	/**
+	 * Constructor. Creates a new language tool for the desired language
+	 * @param language - member of Language enumeration type
+	 */
 	public LanguageTool(Language language) {
 		switch (language) {
 		case EN:
@@ -43,21 +50,28 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, I_WordNet, I_PartOfSp
 		}
 	}
 
-	public String Lemmatize(String string) {
-		return lemmatizer.Lemmatize(string);
+	@Override
+	public String lemmatize(String string) {
+		return lemmatizer.lemmatize(string);
 	}
 
+	@Override
 	public List<String> tokenize(String string) {
 		return tokenizer.tokenize(string);
 	}
 	
+	/**
+	 * Convenience method that tokenizes a string and lemmatizes the resulting strings.
+	 * @param string to tokenize and lemmatize
+	 * @return List of lemmas in original String
+	 */
 	public List<String> tokenizeAndLemmatize(String string) {
 		List<String> tokenized = tokenize(string);
 		List<String> tokenizedAndLemmatized = new ArrayList<String>();
 		
 		ListIterator<String> iter = tokenized.listIterator();
 		while (iter.hasNext()) {
-			tokenizedAndLemmatized.add(Lemmatize(iter.next()));
+			tokenizedAndLemmatized.add(lemmatize(iter.next()));
 		}
 		return tokenizedAndLemmatized;
 	}
@@ -87,6 +101,12 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, I_WordNet, I_PartOfSp
 		return pos.getPOStag(word);
 	}
 
+	/**
+	 * Computes the distance between two senses through the lowest common hypernym ancestor given two hypernym chains
+	 * @param ancestors1 - chain of hypernyms for target sense
+	 * @param ancestors2 - chain of hypernyms for context sense
+	 * @return Integer representing the distance between the senses throught the lowest common ancestor, null if no common ancestor
+	 */
 	public Integer getHypernymDistanceScore(List<CASSWordSense> ancestors1, List<CASSWordSense> ancestors2) {
 		
 		if ((ancestors1 == null) || (ancestors2 == null) || ancestors1.isEmpty() || ancestors2.isEmpty()) {
@@ -120,10 +140,17 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, I_WordNet, I_PartOfSp
 		return distanceBetweenSenses;
 	}
 	
+	/**
+	 * Finds the hypernym chain of a particular sense.
+	 * Chooses a random parent hypernym in the case of multiple hypernyms
+	 * @param sense to get hypernym chain of 
+	 * @return List of senses forming the hypernym chain
+	 */
 	public List<CASSWordSense> getHypernymAncestors(CASSWordSense sense) {
 		List<CASSWordSense> ancestors = new ArrayList<CASSWordSense>();
 		
 		Set<CASSWordSense> hypernyms = getHypernyms(sense);
+		Random rand = new Random();
 		
 		while (!hypernyms.isEmpty()) {
 			int size = hypernyms.size();

@@ -15,19 +15,19 @@ public class EN_Lemma_Test {
 		
 		String test = new String();
 		
-		test = lem.Lemmatize("had");
+		test = lem.lemmatize("had");
 		assertEquals(test, "have");
 		
-		test = lem.Lemmatize("eating");
+		test = lem.lemmatize("eating");
 		assertEquals(test, "eat");
 		
-		test = lem.Lemmatize("car");
+		test = lem.lemmatize("car");
 		assertEquals(test, "car");
 		
-		test = lem.Lemmatize("Fausto");
+		test = lem.lemmatize("Fausto");
 		assertEquals(test, "Fausto");
 		
-		test = lem.Lemmatize("aren't");
+		test = lem.lemmatize("aren't");
 		assertEquals(test, "are");
 
 		

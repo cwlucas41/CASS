@@ -1,9 +1,14 @@
 package cass.languageTool.lemma;
 
+/**
+ * Simple lemmatizer for basic testing
+ * @author cwlucas41
+ *
+ */
 public class TEST_Lemmatizer implements I_Lemma{
 
 	@Override
-	public String Lemmatize(String string) {
+	public String lemmatize(String string) {
 		String lemma;
 		
 		switch (string) {
@@ -25,7 +30,4 @@ public class TEST_Lemmatizer implements I_Lemma{
 		
 		return lemma;
 	}
-
-	
-
 }
