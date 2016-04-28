@@ -1,6 +1,7 @@
 package cass.languageTool.lemma;
 
 /**
+ * Interface for all Lemmatizers
  * @author Fausto Tommasi
  * @version 1.0 4/25/2016
  */

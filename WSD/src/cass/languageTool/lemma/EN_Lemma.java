@@ -3,6 +3,7 @@ package cass.languageTool.lemma;
 import edu.stanford.nlp.simple.*;
 
 /**
+ * English Lemmatizer, uses Stanford corenlp
  * @author Fausto Tommasi
  * @version 1.0 4/25/2016
  */

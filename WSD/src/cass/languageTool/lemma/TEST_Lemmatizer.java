@@ -1,5 +1,10 @@
 package cass.languageTool.lemma;
 
+/**
+ * Simple lemmatizer for basic testing
+ * @author cwlucas41
+ *
+ */
 public class TEST_Lemmatizer implements I_Lemma{
 
 	@Override
