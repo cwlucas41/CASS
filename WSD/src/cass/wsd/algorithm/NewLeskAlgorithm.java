@@ -11,7 +11,8 @@ import cass.wsd.WSD;
 
 public class NewLeskAlgorithm implements I_WSDAlgorithm {
 
-	WSD wsd;
+	private WSD wsd;
+	private double contextThreshold = 0.1;
 	
 	public NewLeskAlgorithm(WSD wsd) {
 		this.wsd = wsd;
@@ -26,7 +27,8 @@ public class NewLeskAlgorithm implements I_WSDAlgorithm {
 			int senseScore = 0;
 			for (String contextWord : wsd.getContext()) {
 				int wordScore = 0;
-				for (CASSWordSense contextWordSense : wsd.getlTool().getSenses(contextWord)) {
+				Set<CASSWordSense> contextWordSenses = wsd.getlTool().getSenses(contextWord);
+				for (CASSWordSense contextWordSense : wsd.filterSensesToFrequencyThreshold(contextWordSenses, contextThreshold)){
 					Set<String> contextWordGlossSet = getGlossSet(contextWordSense);
 					contextWordGlossSet.retainAll(targetGlossSet);
 					int score = contextWordGlossSet.size();

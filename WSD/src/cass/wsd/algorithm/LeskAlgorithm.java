@@ -12,7 +12,7 @@ import cass.wsd.WSD;
 
 public class LeskAlgorithm implements I_WSDAlgorithm {
 
-	WSD wsd;
+	private WSD wsd;
 	
 	public LeskAlgorithm(WSD wsd) {
 		this.wsd = wsd;

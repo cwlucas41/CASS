@@ -11,7 +11,7 @@ import cass.wsd.WSD;
 
 public class HypernymDistanceAlgorithm implements I_WSDAlgorithm {
 
-	WSD wsd;
+	private WSD wsd;
 	
 	public HypernymDistanceAlgorithm(WSD wsd) {
 		this.wsd = wsd;
