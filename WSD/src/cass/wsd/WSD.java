@@ -24,7 +24,7 @@ public class WSD {
 	private List<String> context;
 	private String target;
 	
-	private double threshold = 0.3;
+	private double threshold = 0.2;
 	
 	/**
 	 * Constructor for WSD. 
@@ -89,37 +89,42 @@ public class WSD {
 		switch (algorithm) {
 		case LESK:
 			alg = new LeskAlgorithm(this);
-			scoredSenses = alg.score(lTool.getSenses(target));
-			break;
-			
-		case NEW_LESK:
-			alg = new NewLeskAlgorithm(this);
-			scoredSenses = alg.score(filterSensesToFrequencyThreshold(lTool.getSenses(target), threshold));
-			break;
-
-		case STOCHASTIC_GRAPH:
-			alg = new HypernymDistanceAlgorithm(this);
-			scoredSenses = alg.score(lTool.getSenses(target));
-			break;
-			
-		case FREQUENCY:
-			alg = new FrequencyAlgorithm();
-			scoredSenses = alg.score(lTool.getSenses(target));
-			break;
-			
-		case RANDOM:
-			alg = new RandomAlgorithm();
-			scoredSenses = alg.score(lTool.getSenses(target));
+			scoredSenses = alg.score(getTargetSenses());
 			break;
 			
 		case LESK_WITH_FILTER:
 			alg = new LeskAlgorithm(this);
-			scoredSenses =  alg.score(lTool.getSenses(target));
+			scoredSenses =  alg.score(getFilteredTargetSenses());
+			break;
+			
+		case BETTER_LESK:
+			alg = new BetterLeskAlgorithm(this);
+			scoredSenses = alg.score(getTargetSenses());
+			break;
+			
+		case BETTER_LESK_WITH_FILTER:
+			alg = new BetterLeskAlgorithm(this);
+			scoredSenses = alg.score(getFilteredTargetSenses());
+			break;
+			
+		case RANDOM:
+			alg = new RandomAlgorithm();
+			scoredSenses = alg.score(getTargetSenses());
 			break;
 			
 		case RANDOM_WITH_FILTER:
 			alg = new RandomAlgorithm();
-			scoredSenses = alg.score(filterSensesToFrequencyThreshold(lTool.getSenses(target), threshold));
+			scoredSenses = alg.score(getFilteredTargetSenses());
+
+		case STOCHASTIC_GRAPH:
+			alg = new HypernymDistanceAlgorithm(this);
+			scoredSenses = alg.score(getTargetSenses());
+			break;
+			
+		case FREQUENCY:
+			alg = new FrequencyAlgorithm();
+			scoredSenses = alg.score(getTargetSenses());
+			break;
 			
 		default:
 			break;
@@ -148,5 +153,13 @@ public class WSD {
 			}
 		}
 		return filteredSenses;
+	}
+	
+	private Set<CASSWordSense> getTargetSenses() {
+		return lTool.getSenses(target);
+	}
+	
+	private Set<CASSWordSense> getFilteredTargetSenses() {
+		return filterSensesToFrequencyThreshold(getTargetSenses(), threshold);
 	}
 }
