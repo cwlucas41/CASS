@@ -20,10 +20,20 @@ import edu.mit.jwi.item.ISynsetID;
 import edu.mit.jwi.item.Pointer;
 import edu.mit.jwi.item.POS;
 
+/**
+ * @author TEWatson
+ * English implementation of I_WordNet using JWI and WordNet 3.0.
+ */
 public class EN_WordNet implements I_WordNet {
 	
+	/**
+	 * Stores JWI Dictionary object used to create objects referencing WordNet
+	 */
 	private IDictionary dict;
 	
+	/**
+	 * Creates the Dictionary object from the included WordNet database file
+	 */
 	public EN_WordNet() {
 		String path = "WNdb-3.0/dict";
 		
@@ -115,6 +125,7 @@ public class EN_WordNet implements I_WordNet {
     	
 	}
 	
+	@Override
 	public Set<CASSWordSense> getHypernyms(CASSWordSense sense) {
 		Set<CASSWordSense> hypernyms = new HashSet<CASSWordSense>();
 		ISynset synset = getSynset(sense);
@@ -134,6 +145,11 @@ public class EN_WordNet implements I_WordNet {
 		return hypernyms;
 	}
 	
+	/**
+	 * Translates a CASSWordSense object into the appropriate ISynset from WordNet
+	 * @param sense CASSWordSense object to be translated to ISynset
+	 * @return ISynset object for the given CASSWordSense object
+	 */
 	private ISynset getSynset(CASSWordSense sense) {
 		IIndexWord indexWord = getIndexWord(sense);
         
@@ -151,6 +167,11 @@ public class EN_WordNet implements I_WordNet {
     	return synset;
 	}
 	
+	/**
+	 * Translates a CASSWordSense object into the appropriate IIndexWord from WordNet
+	 * @param sense CASSWordSense object to be translated to IIndexWord
+	 * @return IIndexWord object for the given CASSWordSense object
+	 */
 	private IIndexWord getIndexWord(CASSWordSense sense) {
 		IIndexWord indexWord = null;
 		
