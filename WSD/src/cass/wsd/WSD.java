@@ -79,7 +79,7 @@ public class WSD {
 	/**
 	 * Converts Algorithm parameter to WSD method call. Package visibility so that score information can be used in JUint tests.
 	 * @param algorithm - member of Algorithm enumeration representing which algorithm to run
-	 * @return sorted List of ScoredSenses scored according to alforithm of choice
+	 * @return sorted List of ScoredSenses scored according to algorithm of choice
 	 */
 	List<ScoredSense> scoreSensesUsing(Algorithm algorithm) {
 		
