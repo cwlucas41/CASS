@@ -9,12 +9,28 @@ import cass.languageTool.*;
 import cass.languageTool.wordNet.CASSWordSense;
 import cass.wsd.algorithm.*;
 
+/**
+ * General purpose Word Sense Disambiguation class. It has been designed not only to 
+ * give a best sense for a word, but also to rank senses of a word with respect to 
+ * each other. The output of the WSD algorithms is a List of senses that are in sorted
+ * order.
+ * 
+ * @author cwlucas41
+ *
+ */
 public class WSD {
 	
 	private LanguageTool lTool;
 	private List<String> context;
 	private String target;
 	
+	/**
+	 * Constructor for WSD. 
+	 * @param leftContext - String of words left of the target word in corpus
+	 * @param target - target word String
+	 * @param rightContext - String of words right of the target word in corpus
+	 * @param language - Language of text, member of Language enumeration
+	 */
 	public WSD(String leftContext, String target, String rightContext, Language language) {
 		lTool = new LanguageTool(language);
 		
@@ -59,6 +75,11 @@ public class WSD {
 		return rankedSenses;
 	}
 	
+	/**
+	 * Converts Algorithm parameter to WSD method call. Package visibility so that score information can be used in JUint tests.
+	 * @param algorithm - member of Algorithm enumeration representing which algorithm to run
+	 * @return sorted List of ScoredSenses scored according to alforithm of choice
+	 */
 	List<ScoredSense> scoreSensesUsing(Algorithm algorithm) {
 		
 		List<ScoredSense> scoredSenses = null;
@@ -80,9 +101,12 @@ public class WSD {
 			scoredSenses = scoreSensesRandomly();
 			break;
 			
-		case LESK_WITH_FREQUENCY_FILTER:
+		case LESK_WITH_FILTER:
 			scoredSenses = scoreSensesUsingLeskAndFilter();
 			break;
+			
+		case RANDOM_WITH_FILTER:
+			scoredSenses = scoreFilteredSensesRandomly();
 			
 		default:
 			break;
@@ -101,6 +125,10 @@ public class WSD {
 		return alg.score(filterTargetSensesToFrequencyThreshold());
 	}
 	
+	/**
+	 * WSD implementation of Lesk's algorithm
+	 * @return sorted List of ScoredSenses scored on intersection of target sense gloss and context
+	 */
 	private List<ScoredSense> scoreSensesUsingLesk() {
 		I_WSDAlgorithm alg = new LeskAlgorithm(this);
 		return alg.score(lTool.getSenses(target));
@@ -117,6 +145,11 @@ public class WSD {
 		return alg.score(lTool.getSenses(target));
 	}
 	
+	/**
+	 * Real baseline algorithm. Implements selection of sense based on sense frequency. The results of this algorithm are the baseline
+	 * that the WSD algorithms should beat.
+	 * @return sorted List of ScoredSenses scored by frequency distribution of sense
+	 */
 	private List<ScoredSense> scoreSensesUsingTagFrequency() {
 		I_WSDAlgorithm alg = new FrequencyAlgorithm();
 		return alg.score(lTool.getSenses(target));
