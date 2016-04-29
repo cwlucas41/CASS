@@ -24,7 +24,7 @@ public class WSD {
 	private List<String> context;
 	private String target;
 	
-	private double threshold = 0.2;
+	private double threshold = 0.10;
 	
 	/**
 	 * Constructor for WSD. 
@@ -97,15 +97,24 @@ public class WSD {
 			scoredSenses =  alg.score(getFilteredTargetSenses());
 			break;
 			
-		case BETTER_LESK:
-			alg = new BetterLeskAlgorithm(this);
+		case CUSTOM_LESK:
+			alg = new CustomLeskAlgorithm(this);
 			scoredSenses = alg.score(getTargetSenses());
 			break;
 			
-		case BETTER_LESK_WITH_FILTER:
-			alg = new BetterLeskAlgorithm(this);
+		case CUSTOM_LESK_WITH_FILTER:
+			alg = new CustomLeskAlgorithm(this);
 			scoredSenses = alg.score(getFilteredTargetSenses());
 			break;
+
+		case HYPERNYM_DISTANCE:
+			alg = new HypernymDistanceAlgorithm(this);
+			scoredSenses = alg.score(getTargetSenses());
+			break;
+			
+		case HYPERNYM_DISTANCE_WITH_FILTER:
+			alg = new HypernymDistanceAlgorithm(this);
+			scoredSenses = alg.score(getFilteredTargetSenses());
 			
 		case RANDOM:
 			alg = new RandomAlgorithm();
@@ -115,12 +124,7 @@ public class WSD {
 		case RANDOM_WITH_FILTER:
 			alg = new RandomAlgorithm();
 			scoredSenses = alg.score(getFilteredTargetSenses());
-
-		case STOCHASTIC_GRAPH:
-			alg = new HypernymDistanceAlgorithm(this);
-			scoredSenses = alg.score(getTargetSenses());
-			break;
-			
+						
 		case FREQUENCY:
 			alg = new FrequencyAlgorithm();
 			scoredSenses = alg.score(getTargetSenses());

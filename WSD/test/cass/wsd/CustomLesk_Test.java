@@ -2,12 +2,12 @@ package cass.wsd;
 
 import org.junit.Test;
 
-public class BetterLesk_Test {
+public class CustomLesk_Test {
 
 	@Test
 	public void systemTest() {
 		WSDBenchmark test = new WSDBenchmark();
-		test.simpleBenchmark(Algorithm.BETTER_LESK);
+		test.simpleBenchmark(Algorithm.CUSTOM_LESK);
 	}
 
 }

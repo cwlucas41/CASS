@@ -10,12 +10,12 @@ import cass.languageTool.wordNet.CASSWordSense;
 import cass.wsd.ScoredSense;
 import cass.wsd.WSD;
 
-public class BetterLeskAlgorithm implements I_WSDAlgorithm {
+public class CustomLeskAlgorithm implements I_WSDAlgorithm {
 
 	private WSD wsd;
 	private double contextThreshold = 0.1;
 	
-	public BetterLeskAlgorithm(WSD wsd) {
+	public CustomLeskAlgorithm(WSD wsd) {
 		this.wsd = wsd;
 	}
 	

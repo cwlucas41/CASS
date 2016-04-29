@@ -17,7 +17,7 @@ public class RandomAlgorithm implements I_WSDAlgorithm {
 	 */
 	@Override
 	public List<ScoredSense> score(Set<CASSWordSense> senses) {
-		
+				
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 		
 		for (CASSWordSense sense : senses) {
