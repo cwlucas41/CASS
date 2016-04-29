@@ -2,7 +2,7 @@ package cass.wsd;
 
 import org.junit.Test;
 
-public class FilteredLesk_Test {
+public class LeskWithFilter_Test {
 
 	@Test
 	public void systemTest() {

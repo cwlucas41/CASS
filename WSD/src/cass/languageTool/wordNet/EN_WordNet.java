@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import edu.mit.jwi.Dictionary;
+import edu.mit.jwi.IDictionary;
 import edu.mit.jwi.item.IIndexWord;
 import edu.mit.jwi.item.ISenseEntry;
 import edu.mit.jwi.item.ISenseKey;
@@ -21,7 +22,7 @@ import edu.mit.jwi.item.POS;
 
 public class EN_WordNet implements I_WordNet {
 	
-	private Dictionary dict;
+	private IDictionary dict;
 	
 	public EN_WordNet() {
 		String path = "WNdb-3.0/dict";
