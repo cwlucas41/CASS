@@ -22,13 +22,24 @@ public class BetterLeskAlgorithm implements I_WSDAlgorithm {
 	public List<ScoredSense> score(Set<CASSWordSense> senses) {
 		List<ScoredSense> scoredSenses = new ArrayList<ScoredSense>();
 		
+		// for every sense of the target word
 		for (CASSWordSense targetSense : senses) {
 			Set<String> targetGlossSet = getGlossSet(targetSense);
 			int senseScore = 0;
+			
+			// for every word in the context
 			for (String contextWord : wsd.getContext()) {
+				// score of best sense of word
 				int wordScore = 0;
+				
 				Set<CASSWordSense> contextWordSenses = wsd.getlTool().getSenses(contextWord);
-				for (CASSWordSense contextWordSense : wsd.filterSensesToFrequencyThreshold(contextWordSenses, contextThreshold)){
+				// apply filter so that algorithm runs faster
+				contextWordSenses = wsd.filterSensesToFrequencyThreshold(contextWordSenses, contextThreshold);
+				
+				// for every relevent sense of the context word
+				for (CASSWordSense contextWordSense : contextWordSenses){
+					
+					// compute the cardinality of the intersection of the target gloss and context gloss
 					Set<String> contextWordGlossSet = getGlossSet(contextWordSense);
 					contextWordGlossSet.retainAll(targetGlossSet);
 					int score = contextWordGlossSet.size();
