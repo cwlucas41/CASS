@@ -3,7 +3,6 @@ package cass.wsd.algorithm;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 import cass.languageTool.wordNet.CASSWordSense;
@@ -18,16 +17,14 @@ public class RandomAlgorithm implements I_WSDAlgorithm {
 	 */
 	@Override
 	public List<ScoredSense> score(Set<CASSWordSense> senses) {
-		Random rand = new Random();
 		
 		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
 		
 		for (CASSWordSense sense : senses) {
-			scoredSenses.add(new ScoredSense(sense, rand.nextInt()));
+			scoredSenses.add(new ScoredSense(sense, 0));
 		}
 		
-		Collections.sort(scoredSenses);
-		Collections.reverse(scoredSenses);
+		Collections.shuffle(scoredSenses);
 		
 		return scoredSenses;
 	}
