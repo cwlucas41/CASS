@@ -1,14 +1,13 @@
 package cass.wsd;
 
 import java.util.List;
-import java.util.Random;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.Collections;
 
 import cass.languageTool.*;
 import cass.languageTool.wordNet.CASSWordSense;
+import cass.wsd.algorithm.*;
 
 public class WSD {
 	
@@ -26,6 +25,27 @@ public class WSD {
 		context.addAll(lTool.tokenizeAndLemmatize(rightContext));
 		}
 	
+	/**
+	 * Gets the Language Tool of the class. The language tool is initialized to the language of the WSD class.
+	 * @return language tool
+	 */
+	public LanguageTool getlTool() {
+		return lTool;
+	}
+
+	/**
+	 * gets the context for the WSD object. The context is a List of strings. Tokenization and Lemmatization have already taken place
+	 * @return lemmatized and tokenized context in a List
+	 */
+	public List<String> getContext() {
+		return context;
+	}
+
+	/**
+	 * public WSD method
+	 * @param algorithm - member of Algorithm enumeration representing which algorithm to run
+	 * @return sorted List of senses scored with algorithm of choice
+	 */
 	public List<CASSWordSense> rankSensesUsing(Algorithm algorithm) {
 		
 		List<ScoredSense> scoredSenses = scoreSensesUsing(algorithm);
@@ -65,139 +85,82 @@ public class WSD {
 			break;
 			
 		default:
-			// TODO throw proper exception
 			break;
 		}
 		
 		return scoredSenses;
 	}
 	
+	/**
+	 * Custom WSD algorithm that filters the target senses to get a more fine-grained sense inventory before
+	 * running Lesk's algorithm on the target senses.
+	 * @return sorted List of ScoredSenses scored on intersection of filtered target sense gloss and context
+	 */
 	private List<ScoredSense> scoreSensesUsingLeskAndFilter() {
-		Set<CASSWordSense> allTargetSenses = lTool.getSenses(target);
-		Set<CASSWordSense> filteredSenses = new HashSet<CASSWordSense>();
-		
-		// filter allTargetSenses, save to filteredSenses
-		
-		// TODO: FAUSTO
-		return leskIntenal(filteredSenses);
+		I_WSDAlgorithm alg = new LeskAlgorithm(this);
+		return alg.score(filterTargetSensesToFrequencyThreshold());
 	}
 	
 	private List<ScoredSense> scoreSensesUsingLesk() {
-		return leskIntenal(lTool.getSenses(target));
+		I_WSDAlgorithm alg = new LeskAlgorithm(this);
+		return alg.score(lTool.getSenses(target));
 	}
 	
-	private List<ScoredSense> leskIntenal(Set<CASSWordSense> targetSenses) {
-		// context set is set of words in context
-				Set<String> contextSet = new HashSet<String>(context);
-				
-				Set<String> glossSet = new HashSet<String>();
-				List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
-				
-				// for every set of synonyms in the list
-				for (CASSWordSense targetSense : targetSenses) {
-					// clear and add lemmatized tokens of gloss to set
-					glossSet.clear();
-					String definition = lTool.getDefinition(targetSense);
-					glossSet.addAll(lTool.tokenizeAndLemmatize(definition));
-					
-					// find intersection of sets
-					glossSet.retainAll(contextSet);
-					
-					// score is cardinality of intersection
-					int score = glossSet.size();
-					
-					scoredSenses.add(new ScoredSense(targetSense, score));
-				}
-				
-				// sort in descending order
-				Collections.sort(scoredSenses);
-				Collections.reverse(scoredSenses);
-				
-				return scoredSenses;
-	}
-	
+	 /**
+	  * WSD algorithm to score senses based on lowest common hypernym ancestor to senses of context words.
+	  * The algorithm assigns a score to a target sense that is the sum of the minimum distances between it and the senses of the context words.
+	  * The stochastic part of this algorithm relies on randomly selecting a hypernym in the case there are multiple.
+	  * @return sorted List of ScoredSenses scored by hypernym traversals to the senses of each context word.
+	  */
 	private List<ScoredSense> scoreSensesUsingStochasticHypernymDistance() {
-		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
-				
-		for (CASSWordSense targetSense : lTool.getSenses(target)) {
-			
-			Integer senseScore = null;
-			
-			if (targetSense.getPOS() == "noun") {
-				senseScore = scoreTargetSensesUsingHypernymDistance(targetSense);
-			}
-			
-			if (senseScore == null) {
-				senseScore = Integer.MAX_VALUE;
-			}
-			
-			scoredSenses.add(new ScoredSense(targetSense, senseScore));
-		}
-		
-		// sort in ascending order
-		Collections.sort(scoredSenses);
-		
-		return scoredSenses;
-	}
-	
-	private Integer scoreTargetSensesUsingHypernymDistance(CASSWordSense targetSense) {
-		
-		List<CASSWordSense> targetHypernymChain = lTool.getHypernymAncestors(targetSense);
-		if ((targetHypernymChain == null) || (targetHypernymChain.isEmpty())) {
-			return null;
-		}
-		
-		int senseScore = 0;
-		
-		// loop over all context words
-		for (String contextWord : context) {
-			Set<CASSWordSense> contextWordSenses = lTool.getSenses(contextWord);
-			int contextWordBestScore = Integer.MAX_VALUE;
-			if (!contextWordSenses.isEmpty()) {
-				// loop over all senses of context word
-				for (CASSWordSense contextWordSense : contextWordSenses) {
-					if (contextWordSense.getPOS() == "noun") {
-						List<CASSWordSense> contextWordHypernymChain = lTool.getHypernymAncestors(contextWordSense);
-						Integer score = lTool.getHypernymDistanceScore(targetHypernymChain, contextWordHypernymChain);
-						if ((score != null) && (score < contextWordBestScore)) {
-							contextWordBestScore = score;
-						}
-					}
-				}
-			}
-			if (contextWordBestScore == Integer.MAX_VALUE) {
-				contextWordBestScore = 0;
-			}
-			senseScore += contextWordBestScore;
-		}
-		return senseScore;
+		I_WSDAlgorithm alg = new HypernymDistanceAlgorithm(this);
+		return alg.score(lTool.getSenses(target));
 	}
 	
 	private List<ScoredSense> scoreSensesUsingTagFrequency() {
-		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
-				
-		for (CASSWordSense sense : lTool.getSenses(target)) {
-			scoredSenses.add(new ScoredSense(sense, sense.getTagFrequency()));
-		}
-
-		Collections.sort(scoredSenses);
-		Collections.reverse(scoredSenses);
-		
-		return scoredSenses;
+		I_WSDAlgorithm alg = new FrequencyAlgorithm();
+		return alg.score(lTool.getSenses(target));
 	}
 	
+	/**
+	 * Simple baseline algorithm for other algorithms that use filter. Similar to random.
+	 * @return
+	 */
+	private List<ScoredSense> scoreFilteredSensesRandomly() {
+		I_WSDAlgorithm randomAlg= new RandomAlgorithm();
+		return randomAlg.score(filterTargetSensesToFrequencyThreshold());
+	}
+	
+	/**
+	 * Simple baseline algorithm. Chooses a random score for each sense and then sorts the senses based on the score.
+	 * @return sorted List of ScoredSenses with randomly generated scores
+	 */
 	private List<ScoredSense> scoreSensesRandomly() {
-		Random rand = new Random();
-		
-		List<ScoredSense> scoredSenses= new ArrayList<ScoredSense>();
-		
-		for (CASSWordSense sense : lTool.getSenses(target)) {
-			scoredSenses.add(new ScoredSense(sense, rand.nextInt()));
-		}
+		I_WSDAlgorithm randomAlg= new RandomAlgorithm();
+		return randomAlg.score(lTool.getSenses(target));
+	}
+	
+	/**
+	 * filters target senses to some threshold
+	 * @return filtered set of target senses
+	 */
+	private Set<CASSWordSense> filterTargetSensesToFrequencyThreshold() {
+		// filter allTargetSenses, save to filteredSenses
+		double threshold = 0.3;
 
-		Collections.sort(scoredSenses);
-		Collections.reverse(scoredSenses);
+		Set<CASSWordSense> allTargetSenses = lTool.getSenses(target);
+		Set<CASSWordSense> filteredSenses = new HashSet<CASSWordSense>();
+		int total =0;
+		for(CASSWordSense sense : allTargetSenses){			
+			total+=sense.getTagFrequency();
+		}
+		int minFrequency =  (int)( total * threshold); // Floor of threshold of total usage
 		
-		return scoredSenses;
+		for(CASSWordSense sense : allTargetSenses){			
+			if(sense.getTagFrequency() >= minFrequency){
+				filteredSenses.add(sense);
+			}
+		}
+		return filteredSenses;
 	}
 }
