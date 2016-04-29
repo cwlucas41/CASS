@@ -19,6 +19,13 @@ public class CustomLeskAlgorithm implements I_WSDAlgorithm {
 		this.wsd = wsd;
 	}
 	
+	/**
+	 * WSD algorithm that attempt to improve on Lesk's algorithm. Instead of comparing the target glosses to the context,
+	 * this algorithm compares the target glosses to every gloss of each context word. The score is the sum of the maximum gloss
+	 * overlaps for each word.
+	 * @param senses - target senses to operate on
+	 * @return sorted list of ScoredSenses sorted by decreasing score
+	 */
 	@Override
 	public List<ScoredSense> score(Set<CASSWordSense> senses) {
 		List<ScoredSense> scoredSenses = new ArrayList<ScoredSense>();
