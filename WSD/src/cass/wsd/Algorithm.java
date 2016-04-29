@@ -8,6 +8,7 @@ package cass.wsd;
 public enum Algorithm {
 	LESK,
 	LESK_WITH_FILTER,
+	NEW_LESK,
 	STOCHASTIC_GRAPH,
 	FREQUENCY,
 	RANDOM,

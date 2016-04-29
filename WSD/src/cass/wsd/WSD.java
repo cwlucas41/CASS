@@ -88,6 +88,10 @@ public class WSD {
 		case LESK:
 			scoredSenses = scoreSensesUsingLesk();
 			break;
+			
+		case NEW_LESK:
+			scoredSenses = scoreSensesUsingNewLesk();
+			break;
 
 		case STOCHASTIC_GRAPH:
 			scoredSenses = scoreSensesUsingStochasticHypernymDistance();
@@ -122,7 +126,7 @@ public class WSD {
 	 */
 	private List<ScoredSense> scoreSensesUsingLeskAndFilter() {
 		I_WSDAlgorithm alg = new LeskAlgorithm(this);
-		return alg.score(filterTargetSensesToFrequencyThreshold());
+		return alg.score(lTool.getSenses(target));
 	}
 	
 	/**
@@ -132,6 +136,11 @@ public class WSD {
 	private List<ScoredSense> scoreSensesUsingLesk() {
 		I_WSDAlgorithm alg = new LeskAlgorithm(this);
 		return alg.score(lTool.getSenses(target));
+	}
+	
+	private List<ScoredSense> scoreSensesUsingNewLesk() {
+		I_WSDAlgorithm alg = new NewLeskAlgorithm(this);
+		return alg.score(filterTargetSensesToFrequencyThreshold());
 	}
 	
 	 /**
