@@ -14,7 +14,7 @@ public class Lesk_Test {
 	@Test
 	public void test() {
 		WSD wsd = new WSD("The", "bass", "makes low musical sounds", Language.TEST);
-		List<ScoredSense> ranked = wsd.scoreSensesUsing(Algorithm.LESK);
+		List<ScoredSense> ranked = wsd.scoreSensesUsing(Algorithm.LESK, 0);
 		
 		List<String> properID = Arrays.asList("bass0", "bass1");
 		List<Integer> properScore = Arrays.asList(3,1);
@@ -29,6 +29,6 @@ public class Lesk_Test {
 	@Test
 	public void systemTest() {
 		WSDBenchmark test = new WSDBenchmark();
-		test.simpleBenchmark(Algorithm.LESK);
+		test.simpleBenchmark(Algorithm.LESK, 0);
 	}
 }

@@ -23,9 +23,7 @@ public class WSD {
 	private LanguageTool lTool;
 	private List<String> context;
 	private String target;
-	
-	private double threshold = 0.10;
-	
+		
 	/**
 	 * Constructor for WSD. 
 	 * @param leftContext - String of words left of the target word in corpus
@@ -62,11 +60,12 @@ public class WSD {
 	/**
 	 * public WSD method
 	 * @param algorithm - member of Algorithm enumeration representing which algorithm to run
+	 * @param frequencyThreshold for filtering senses
 	 * @return sorted List of senses scored with algorithm of choice
 	 */
-	public List<CASSWordSense> rankSensesUsing(Algorithm algorithm) {
+	public List<CASSWordSense> rankSensesUsing(Algorithm algorithm, double frequencyThreshold) {
 		
-		List<ScoredSense> scoredSenses = scoreSensesUsing(algorithm);
+		List<ScoredSense> scoredSenses = scoreSensesUsing(algorithm, frequencyThreshold);
 		List<CASSWordSense> rankedSenses = new ArrayList<CASSWordSense>();
 		
 		// convert ScoredSense to WordSense, discard score
@@ -79,55 +78,46 @@ public class WSD {
 	/**
 	 * Converts Algorithm parameter to WSD method call. Package visibility so that score information can be used in JUint tests.
 	 * @param algorithm - member of Algorithm enumeration representing which algorithm to run
+	 * @param frequencyThreshold for filtering senses
 	 * @return sorted List of ScoredSenses scored according to algorithm of choice
 	 */
-	List<ScoredSense> scoreSensesUsing(Algorithm algorithm) {
+	List<ScoredSense> scoreSensesUsing(Algorithm algorithm, double frequencyThreshold) {
 		
 		List<ScoredSense> scoredSenses = null;
 		I_WSDAlgorithm alg;
 		
+		Set <CASSWordSense> relevantSenses;
+		
+		if (frequencyThreshold != 0) {
+			relevantSenses = getFilteredTargetSenses(frequencyThreshold);
+		} else {
+			relevantSenses = getAllTargetSenses();
+		}
+		
 		switch (algorithm) {
 		case LESK:
 			alg = new LeskAlgorithm(this);
-			scoredSenses = alg.score(getTargetSenses());
-			break;
-			
-		case LESK_WITH_FILTER:
-			alg = new LeskAlgorithm(this);
-			scoredSenses =  alg.score(getFilteredTargetSenses());
+			scoredSenses = alg.score(relevantSenses);
 			break;
 			
 		case CUSTOM_LESK:
 			alg = new CustomLeskAlgorithm(this);
-			scoredSenses = alg.score(getTargetSenses());
-			break;
-			
-		case CUSTOM_LESK_WITH_FILTER:
-			alg = new CustomLeskAlgorithm(this);
-			scoredSenses = alg.score(getFilteredTargetSenses());
+			scoredSenses = alg.score(relevantSenses);
 			break;
 
 		case HYPERNYM_DISTANCE:
 			alg = new HypernymDistanceAlgorithm(this);
-			scoredSenses = alg.score(getTargetSenses());
+			scoredSenses = alg.score(relevantSenses);
 			break;
-			
-		case HYPERNYM_DISTANCE_WITH_FILTER:
-			alg = new HypernymDistanceAlgorithm(this);
-			scoredSenses = alg.score(getFilteredTargetSenses());
 			
 		case RANDOM:
 			alg = new RandomAlgorithm();
-			scoredSenses = alg.score(getTargetSenses());
+			scoredSenses = alg.score(relevantSenses);
 			break;
-			
-		case RANDOM_WITH_FILTER:
-			alg = new RandomAlgorithm();
-			scoredSenses = alg.score(getFilteredTargetSenses());
 						
 		case FREQUENCY:
 			alg = new FrequencyAlgorithm();
-			scoredSenses = alg.score(getTargetSenses());
+			scoredSenses = alg.score(relevantSenses);
 			break;
 			
 		default:
@@ -139,6 +129,8 @@ public class WSD {
 	
 	/**
 	 * filters senses to some frequency threshold
+	 * @param senses - input senses
+	 * @param threshold for filtering senses
 	 * @return filtered set of target senses
 	 */
 	public Set<CASSWordSense> filterSensesToFrequencyThreshold(Set<CASSWordSense> senses, double threshold) {
@@ -159,11 +151,11 @@ public class WSD {
 		return filteredSenses;
 	}
 	
-	private Set<CASSWordSense> getTargetSenses() {
+	private Set<CASSWordSense> getAllTargetSenses() {
 		return lTool.getSenses(target);
 	}
 	
-	private Set<CASSWordSense> getFilteredTargetSenses() {
-		return filterSensesToFrequencyThreshold(getTargetSenses(), threshold);
+	private Set<CASSWordSense> getFilteredTargetSenses(double threshold) {
+		return filterSensesToFrequencyThreshold(getAllTargetSenses(), threshold);
 	}
 }
