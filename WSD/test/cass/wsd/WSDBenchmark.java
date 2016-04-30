@@ -14,7 +14,7 @@ import cass.testGenerator.TestSentenceGenerator;
 
 public class WSDBenchmark {
 	
-	public Map<Integer, Map<Integer,Integer>> benchmark(Algorithm algorithm) {
+	public Map<Integer, Map<Integer,Integer>> benchmark(Algorithm algorithm, double frequencyThreshold) {
 		Iterator<TestData> tsg = new TestSentenceGenerator("semcor3.0");
 				
 		Map<Integer, Map<Integer,Integer>> bins = new HashMap<Integer, Map<Integer, Integer>>();
@@ -22,7 +22,7 @@ public class WSDBenchmark {
 		while (tsg.hasNext()) {
 			TestData ts = tsg.next();
 			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
-			List<ScoredSense> results = wsd.scoreSensesUsing(algorithm);
+			List<ScoredSense> results = wsd.scoreSensesUsing(algorithm, frequencyThreshold);
 			
 			int numberOfSenses = results.size();
 			
@@ -47,8 +47,8 @@ public class WSDBenchmark {
 		return bins;
 	}
 	
-	public void printBenchmark(Algorithm algorithm) {
-		Map<Integer, Map<Integer,Integer>> bins = benchmark(algorithm);
+	public void printBenchmark(Algorithm algorithm, double frequencyThreshold) {
+		Map<Integer, Map<Integer,Integer>> bins = benchmark(algorithm, frequencyThreshold);
 		
 		List<Integer> keys = new ArrayList<Integer>(bins.keySet());
 		Collections.sort(keys);
@@ -63,7 +63,7 @@ public class WSDBenchmark {
 		}
 	}
 	
-	public void simpleBenchmark(Algorithm algorithm) {
+	public void simpleBenchmark(Algorithm algorithm, double frequencyThreshold) {
 		Iterator<TestData> tsg = new TestSentenceGenerator("semcor3.0");
 		
 		int numCorrect = 0;
@@ -76,7 +76,7 @@ public class WSDBenchmark {
 			LanguageTool lt = new LanguageTool(Language.EN);
 			
 			if (!lt.getSenses(ts.getTarget()).isEmpty()) {				
-				List<ScoredSense> results = wsd.scoreSensesUsing(algorithm);
+				List<ScoredSense> results = wsd.scoreSensesUsing(algorithm, frequencyThreshold);
 				
 				if (!results.isEmpty() && ts.getSenses().contains(results.get(0).getSense().getId())) {
 					numCorrect++;

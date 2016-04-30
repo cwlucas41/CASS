@@ -1,1 +1,9 @@
+cass.languageTool
+cass.languageTool.lemma
+cass.languageTool.partOfSpeech
+cass.languageTool.tokenizer
 cass.languageTool.wordNet
+cass.libreOffice
+cass.testGenerator
+cass.wsd
+cass.wsd.algorithm
