@@ -7,6 +7,6 @@ public class HypernymDistance_Test {
 	@Test
 	public void systemTest() {
 		WSDBenchmark test = new WSDBenchmark();
-		test.simpleBenchmark(Algorithm.HYPERNYM_DISTANCE);
+		test.benchmark(Algorithm.HYPERNYM_DISTANCE);
 	}
 }

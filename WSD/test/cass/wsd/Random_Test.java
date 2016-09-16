@@ -8,7 +8,7 @@ public class Random_Test {
 	@Test
 	public void systemTest() {
 		WSDBenchmark test = new WSDBenchmark();
-		test.simpleBenchmark(Algorithm.RANDOM);
+		test.benchmark(Algorithm.RANDOM);
 	}
 
 }

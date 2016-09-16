@@ -7,7 +7,7 @@ public class LeskWithFilter_Test {
 	@Test
 	public void systemTest() {
 		WSDBenchmark test = new WSDBenchmark();
-		test.simpleBenchmark(Algorithm.LESK_WITH_FILTER);
+		test.benchmark(Algorithm.LESK_WITH_FILTER);
 	}
 
 }
