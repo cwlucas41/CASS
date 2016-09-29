@@ -1,5 +1,6 @@
 package cass.wsd;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -28,16 +29,31 @@ public class WSDBenchmark {
 				List<ScoredSense> results = wsd.scoreSensesUsing(algorithm);
 				
 				int numCorrectAnswers = ts.getSenses().size();
-				double bestScore = IntStream.rangeClosed(1, numCorrectAnswers).mapToDouble(x -> 1/x).sum();
+				double bestScore = IntStream.rangeClosed(1, numCorrectAnswers).mapToDouble(x -> ((double) 1)/x).sum();
 				// best score is based on harmonic series
 						
 				double score = IntStream.range(0, results.size())
 					.mapToObj(i -> new Pair<Integer, String>(i, results.get(i).getSense().getId()))
 					.filter(pair -> ts.getSenses().contains(pair.s))
-					.mapToDouble(pair -> 1/(pair.t + 1))
+					.mapToDouble(pair -> ((double) 1)/(pair.t + 1))
 					.sum() / bestScore;
 				
+				List<String> resultIDs = new ArrayList<String>();
+				for (ScoredSense result : results) {
+					resultIDs.add(result.getSense().getId());
+				}
+				
 				meanScore = (meanScore * n + score) / (n+1);
+				
+//				System.out.println();
+//				System.out.println(ts.getLeftContext());
+//				System.out.println(ts.getTarget());
+//				System.out.println(ts.getRightContext());
+//				System.out.println(resultIDs);
+//				System.out.println(ts.getSenses());
+//				System.out.println(score);
+//				System.out.println();
+				
 				System.out.println(meanScore);
 				
 				n++;
@@ -54,6 +70,11 @@ public class WSDBenchmark {
 		public Pair(T t, S s) {
 			this.t = t;
 			this.s = s;
+		}
+		
+		@Override
+		public String toString() {
+			return t.toString() + ", " + s.toString();
 		}
 	}
 }
