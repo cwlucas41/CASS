@@ -43,7 +43,7 @@ public class LibreOfficeCass {
 	 * @param algorithm String
 	 * @return String array of senses containing synonyms
 	 */
-	public String[][] getSynonyms(String algorithm) {
+	public SWSD_Result getSynonyms(String algorithm) {
 		List<CASSWordSense> rankedSenses = null;
 		
 		switch (algorithm) {
@@ -54,8 +54,12 @@ public class LibreOfficeCass {
 		default:
 			break;
 		}
-		
-		return convert(rankedSenses);
+		WSD_Result result = new WSD_Result();
+		result.SynonymCount = 1;
+		result.SynsetCount = 2;
+		result.Synonyms  = convert(rankedSenses);
+		return result;
+		//return convert(rankedSenses);
 	}
 
 	/**
@@ -63,8 +67,12 @@ public class LibreOfficeCass {
 	 * @param senses
 	 * @return String array for senses containg array for synonyms
 	 */
-	private String[][] convert(List<CASSWordSense> senses) {
-		return null;
-	}
+	private WSD_Result convert(List<CASSWordSense> senses) {
+		WSD_Result result = new WSD_Result();
+		result.SynonymCount = 1;
+		result.SynsetCount = 2;
+		result.Synonyms  = new String[] {"Syn1","Syn2"};
+		return result;
+		}
 	
 }
