@@ -26,7 +26,7 @@ public class WSDBenchmark {
 			LanguageTool lt = new LanguageTool(Language.EN);
 			
 			if (!lt.getSenses(ts.getTarget()).isEmpty()) {				
-				List<ScoredSense> results = wsd.scoreSensesUsing(algorithm, frequencyThreshold);
+				List<ScoredSense> results = wsd.scoreSensesUsing(algorithm, 0);
 				
 				int numCorrectAnswers = ts.getSenses().size();
 				double bestScore = IntStream.rangeClosed(1, numCorrectAnswers).mapToDouble(x -> ((double) 1)/x).sum();
