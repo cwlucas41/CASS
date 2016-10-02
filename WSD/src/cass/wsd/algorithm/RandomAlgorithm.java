@@ -12,7 +12,7 @@ public class RandomAlgorithm implements I_WSDAlgorithm {
 	
 	/**
 	 * Internal details for randomly selecting a sense
-	 * @param Set of senses to consider
+	 * @param senses - Set of senses to consider
 	 * @return List of senses scored randomly
 	 */
 	@Override
