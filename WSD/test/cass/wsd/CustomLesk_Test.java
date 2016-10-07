@@ -7,7 +7,7 @@ public class CustomLesk_Test {
 	@Test
 	public void systemTest() {
 		WSDBenchmark test = new WSDBenchmark();
-		test.simpleBenchmark(Algorithm.CUSTOM_LESK, 0);
+		test.benchmark(Algorithm.CUSTOM_LESK);
 	}
 
 }

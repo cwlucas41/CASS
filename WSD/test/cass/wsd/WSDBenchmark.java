@@ -1,11 +1,10 @@
 package cass.wsd;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.OptionalDouble;
+import java.util.stream.IntStream;
 
 import cass.languageTool.Language;
 import cass.languageTool.LanguageTool;
@@ -14,86 +13,68 @@ import cass.testGenerator.TestSentenceGenerator;
 
 public class WSDBenchmark {
 	
-	public Map<Integer, Map<Integer,Integer>> benchmark(Algorithm algorithm, double frequencyThreshold) {
-		Iterator<TestData> tsg = new TestSentenceGenerator("semcor3.0");
-				
-		Map<Integer, Map<Integer,Integer>> bins = new HashMap<Integer, Map<Integer, Integer>>();
+	public double benchmark(Algorithm algorithm) {
+		int n = 0;
+		double meanScore = 0;
 		
-		while (tsg.hasNext()) {
-			TestData ts = tsg.next();
-			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
-			List<ScoredSense> results = wsd.scoreSensesUsing(algorithm, frequencyThreshold);
-			
-			int numberOfSenses = results.size();
-			
-			// ensure bin exists
-			bins.putIfAbsent(numberOfSenses, new HashMap<Integer, Integer>());
-			
-			Map<Integer, Integer> bin = bins.get(numberOfSenses);
-			
-			for (ScoredSense result : results) {
-				if (ts.getSenses().contains(result.getSense().getId())) {
-					int indexOfCorrectSense = results.indexOf(result);
-					Integer currentCount = bin.get(indexOfCorrectSense);
-					if (currentCount == null) {
-						bin.put(indexOfCorrectSense, 1);
-					} else {
-						bin.put(indexOfCorrectSense, currentCount++);
-					}
-				}
-			}
-		}
-		
-		return bins;
-	}
-	
-	public void printBenchmark(Algorithm algorithm, double frequencyThreshold) {
-		Map<Integer, Map<Integer,Integer>> bins = benchmark(algorithm, frequencyThreshold);
-		
-		List<Integer> keys = new ArrayList<Integer>(bins.keySet());
-		Collections.sort(keys);
-		for (Integer key : keys) {
-			System.out.println(key);
-			Map<Integer,Integer> bin = bins.get(key);
-			List<Integer> innerKeys = new ArrayList<Integer>(bin.keySet());
-			Collections.sort(innerKeys);
-			for (Integer innerKey : innerKeys) {
-				System.out.println("\t" + innerKey + "\t" + bin.get(innerKey));
-			}
-		}
-	}
-	
-	public void simpleBenchmark(Algorithm algorithm, double frequencyThreshold) {
 		Iterator<TestData> tsg = new TestSentenceGenerator("semcor3.0");
 		
-		int numCorrect = 0;
-		int numSentences = 0;
-		
-		while (tsg.hasNext()) {
+		while(tsg.hasNext()) {
+			n++;
 			TestData ts = tsg.next();
-			
-			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
+			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);				
 			LanguageTool lt = new LanguageTool(Language.EN);
 			
 			if (!lt.getSenses(ts.getTarget()).isEmpty()) {				
-				List<ScoredSense> results = wsd.scoreSensesUsing(algorithm, frequencyThreshold);
+				List<ScoredSense> results = wsd.scoreSensesUsing(algorithm, 0);
 				
-				if (!results.isEmpty() && ts.getSenses().contains(results.get(0).getSense().getId())) {
-					numCorrect++;
-				}
-	
-				numSentences++;
+				int numCorrectAnswers = ts.getSenses().size();
+				double bestScore = IntStream.rangeClosed(1, numCorrectAnswers).mapToDouble(x -> ((double) 1)/x).sum();
+				// best score is based on harmonic series
+						
+				double score = IntStream.range(0, results.size())
+					.mapToObj(i -> new Pair<Integer, String>(i, results.get(i).getSense().getId()))
+					.filter(pair -> ts.getSenses().contains(pair.s))
+					.mapToDouble(pair -> ((double) 1)/(pair.t + 1))
+					.sum() / bestScore;
 				
-				if (numSentences % 50 == 0) {
-					System.out.println(numCorrect + " / " + numSentences);
-					System.out.println((float) numCorrect / numSentences);
-					System.out.println();
+				List<String> resultIDs = new ArrayList<String>();
+				for (ScoredSense result : results) {
+					resultIDs.add(result.getSense().getId());
 				}
+				
+				meanScore = (meanScore * n + score) / (n+1);
+				
+//				System.out.println();
+//				System.out.println(ts.getLeftContext());
+//				System.out.println(ts.getTarget());
+//				System.out.println(ts.getRightContext());
+//				System.out.println(resultIDs);
+//				System.out.println(ts.getSenses());
+//				System.out.println(score);
+//				System.out.println();
+				
+				System.out.println(meanScore);
+				
+				n++;
 			}
 		}
 		
-		System.out.println(numCorrect + " / " + numSentences);
-		System.out.println((float) numCorrect / numSentences);
-		System.out.println();
+		return meanScore;
+	}
+	
+	class Pair<T,S> {
+		public T t;
+		public S s;
+		
+		public Pair(T t, S s) {
+			this.t = t;
+			this.s = s;
+		}
+		
+		@Override
+		public String toString() {
+			return t.toString() + ", " + s.toString();
+		}
 	}
 }
