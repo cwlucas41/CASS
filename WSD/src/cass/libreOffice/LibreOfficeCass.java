@@ -1,8 +1,11 @@
 package cass.libreOffice;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import cass.languageTool.Language;
+import cass.languageTool.LanguageTool;
 import cass.languageTool.wordNet.CASSWordSense;
 import cass.wsd.*;
 
@@ -61,10 +64,33 @@ public class LibreOfficeCass {
 	/**
 	 * Converts list of senses to nested array of synonyms
 	 * @param senses
-	 * @return String array for senses containg array for synonyms
+	 * @return String array for senses containing array for synonyms
 	 */
 	private String[][] convert(List<CASSWordSense> senses) {
-		return null;
+		List<Set<String>> bufferedConversion = new ArrayList<Set<String>>();
+		LanguageTool langTool = wsd.getlTool();
+		int rowSize = 0;
+		for (CASSWordSense sense : senses) {
+			Set<String> synonyms = langTool.getSynonyms(sense);
+			bufferedConversion.add(synonyms);
+			int thisRowSize = synonyms.size();
+			if (thisRowSize > rowSize){
+				rowSize = thisRowSize;
+			}
+		}
+		int columnSize = senses.size();
+		String[][] nestedArray = new String[columnSize][rowSize];
+		int i = 0;
+		for (Set<String> synonyms : bufferedConversion) {
+			int j = 0;
+			for (String synonym : synonyms) {
+				nestedArray[i][j] = synonym;
+				j++;
+			}
+			i++;
+		}
+		
+		return nestedArray;
 	}
 	
 }
