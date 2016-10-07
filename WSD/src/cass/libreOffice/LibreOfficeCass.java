@@ -46,7 +46,7 @@ public class LibreOfficeCass {
 	 * @param algorithm String
 	 * @return String array of senses containing synonyms
 	 */
-	public String[][] getSynonyms(String algorithm) {
+	public WSD_Result getSynonyms(String algorithm) {
 		List<CASSWordSense> rankedSenses = null;
 		
 		switch (algorithm) {
@@ -66,7 +66,7 @@ public class LibreOfficeCass {
 	 * @param senses
 	 * @return String array for senses containing array for synonyms
 	 */
-	private String[][] convert(List<CASSWordSense> senses) {
+	private WSD_Result convert(List<CASSWordSense> senses) {
 		List<Set<String>> bufferedConversion = new ArrayList<Set<String>>();
 		LanguageTool langTool = wsd.getlTool();
 		int rowSize = 0;
@@ -80,6 +80,7 @@ public class LibreOfficeCass {
 		}
 		int columnSize = senses.size();
 		String[][] nestedArray = new String[columnSize][rowSize];
+		int maxSynonym = 0;
 		int i = 0;
 		for (Set<String> synonyms : bufferedConversion) {
 			int j = 0;
@@ -87,10 +88,17 @@ public class LibreOfficeCass {
 				nestedArray[i][j] = synonym;
 				j++;
 			}
+			if (j > maxSynonym)
+				maxSynonym = j;
 			i++;
 		}
 		
-		return nestedArray;
+		WSD_Result result = new WSD_Result();
+		result.SynsetCount = i;
+		result.SynonymCount = maxSynonym;
+		result.Synonyms = nestedArray;
+		
+		return result;
 	}
 	
 }
