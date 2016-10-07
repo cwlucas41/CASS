@@ -9,5 +9,11 @@ module org { module libreoffice { module example {
 		sequence<string> getSynonym([in] string target);
 	};
 
+	struct WSD_Result{
+		unsigned short SynonymCount;
+		unsigned short SynsetSize;
+		sequence< sequence<string> > Synonyms;
+	};
+
  }; }; };
 #endif
