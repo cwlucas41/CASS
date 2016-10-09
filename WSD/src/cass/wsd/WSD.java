@@ -70,7 +70,12 @@ public class WSD {
 		
 		// convert ScoredSense to WordSense, discard score
 		for (ScoredSense wordSense : scoredSenses) {
-			rankedSenses.add(wordSense.getSense());
+			Set<String> senseSynonyms = lTool.getSynonyms(wordSense.getSense());
+			String exampleSynonym = senseSynonyms.iterator().next();
+			char firstLetter = exampleSynonym.charAt(0);
+			if (!Character.isUpperCase(firstLetter)) {
+				rankedSenses.add(wordSense.getSense());
+			}
 		}
 		return rankedSenses;
 	}

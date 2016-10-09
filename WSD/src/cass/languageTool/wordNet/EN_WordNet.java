@@ -49,7 +49,6 @@ public class EN_WordNet implements I_WordNet {
 		try {
 			dict.open();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

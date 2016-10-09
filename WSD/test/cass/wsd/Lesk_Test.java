@@ -29,6 +29,6 @@ public class Lesk_Test {
 	@Test
 	public void systemTest() {
 		WSDBenchmark test = new WSDBenchmark();
-		test.simpleBenchmark(Algorithm.LESK, 0);
+		test.benchmark(Algorithm.LESK);
 	}
 }
