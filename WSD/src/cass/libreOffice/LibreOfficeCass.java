@@ -80,7 +80,6 @@ public class LibreOfficeCass {
 		}
 		int columnSize = senses.size();
 		String[][] nestedArray = new String[columnSize][rowSize];
-		int maxSynonym = 0;
 		int i = 0;
 		for (Set<String> synonyms : bufferedConversion) {
 			int j = 0;
@@ -88,14 +87,12 @@ public class LibreOfficeCass {
 				nestedArray[i][j] = synonym;
 				j++;
 			}
-			if (j > maxSynonym)
-				maxSynonym = j;
 			i++;
 		}
 		
 		WSD_Result result = new WSD_Result();
 		result.SynsetCount = i;
-		result.SynonymCount = maxSynonym;
+		result.SynonymCount = rowSize;
 		result.Synonyms = nestedArray;
 		
 		return result;
