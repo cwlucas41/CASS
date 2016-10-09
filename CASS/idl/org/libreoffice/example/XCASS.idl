@@ -6,7 +6,7 @@ module org { module libreoffice { module example {
 	interface XCASS {
 		[attribute] string wnKey;
 		[attribute] string wnValue;
-		sequence<string> getSynonym([in] string target);
+		WSD_Result getSynonym([in] string target);
 	};
 
 	struct WSD_Result{
