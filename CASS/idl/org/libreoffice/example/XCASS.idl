@@ -1,19 +1,22 @@
 #ifndef __org_libreoffice_example_xcass_idl__
 #define __org_libreoffice_example_xcass_idl__
 
-module org { module libreoffice { module example { 	
 
-	interface XCASS {
-		[attribute] string wnKey;
-		[attribute] string wnValue;
-		sequence<string> getSynonym([in] string target);
-	};
-
-	struct WSD_Result{
+struct WSD_Result{
 		unsigned short SynonymCount;
 		unsigned short SynsetSize;
 		sequence< sequence<string> > Synonyms;
 	};
+
+module org { module libreoffice { module example { 	
+	
+	interface XCASS {
+		[attribute] string wnKey;
+		[attribute] string wnValue;
+		WSD_Result getSynonym([in] string target);
+	};
+
+	
 
  }; }; };
 #endif

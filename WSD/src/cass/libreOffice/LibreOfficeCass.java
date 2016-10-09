@@ -43,7 +43,7 @@ public class LibreOfficeCass {
 	 * @param algorithm String
 	 * @return String array of senses containing synonyms
 	 */
-	public SWSD_Result getSynonyms(String algorithm) {
+	public WSD_Result getSynonyms(String algorithm) {
 		List<CASSWordSense> rankedSenses = null;
 		
 		switch (algorithm) {
