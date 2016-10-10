@@ -57,8 +57,12 @@ public class LibreOfficeCass {
 		default:
 			break;
 		}
-		
-		return convert(rankedSenses);
+		WSD_Result result = new WSD_Result();
+		result.SynonymCount = 1;
+		result.SynsetCount = 2;
+		result.Synonyms  = convert(rankedSenses);
+		return result;
+		//return convert(rankedSenses);
 	}
 
 	/**
@@ -67,6 +71,9 @@ public class LibreOfficeCass {
 	 * @return String array for senses containing array for synonyms
 	 */
 	private WSD_Result convert(List<CASSWordSense> senses) {
+
+		
+
 		List<Set<String>> bufferedConversion = new ArrayList<Set<String>>();
 		LanguageTool langTool = wsd.getlTool();
 		int rowSize = 0;
@@ -97,5 +104,6 @@ public class LibreOfficeCass {
 		
 		return result;
 	}
+
 	
 }
