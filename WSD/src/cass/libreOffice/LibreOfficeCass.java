@@ -57,11 +57,8 @@ public class LibreOfficeCass {
 		default:
 			break;
 		}
-		WSD_Result result = new WSD_Result();
-		result.SynonymCount = 1;
-		result.SynsetCount = 2;
-		result.Synonyms  = convert(rankedSenses);
-		return result;
+		
+		return convert(rankedSenses);
 		//return convert(rankedSenses);
 	}
 
