@@ -26,7 +26,11 @@ public final class CASS2Impl extends WeakBase
     private String[][] synonyms;
     
     public String getSyn(int i, int j) {
-    	return synonyms[i][j];
+    	if (synonyms[i][j] == null) {
+    		return "";
+    	} else {
+    		return synonyms[i][j];
+    	}
     }
 
     public int getsynonymCount() {
