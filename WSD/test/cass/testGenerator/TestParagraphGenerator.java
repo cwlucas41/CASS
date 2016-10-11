@@ -155,4 +155,11 @@ public class TestParagraphGenerator extends TestDataGenerator {
 		}
 		return concatenated;
 	}
+
+
+	@Override
+	public void remove() {
+		// TODO Auto-generated method stub
+		
+	}
 }

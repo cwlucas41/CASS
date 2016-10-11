@@ -26,18 +26,17 @@ public class LibreOfficeCass {
 	 * @param language - String representing language of test
 	 */
 	public LibreOfficeCass(String leftContext, String target, String rightContext, String language) {
-		Language enumLang = null;
 		
 		switch (language) {
 		case "English":
-			enumLang = Language.EN;
+			wsd = new WSD(leftContext, target, rightContext, Language.EN);
 			break;
 
 		default:
 			break;
 		}
 		
-		wsd = new WSD(leftContext, target, rightContext, enumLang);
+		
 	}
 	
 	/**

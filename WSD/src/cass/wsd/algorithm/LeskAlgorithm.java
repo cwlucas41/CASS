@@ -2,16 +2,12 @@ package cass.wsd.algorithm;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import cass.languageTool.wordNet.CASSWordSense;
 import cass.wsd.ScoredSense;
@@ -78,7 +74,7 @@ public class LeskAlgorithm implements I_WSDAlgorithm {
 	}
 	
 	private Set<String> getFunctionWords() throws FileNotFoundException {
-		Scanner s = new Scanner(new File("functionWords.txt"));
+		Scanner s = new Scanner(new File("/home/design/Documents/CSCI_Capstone/WSD/functionWords.txt"));
 		Set<String> words = new HashSet<String>();
 		while (s.hasNext()) {
 			words.add(wsd.getlTool().lemmatize(s.next()));
