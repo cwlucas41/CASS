@@ -48,6 +48,10 @@ public class WSD {
 	public LanguageTool getlTool() {
 		return lTool;
 	}
+	
+	public String getTarget() {
+		return target;
+	}
 
 	/**
 	 * gets the context for the WSD object. The context is a List of strings. Tokenization and Lemmatization have already taken place
