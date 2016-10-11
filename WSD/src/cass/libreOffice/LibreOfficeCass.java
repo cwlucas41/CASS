@@ -68,17 +68,18 @@ public class LibreOfficeCass {
 	 */
 	private WSD_Result convert(List<CASSWordSense> senses) {
 
-		
-
 		List<Set<String>> bufferedConversion = new ArrayList<Set<String>>();
 		LanguageTool langTool = wsd.getlTool();
 		int rowSize = 0;
 		for (CASSWordSense sense : senses) {
 			Set<String> synonyms = langTool.getSynonyms(sense);
-			bufferedConversion.add(synonyms);
-			int thisRowSize = synonyms.size();
-			if (thisRowSize > rowSize){
-				rowSize = thisRowSize;
+			synonyms.remove(wsd.getTarget());
+			if (synonyms.size() > 0) {
+				bufferedConversion.add(synonyms);
+				int thisRowSize = synonyms.size();
+				if (thisRowSize > rowSize){
+					rowSize = thisRowSize;
+				}
 			}
 		}
 		int columnSize = senses.size();
