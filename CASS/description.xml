@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<description xmlns:d="http://openoffice.org/extensions/description/2006" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://openoffice.org/extensions/description/2006">
-	<identifier value="org.libreoffice.example.cass"/>
-	<display-name>
-		<name lang="en">CASS</name>
-	</display-name>
-</description>

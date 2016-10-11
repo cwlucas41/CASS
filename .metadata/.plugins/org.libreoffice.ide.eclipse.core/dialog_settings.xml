@@ -4,11 +4,11 @@
 		<item value="true" key="overwrite.files"/>
 		<item value="false" key="autodeploy"/>
 		<list key="destination.history">
-			<item value="/home/design/Documents/hhhh/LO/CASS.oxt"/>
-			<item value="/home/design/Documents/hhhh/LO/CASS.oxt"/>
-			<item value="/home/design/Documents/hhhh/LO/CASS.oxt"/>
-			<item value="/home/design/Documents/hhhh/LO/CASS.oxt"/>
-			<item value="/home/design/Documents/CSCI_Capstone/CASS.oxt"/>
+			<item value="/home/design/test.oxt"/>
+			<item value="/home/design/test.oxt"/>
+			<item value="/home/design/test.oxt"/>
+			<item value="/home/design/test.oxt"/>
+			<item value="/home/design/test.oxt"/>
 		</list>
 	</section>
 </section>
