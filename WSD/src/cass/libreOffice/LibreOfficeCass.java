@@ -74,7 +74,7 @@ public class LibreOfficeCass {
 		for (CASSWordSense sense : senses) {
 			Set<String> synonyms = langTool.getSynonyms(sense);
 			synonyms.remove(wsd.getTarget());
-			if (synonyms.size() > 0) {
+			if (synonyms.size() > 0 && !bufferedConversion.contains(synonyms)) {
 				bufferedConversion.add(synonyms);
 				int thisRowSize = synonyms.size();
 				if (thisRowSize > rowSize){

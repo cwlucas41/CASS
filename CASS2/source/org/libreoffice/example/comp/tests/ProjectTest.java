@@ -30,7 +30,7 @@ public class ProjectTest extends UnoTestCase {
 
     public void testSomething() {
     	CASS2Impl s= new CASS2Impl(null);
-		s.getSynonym("I", "stab", "at thee", "English", "LeskWithWordNet");
+		s.getSynonym("Be sure that he took so little hurt from the evil, and escaped in the", "end", "because he began his ownership of the Ring so", "English", "LeskWithWordNet");
 		System.out.println(s.getsynonymCount());
 		System.out.println(s.getsynsetCount());
 
@@ -38,7 +38,7 @@ public class ProjectTest extends UnoTestCase {
 		for (int i = 0; i < s.getsynsetCount(); i++) {
 			for (int j = 0; j < s.getsynonymCount(); j++) {
 				String syn = s.getSyn(i, j);
-				if (syn != null) {
+				if (syn != "") {
 					System.out.println(syn);
 				}
 			}
