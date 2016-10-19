@@ -2,8 +2,8 @@ package org.libreoffice.example.comp;
 
 import com.sun.star.uno.XComponentContext;
 
-import cass.libreOffice.LibreOfficeCass;
-import cass.libreOffice.WSD_Result;
+import edu.slu.cass.libreOffice.LibreOfficeCass;
+import edu.slu.cass.libreOffice.WSD_Result;
 
 import com.sun.star.lib.uno.helper.Factory;
 
