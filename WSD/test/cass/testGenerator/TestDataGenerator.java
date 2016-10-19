@@ -13,7 +13,9 @@ public abstract class TestDataGenerator implements Iterable<TestData>, Iterator<
 	private IConcordanceSet semcor;
 	private Iterator<IContext> contextIter;
 	
-	public TestDataGenerator(String path) {
+	public TestDataGenerator() {
+		
+		String path = "textResources/semcor3.0";
 		try {
 			semcor = new Semcor(new URL("file", null, path));
 		} catch (MalformedURLException e) {

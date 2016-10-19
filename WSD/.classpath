@@ -23,6 +23,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="JSemcor/edu.mit.jsemcor_1.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="JSemcor/edu.mit.jsemcor_1.0.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -19,8 +19,8 @@ public class TestParagraphGenerator extends TestDataGenerator {
 	
 	private DefaultDetokenizer detokenizer =  new DefaultDetokenizer();
 	
-	public TestParagraphGenerator(String path) {
-		super(path);
+	public TestParagraphGenerator() {
+		super();
 		paragraphIter = getContextIter().next().getParagraphs().listIterator();
 	}
 	

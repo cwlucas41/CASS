@@ -52,11 +52,6 @@ public class LeskAlgorithm implements I_WSDAlgorithm {
 			String definition = wsd.getlTool().getDefinition(targetSense);
 			glossSet.addAll(wsd.getlTool().tokenizeAndLemmatize(definition));
 			
-//			Set<String> synonyms = wsd.getlTool().getSynonyms(targetSense);
-//			for (String synonym : synonyms) {
-//				glossSet.add(synonym);
-//			}
-			
 			// find intersection of sets
 			glossSet.retainAll(contextSet);
 			
@@ -74,7 +69,7 @@ public class LeskAlgorithm implements I_WSDAlgorithm {
 	}
 	
 	private Set<String> getFunctionWords() throws FileNotFoundException {
-		Scanner s = new Scanner(new File("/home/design/Documents/CSCI_Capstone/WSD/functionWords.txt"));
+		Scanner s = new Scanner(new File("textResources/functionWords.txt"));
 		Set<String> words = new HashSet<String>();
 		while (s.hasNext()) {
 			words.add(wsd.getlTool().lemmatize(s.next()));
