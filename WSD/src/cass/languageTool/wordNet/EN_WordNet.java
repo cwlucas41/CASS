@@ -36,16 +36,16 @@ public class EN_WordNet implements I_WordNet {
 	 * Creates the Dictionary object from the included WordNet database file
 	 */
 	public EN_WordNet() {
-//		String path = "WNdb-3.0/dict";
-//		
-//		URL url = null;
-//		try{ 
-//			url = new URL("file", null, path); 
-//		} catch(MalformedURLException e) { 
-//			e.printStackTrace();
-//		}
+		String path = "textResources/WNdb-3.0/dict";
 		
-		URL url = getClass().getClassLoader().getResource("WNdb-3.0/dict");
+		URL url = null;
+		try{ 
+			url = new URL("file", null, path); 
+		} catch(MalformedURLException e) { 
+			e.printStackTrace();
+		}
+		
+//		URL url = getClass().getClassLoader().getResource("WNdb-3.0/dict");
 		
 		
 		dict = new Dictionary(url);

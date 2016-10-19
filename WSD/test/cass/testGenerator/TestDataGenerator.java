@@ -1,5 +1,6 @@
 package cass.testGenerator;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
 
@@ -14,14 +15,13 @@ public abstract class TestDataGenerator implements Iterable<TestData>, Iterator<
 	
 	public TestDataGenerator() {
 		
-		URL url = getClass().getClassLoader().getResource("semcor3.0");
-//		try {
-//			semcor = new Semcor(new URL("file", null, path));
-//		} catch (MalformedURLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		semcor = new Semcor(url);
+		String path = "textResources/semcor3.0";
+		try {
+			semcor = new Semcor(new URL("file", null, path));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		semcor.open();
 		
 		contextIter = semcor.iterator();

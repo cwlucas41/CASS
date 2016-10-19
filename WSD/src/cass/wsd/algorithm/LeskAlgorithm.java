@@ -2,6 +2,7 @@ package cass.wsd.algorithm;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -74,7 +75,7 @@ public class LeskAlgorithm implements I_WSDAlgorithm {
 	}
 	
 	private Set<String> getFunctionWords() throws FileNotFoundException {
-		Scanner s = new Scanner(getClass().getClassLoader().getResource("functionWords.txt").getFile());
+		Scanner s = new Scanner(new File("textResources/functionWords.txt"));
 		Set<String> words = new HashSet<String>();
 		while (s.hasNext()) {
 			words.add(wsd.getlTool().lemmatize(s.next()));
