@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.JOptionPane;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -38,14 +36,16 @@ public class EN_WordNet implements I_WordNet {
 	 * Creates the Dictionary object from the included WordNet database file
 	 */
 	public EN_WordNet() {
-		String path = "/home/design/Documents/CSCI_Capstone/WSD/WNdb-3.0/dict";
+//		String path = "WNdb-3.0/dict";
+//		
+//		URL url = null;
+//		try{ 
+//			url = new URL("file", null, path); 
+//		} catch(MalformedURLException e) { 
+//			e.printStackTrace();
+//		}
 		
-		URL url = null;
-		try{ 
-			url = new URL("file", null, path); 
-		} catch(MalformedURLException e) { 
-			e.printStackTrace();
-		}
+		URL url = getClass().getClassLoader().getResource("WNdb-3.0/dict");
 		
 		
 		dict = new Dictionary(url);

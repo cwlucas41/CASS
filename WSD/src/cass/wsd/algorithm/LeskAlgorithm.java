@@ -74,7 +74,7 @@ public class LeskAlgorithm implements I_WSDAlgorithm {
 	}
 	
 	private Set<String> getFunctionWords() throws FileNotFoundException {
-		Scanner s = new Scanner(new File("/home/design/Documents/CSCI_Capstone/WSD/functionWords.txt"));
+		Scanner s = new Scanner(getClass().getClassLoader().getResource("functionWords.txt").getFile());
 		Set<String> words = new HashSet<String>();
 		while (s.hasNext()) {
 			words.add(wsd.getlTool().lemmatize(s.next()));
