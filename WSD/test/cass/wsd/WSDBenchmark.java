@@ -3,7 +3,6 @@ package cass.wsd;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.OptionalDouble;
 import java.util.stream.IntStream;
 
 import cass.languageTool.Language;

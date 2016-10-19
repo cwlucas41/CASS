@@ -2,7 +2,6 @@ package cass.wsd.algorithm;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -52,11 +51,6 @@ public class LeskAlgorithm implements I_WSDAlgorithm {
 			// add lemmatized tokens of gloss to set
 			String definition = wsd.getlTool().getDefinition(targetSense);
 			glossSet.addAll(wsd.getlTool().tokenizeAndLemmatize(definition));
-			
-//			Set<String> synonyms = wsd.getlTool().getSynonyms(targetSense);
-//			for (String synonym : synonyms) {
-//				glossSet.add(synonym);
-//			}
 			
 			// find intersection of sets
 			glossSet.retainAll(contextSet);

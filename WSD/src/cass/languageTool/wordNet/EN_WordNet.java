@@ -43,10 +43,7 @@ public class EN_WordNet implements I_WordNet {
 			url = new URL("file", null, path); 
 		} catch(MalformedURLException e) { 
 			e.printStackTrace();
-		}
-		
-//		URL url = getClass().getClassLoader().getResource("WNdb-3.0/dict");
-		
+		}		
 		
 		dict = new Dictionary(url);
 		
