@@ -3,7 +3,6 @@ package edu.slu.wsd;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.OptionalDouble;
 import java.util.stream.IntStream;
 
 import edu.slu.wsd.Algorithm;
@@ -20,7 +19,7 @@ public class WSDBenchmark {
 		int n = 0;
 		double meanScore = 0;
 		
-		Iterator<TestData> tsg = new TestSentenceGenerator("semcor3.0");
+		Iterator<TestData> tsg = new TestSentenceGenerator();
 		
 		while(tsg.hasNext()) {
 			n++;

@@ -10,7 +10,7 @@ public class TestSentenceGenerator_Test {
 	
 	@Test
 	public void fieldsAreValid() {
-		Iterator<TestData> testSentences = new TestSentenceGenerator("semcor3.0");
+		Iterator<TestData> testSentences = new TestSentenceGenerator();
 		while (testSentences.hasNext()) {
 			TestData testSentence = testSentences.next();
 			assertNotNull(testSentence.getLeftContext());
@@ -23,7 +23,7 @@ public class TestSentenceGenerator_Test {
 	
 	@Test
 	public void testFirstSentence() {
-		Iterator<TestData> testSentences = new TestSentenceGenerator("semcor3.0");
+		Iterator<TestData> testSentences = new TestSentenceGenerator();
 		TestData testSentence = testSentences.next();
 		System.out.println(testSentence);
 	}

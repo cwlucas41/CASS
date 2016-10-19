@@ -18,8 +18,8 @@ public class TestSentenceGenerator extends TestDataGenerator {
 	
 	private DefaultDetokenizer detokenizer =  new DefaultDetokenizer();
 	
-	public TestSentenceGenerator(String path) {
-		super(path);
+	public TestSentenceGenerator() {
+		super();
 		sentenceIter = getContextIter().next().getSentences().listIterator();
 	}
 
