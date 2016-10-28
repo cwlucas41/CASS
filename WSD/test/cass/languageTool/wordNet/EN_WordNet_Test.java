@@ -13,7 +13,7 @@ import cass.languageTool.LanguageTool;
 public class EN_WordNet_Test {
 
 	I_WordNet wn = new EN_WordNet();
-	String testString = "bell";
+	String testString = "stab";
 	Set<CASSWordSense> senses = wn.getSenses(testString);
 	
 	private LanguageTool lTool;
