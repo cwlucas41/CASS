@@ -4,10 +4,7 @@
 module org { module libreoffice { module example { 	
 
 	interface XCASS2 {
-		[attribute] long synonymCount;
-		[attribute] long synsetCount;
-		string getSyn([in] long i, [in] long j);
-		void getSynonym([in] string leftContext, [in] string target, [in] string rightContext, [in] string language, [in] string algorithm);
+		string getSynonym([in] string leftContext, [in] string target, [in] string rightContext, [in] string language, [in] string algorithm);
 	};
 
  }; }; };

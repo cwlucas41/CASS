@@ -3,7 +3,6 @@ package org.libreoffice.example.comp;
 import com.sun.star.uno.XComponentContext;
 
 import edu.slu.cass.libreOffice.LibreOfficeCass;
-import edu.slu.cass.libreOffice.WSD_Result;
 
 import com.sun.star.lib.uno.helper.Factory;
 
@@ -20,42 +19,10 @@ public final class CASS2Impl extends WeakBase
     private static final String m_implementationName = CASS2Impl.class.getName();
     private static final String[] m_serviceNames = {
         "org.libreoffice.example.CASS2" };
-
-    private int synonymCount;
-    private int synsetCount;
-    private String[][] synonyms;
-    
-    public String getSyn(int i, int j) {
-    	if (synonyms[i][j] == null) {
-    		return "";
-    	} else {
-    		return synonyms[i][j];
-    	}
-    }
-
-    public int getsynonymCount() {
-		return synonymCount;
-	}
-
-	public void setsynonymCount(int synonymCount) {
-		this.synonymCount = synonymCount;
-	}
-
-	public int getsynsetCount() {
-		return synsetCount;
-	}
-
-	public void setsynsetCount(int synsetCount) {
-		this.synsetCount = synsetCount;
-	}
 	
-    public void getSynonym(String leftContext, String target, String rightContext, String language, String algorithm) {
+    public String getSynonym(String leftContext, String target, String rightContext, String language, String algorithm) {
     	LibreOfficeCass loc = new LibreOfficeCass(leftContext, target, rightContext, language);
-    	WSD_Result result = loc.getSynonyms(algorithm);
-    	
-    	synonymCount = result.SynonymCount;
-    	synsetCount = result.SynsetCount;
-    	synonyms = result.Synonyms;
+    	return loc.getSynonyms(algorithm);
 	}
 
 

@@ -30,21 +30,9 @@ public class ProjectTest extends UnoTestCase {
 
     public void testSomething() {
     	CASS2Impl s= new CASS2Impl(null);
-		s.getSynonym("Be sure that he took so little hurt from the evil, and escaped in the", "end", "because he began his ownership of the Ring so", "English", "LeskWithWordNet");
-		System.out.println(s.getsynonymCount());
-		System.out.println(s.getsynsetCount());
-
-		
-		for (int i = 0; i < s.getsynsetCount(); i++) {
-			for (int j = 0; j < s.getsynonymCount(); j++) {
-				String syn = s.getSyn(i, j);
-				if (syn != "") {
-					System.out.println(syn);
-				}
-			}
-			System.out.println();
-		}
-	}
+		String result = s.getSynonym("Be sure that he took so little hurt from the evil, and escaped in the", "end", "because he began his ownership of the Ring so", "English", "Lesk");
+		System.out.println(result);
+    }
     
     // TODO Add some more tests methods
 }

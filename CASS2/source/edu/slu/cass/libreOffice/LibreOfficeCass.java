@@ -1,8 +1,26 @@
 package edu.slu.cass.libreOffice;
 
+import java.awt.BorderLayout;
+import java.awt.Dialog;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 import edu.slu.wsd.Algorithm;
 import edu.slu.wsd.WSD;
@@ -19,6 +37,9 @@ import edu.slu.cass.libreOffice.WSD_Result;
 public class LibreOfficeCass {
 	
 	private WSD wsd;
+	JTree tree;
+	DefaultTreeModel dm;
+	JDialog dialog;
 	
 	/**
 	 * Constructor for LibreOfficeCass. Converts language String into Language Enumeration type.
@@ -47,11 +68,11 @@ public class LibreOfficeCass {
 	 * @param algorithm String
 	 * @return String array of senses containing synonyms
 	 */
-	public WSD_Result getSynonyms(String algorithm) {
+	public String getSynonyms(String algorithm) {
 		List<CASSWordSense> rankedSenses = null;
 		
 		switch (algorithm) {
-		case "LeskWithWordNet":
+		case "Lesk":
 			rankedSenses = wsd.rankSensesUsing(Algorithm.LESK, 0);
 			break;
 
@@ -59,8 +80,52 @@ public class LibreOfficeCass {
 			break;
 		}
 		
-		return convert(rankedSenses);
-		//return convert(rankedSenses);
+		
+		
+		
+
+		
+		DefaultMutableTreeNode treeRoot = makeTree(rankedSenses);	    
+	    
+	    JFrame frame = new JFrame("title");
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//	    frame.setVisible(true);
+
+	    JPanel showPane = new JPanel();
+	    showPane.setLayout(new BorderLayout()); 
+
+	    dm = new DefaultTreeModel(treeRoot);
+	    tree = new JTree(dm);
+	    tree.setRootVisible(false);
+	    
+	    for (int i = 0; i < tree.getRowCount(); i++) {
+	    	tree.expandRow(i);
+	    }
+	    
+	    JScrollPane treeView = new JScrollPane(tree);
+
+	    showPane.add(treeView, BorderLayout.CENTER);
+
+	    JComponent[] inputComponents = new JComponent[] {showPane};
+
+	    Object[] opButtons = {"OK"};
+
+	    JOptionPane optPane = new JOptionPane(inputComponents       
+	            , JOptionPane.PLAIN_MESSAGE             
+	            , JOptionPane.CLOSED_OPTION             
+	            , null                                      
+	            , opButtons                             
+	            , opButtons[0]);                            
+
+	    optPane.setPreferredSize(new Dimension(400 ,500));
+
+	    dialog = optPane.createDialog(null, "CASS");
+	    dialog.setLocationRelativeTo(frame);
+	    dialog.setVisible(true);
+	    
+	    String selection = tree.getLastSelectedPathComponent().toString();
+		
+		return selection;
 	}
 
 	/**
@@ -68,40 +133,28 @@ public class LibreOfficeCass {
 	 * @param senses
 	 * @return String array for senses containing array for synonyms
 	 */
-	private WSD_Result convert(List<CASSWordSense> senses) {
+	private DefaultMutableTreeNode makeTree(List<CASSWordSense> senses) {
 
-		List<Set<String>> bufferedConversion = new ArrayList<Set<String>>();
-		LanguageTool langTool = wsd.getlTool();
-		int rowSize = 0;
-		for (CASSWordSense sense : senses) {
-			Set<String> synonyms = langTool.getSynonyms(sense);
-			synonyms.remove(wsd.getTarget());
-			if (synonyms.size() > 0 && !bufferedConversion.contains(synonyms)) {
-				bufferedConversion.add(synonyms);
-				int thisRowSize = synonyms.size();
-				if (thisRowSize > rowSize){
-					rowSize = thisRowSize;
-				}
-			}
-		}
-		int columnSize = senses.size();
-		String[][] nestedArray = new String[columnSize][rowSize];
-		int i = 0;
-		for (Set<String> synonyms : bufferedConversion) {
-			int j = 0;
-			for (String synonym : synonyms) {
-				nestedArray[i][j] = synonym;
-				j++;
-			}
-			i++;
-		}
+		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Synsets");
+	    
+	    int i = 0;
+	    for (CASSWordSense sense : senses) {
+	    	Set<String> synonyms = wsd.getlTool().getSynonyms(sense);
+	    	synonyms.remove(wsd.getTarget());
+	    	
+	    	if (synonyms.size() > 0) {
+		    	DefaultMutableTreeNode synsetNode = new DefaultMutableTreeNode(wsd.getlTool().getDefinition(sense));
+		    	rootNode.add(synsetNode);
+		    	
+		    	for (String synonym : synonyms) {
+		    		DefaultMutableTreeNode synonymNode = new DefaultMutableTreeNode(synonym);
+		    		synsetNode.add(synonymNode);
+		    	}
+		    	i++;
+	    	}
+	    }
 		
-		WSD_Result result = new WSD_Result();
-		result.SynsetCount = i;
-		result.SynonymCount = rowSize;
-		result.Synonyms = nestedArray;
-		
-		return result;
+		return rootNode;
 	}
 
 	
