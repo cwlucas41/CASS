@@ -1,23 +1,16 @@
 package edu.slu.cass.libreOffice;
 
 import java.awt.BorderLayout;
-import java.awt.Dialog;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -25,9 +18,7 @@ import javax.swing.tree.DefaultTreeModel;
 import edu.slu.wsd.Algorithm;
 import edu.slu.wsd.WSD;
 import edu.slu.wsd.languageTool.Language;
-import edu.slu.wsd.languageTool.LanguageTool;
 import edu.slu.wsd.languageTool.wordNet.CASSWordSense;
-import edu.slu.cass.libreOffice.WSD_Result;
 
 /**
  * Wrapper class for LibreOffice Basic to interact with. Translates calls into WSD calls and translates returns from List to array types.
@@ -137,7 +128,6 @@ public class LibreOfficeCass {
 
 		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Synsets");
 	    
-	    int i = 0;
 	    for (CASSWordSense sense : senses) {
 	    	Set<String> synonyms = wsd.getlTool().getSynonyms(sense);
 	    	synonyms.remove(wsd.getTarget());
@@ -150,7 +140,6 @@ public class LibreOfficeCass {
 		    		DefaultMutableTreeNode synonymNode = new DefaultMutableTreeNode(synonym);
 		    		synsetNode.add(synonymNode);
 		    	}
-		    	i++;
 	    	}
 	    }
 		
