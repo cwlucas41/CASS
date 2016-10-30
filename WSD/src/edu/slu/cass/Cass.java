@@ -1,4 +1,4 @@
-package edu.slu.cass.libreOffice;
+package edu.slu.cass;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -25,7 +25,7 @@ import edu.slu.wsd.languageTool.wordNet.CASSWordSense;
  * @author cwlucas41
  *
  */
-public class LibreOfficeCass {
+public class Cass {
 	
 	private WSD wsd;
 	JTree tree;
@@ -39,7 +39,7 @@ public class LibreOfficeCass {
 	 * @param rightContext - String of words right of the target word in corpus
 	 * @param language - String representing language of test
 	 */
-	public LibreOfficeCass(String leftContext, String target, String rightContext, String language) {
+	public Cass(String leftContext, String target, String rightContext, String language) {
 		
 		switch (language) {
 		case "English":
