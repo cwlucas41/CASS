@@ -38,7 +38,7 @@ public class EN_WordNet implements I_WordNet {
 	 * Creates the Dictionary object from the included WordNet database file
 	 */
 	public EN_WordNet() {
-		String path = "textResources/WNdb-3.0/dict";
+		String path = "/usr/lib/cass/textResources/WNdb-3.0/dict";
 		
 		URL url = null;
 		try{ 
@@ -48,17 +48,15 @@ public class EN_WordNet implements I_WordNet {
 		}		
 		
 		dict = new Dictionary(url);
-		
+		boolean isOpen = false;
 		try {
-			dict.open();
+			isOpen = dict.open();
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		if (!dict.isOpen()) {
-			JOptionPane.showMessageDialog(null, "Eggs are not supposed to be green.");
+		if (!isOpen) {
+			JOptionPane.showMessageDialog(null, "Dict not open " + url.toString());
 		}
 	}
 	

@@ -15,7 +15,7 @@ public abstract class TestDataGenerator implements Iterable<TestData>, Iterator<
 	
 	public TestDataGenerator() {
 		
-		String path = "textResources/semcor3.0";
+		String path = "/usr/lib/cass/textResources/semcor3.0";
 		try {
 			semcor = new Semcor(new URL("file", null, path));
 		} catch (MalformedURLException e) {

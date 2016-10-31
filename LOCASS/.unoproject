@@ -1,10 +1,10 @@
 #UNO project configuration file
-#Sun Oct 30 20:02:44 CDT 2016
+#Mon Oct 31 02:48:10 CDT 2016
 project.srcdir=/source
 regclassname=edu.slu.locass.comp.RegistrationHandler
 javaversion=java5
-project.sdk=5.0.5.2
-project.ooo=LibreOffice 5.0
+project.sdk=5.1.4.2
+project.ooo=LibreOffice 5.1
 project.implementation=comp
 project.build=build
 project.language=Java
