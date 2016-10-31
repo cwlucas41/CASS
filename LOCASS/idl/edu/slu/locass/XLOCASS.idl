@@ -1,0 +1,11 @@
+#ifndef __edu_slu_locass_xlocass_idl__
+#define __edu_slu_locass_xlocass_idl__
+
+module edu { module slu { module locass { 	
+
+	published interface XLOCASS {
+		string getSynonyms([in] string leftContext, [in] string target, [in] string rightContext, [in] string language, [in] string algorithm);
+	};
+
+ }; }; };
+#endif
