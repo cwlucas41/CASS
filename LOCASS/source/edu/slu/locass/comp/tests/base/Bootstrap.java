@@ -28,7 +28,7 @@
  *
  ************************************************************************/
 
-package org.libreoffice.example.comp.tests.base;
+package edu.slu.locass.comp.tests.base;
 
 import java.io.BufferedReader;
 import java.io.File;

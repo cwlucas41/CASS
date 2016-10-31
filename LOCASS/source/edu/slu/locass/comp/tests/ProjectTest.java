@@ -16,10 +16,10 @@
  *   License along with this library; if not, write to the Free
  *   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-package org.libreoffice.example.comp.tests;
+package edu.slu.locass.comp.tests;
 
-import org.libreoffice.example.comp.CASS2Impl;
-import org.libreoffice.example.comp.tests.base.UnoTestCase;
+import edu.slu.locass.comp.LOCASSImpl;
+import edu.slu.locass.comp.tests.base.UnoTestCase;
 
 
 
@@ -28,10 +28,10 @@ import org.libreoffice.example.comp.tests.base.UnoTestCase;
  */
 public class ProjectTest extends UnoTestCase {
 
-    public void testSomething() {
-    	CASS2Impl s= new CASS2Impl(null);
-		String result = s.getSynonym("Be sure that he took so little hurt from the evil, and escaped in the", "end", "because he began his ownership of the Ring so", "English", "Lesk");
-		System.out.println(result);
+	public void testSomething() {
+        LOCASSImpl s= new LOCASSImpl(null);
+                String result = s.getSynonyms("Be sure that he took so little hurt from the evil, and escaped in the", "end", "because he began his ownership of the Ring so", "English", "Lesk");
+                System.out.println(result);
     }
     
     // TODO Add some more tests methods

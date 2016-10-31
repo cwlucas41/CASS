@@ -1,0 +1,12 @@
+#ifndef __edu_slu_locass_locass_idl__
+#define __edu_slu_locass_locass_idl__
+
+#include <edu/slu/locass/XLOCASS.idl>
+module edu { module slu { module locass { 	
+
+	published service LOCASS : edu::slu::locass::XLOCASS {
+
+	};
+
+ }; }; };
+#endif

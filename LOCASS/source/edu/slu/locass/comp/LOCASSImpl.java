@@ -1,32 +1,26 @@
-package org.libreoffice.example.comp;
+package edu.slu.locass.comp;
 
 import com.sun.star.uno.XComponentContext;
 
-import edu.slu.cass.libreOffice.LibreOfficeCass;
+import edu.slu.cass.Cass;
 
 import com.sun.star.lib.uno.helper.Factory;
-
 import com.sun.star.lang.XSingleComponentFactory;
 import com.sun.star.registry.XRegistryKey;
 import com.sun.star.lib.uno.helper.WeakBase;
 
 
-public final class CASS2Impl extends WeakBase
+public final class LOCASSImpl extends WeakBase
    implements com.sun.star.lang.XServiceInfo,
-              org.libreoffice.example.XCASS2
+              edu.slu.locass.XLOCASS
 {
     private final XComponentContext m_xContext;
-    private static final String m_implementationName = CASS2Impl.class.getName();
+    private static final String m_implementationName = LOCASSImpl.class.getName();
     private static final String[] m_serviceNames = {
-        "org.libreoffice.example.CASS2" };
-	
-    public String getSynonym(String leftContext, String target, String rightContext, String language, String algorithm) {
-    	LibreOfficeCass loc = new LibreOfficeCass(leftContext, target, rightContext, language);
-    	return loc.getSynonyms(algorithm);
-	}
+        "edu.slu.locass.LOCASS" };
 
 
-    public CASS2Impl( XComponentContext context )
+    public LOCASSImpl( XComponentContext context )
     {
         m_xContext = context;
     };
@@ -35,7 +29,7 @@ public final class CASS2Impl extends WeakBase
         XSingleComponentFactory xFactory = null;
 
         if ( sImplementationName.equals( m_implementationName ) )
-            xFactory = Factory.createComponentFactory(CASS2Impl.class, m_serviceNames);
+            xFactory = Factory.createComponentFactory(LOCASSImpl.class, m_serviceNames);
         return xFactory;
     }
 
@@ -63,4 +57,10 @@ public final class CASS2Impl extends WeakBase
     public String[] getSupportedServiceNames() {
         return m_serviceNames;
     }
+    
+    public String getSynonyms(String leftContext, String target, String rightContext, String language, String algorithm) {
+    	Cass loc = new Cass(leftContext, target, rightContext, language);
+    	return loc.getSynonyms(algorithm);
+	}
+
 }

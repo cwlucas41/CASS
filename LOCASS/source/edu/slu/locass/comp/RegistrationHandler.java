@@ -35,7 +35,7 @@
  *
  *
  ************************************************************************/
-package org.libreoffice.example.comp;
+package edu.slu.locass.comp;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="oxt.export">
-		<item value="true" key="overwrite.files"/>
 		<item value="false" key="autodeploy"/>
+		<item value="true" key="overwrite.files"/>
 		<list key="destination.history">
-			<item value="/home/design/test.oxt"/>
-			<item value="/home/design/test.oxt"/>
-			<item value="/home/design/test.oxt"/>
-			<item value="/home/design/test.oxt"/>
-			<item value="/home/design/test.oxt"/>
+			<item value="/home/design/test4.oxt"/>
+			<item value="/home/design/test4.oxt"/>
+			<item value="/home/design/test4.oxt"/>
+			<item value="/home/design/test4.oxt"/>
+			<item value="/home/design/test4.oxt"/>
 		</list>
 	</section>
 </section>

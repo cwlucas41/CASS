@@ -16,11 +16,11 @@
  *   License along with this library; if not, write to the Free
  *   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-package org.libreoffice.example.comp.tests;
+package edu.slu.locass.comp.tests;
 
 import junit.framework.Test;
 
-import org.libreoffice.example.comp.tests.base.UnoTestSuite;
+import edu.slu.locass.comp.tests.base.UnoTestSuite;
 
 
 /**

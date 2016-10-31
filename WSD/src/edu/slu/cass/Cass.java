@@ -71,16 +71,10 @@ public class Cass {
 			break;
 		}
 		
-		
-		
-		
-
-		
 		DefaultMutableTreeNode treeRoot = makeTree(rankedSenses);	    
 	    
 	    JFrame frame = new JFrame("title");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//	    frame.setVisible(true);
 
 	    JPanel showPane = new JPanel();
 	    showPane.setLayout(new BorderLayout()); 
@@ -133,7 +127,7 @@ public class Cass {
 	    	synonyms.remove(wsd.getTarget());
 	    	
 	    	if (synonyms.size() > 0) {
-		    	DefaultMutableTreeNode synsetNode = new DefaultMutableTreeNode(wsd.getlTool().getDefinition(sense));
+		    	DefaultMutableTreeNode synsetNode = new DefaultMutableTreeNode(wsd.getlTool().getDefinition(sense).split(";")[0]);
 		    	rootNode.add(synsetNode);
 		    	
 		    	for (String synonym : synonyms) {

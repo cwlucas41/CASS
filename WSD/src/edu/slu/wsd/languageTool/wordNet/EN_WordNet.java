@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -51,6 +53,12 @@ public class EN_WordNet implements I_WordNet {
 			dict.open();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (!dict.isOpen()) {
+			JOptionPane.showMessageDialog(null, "Eggs are not supposed to be green.");
 		}
 	}
 	
