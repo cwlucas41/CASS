@@ -12,8 +12,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+
 
 import edu.slu.wsd.Algorithm;
 import edu.slu.wsd.WSD;
@@ -28,9 +31,12 @@ import edu.slu.wsd.languageTool.wordNet.CASSWordSense;
 public class Cass {
 	
 	private WSD wsd;
-	JTree tree;
-	DefaultTreeModel dm;
-	JDialog dialog;
+	private String target;
+	private JTree tree;
+	private JOptionPane optPane;
+	private DefaultTreeModel dm;
+	private JDialog dialog;
+	private NodeSelectionSaver result;
 	
 	/**
 	 * Constructor for LibreOfficeCass. Converts language String into Language Enumeration type.
@@ -41,6 +47,9 @@ public class Cass {
 	 */
 	public Cass(String leftContext, String target, String rightContext, String language) {
 		
+		this.target = target;
+		result = new NodeSelectionSaver();
+		
 		switch (language) {
 		case "English":
 			wsd = new WSD(leftContext, target, rightContext, Language.EN);
@@ -49,8 +58,6 @@ public class Cass {
 		default:
 			break;
 		}
-		
-		
 	}
 	
 	/**
@@ -73,7 +80,7 @@ public class Cass {
 		
 		DefaultMutableTreeNode treeRoot = makeTree(rankedSenses);	    
 	    
-	    JFrame frame = new JFrame("title");
+		JFrame frame = new JFrame("title");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	    JPanel showPane = new JPanel();
@@ -82,6 +89,8 @@ public class Cass {
 	    dm = new DefaultTreeModel(treeRoot);
 	    tree = new JTree(dm);
 	    tree.setRootVisible(false);
+	    	    
+	    tree.addTreeSelectionListener(result);
 	    
 	    for (int i = 0; i < tree.getRowCount(); i++) {
 	    	tree.expandRow(i);
@@ -93,24 +102,25 @@ public class Cass {
 
 	    JComponent[] inputComponents = new JComponent[] {showPane};
 
-	    Object[] opButtons = {"OK"};
+	    Object[] opButtons = generateOptions(false);
 
-	    JOptionPane optPane = new JOptionPane(inputComponents       
+	    optPane = new JOptionPane(inputComponents       
 	            , JOptionPane.PLAIN_MESSAGE             
-	            , JOptionPane.CLOSED_OPTION             
+	            , JOptionPane.OK_CANCEL_OPTION             
 	            , null                                      
 	            , opButtons                             
-	            , opButtons[0]);                            
-
+	            , opButtons[0]);
 	    optPane.setPreferredSize(new Dimension(400 ,500));
 
 	    dialog = optPane.createDialog(null, "CASS");
 	    dialog.setLocationRelativeTo(frame);
 	    dialog.setVisible(true);
-	    
-	    String selection = tree.getLastSelectedPathComponent().toString();
-		
-		return selection;
+	    	    
+	    if (optPane.getValue().toString() == "OK") {
+	    	return result.getSelection();
+	    } else {
+	    	return target;
+	    }
 	}
 
 	/**
@@ -139,6 +149,39 @@ public class Cass {
 		
 		return rootNode;
 	}
-
 	
+	private String[] generateOptions(boolean isValid) {
+		if (isValid) {
+			return new String[] {"OK", "Cancel"};
+		} else {
+			return new String[] {"Cancel"};
+		}
+	}
+	
+    class NodeSelectionSaver implements TreeSelectionListener {
+    	private String selection;
+    	
+		@Override
+		public void valueChanged(TreeSelectionEvent e) {
+		    DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+			
+		    if (node == null) {
+		    	return;
+		    }
+
+		    if (node.isLeaf()) {
+		    	selection = node.toString();
+		    	optPane.setOptions(generateOptions(true));
+		    } else {
+		    	optPane.setOptions(generateOptions(false));
+		    }
+		    optPane.repaint();
+		}
+		
+		public String getSelection() {
+			return selection;
+		}
+    }
 }
+
+
