@@ -152,6 +152,15 @@ public class Cass {
 	 * @param senses
 	 * @return String array for senses containing array for synonyms
 	 */
+	
+	private String removeUnderscore(String original){
+		String result = new String(original);
+		if(original.contains("_")){
+			result = original.replace("_", " ");
+		}
+		return result;
+	}
+	
 	private DefaultMutableTreeNode makeTree(List<CASSWordSense> senses) {
 		
 		List<Set<String>> synsets = convertToSynonyms(senses);
@@ -163,10 +172,33 @@ public class Cass {
 	    	
 	    	if (synonyms.size() > 0) {
 		    	DefaultMutableTreeNode synsetNode = new DefaultMutableTreeNode();
+rootNode.add(synsetNode);
+		    	
+		    	for (String synonym : synonyms) {
+		    		DefaultMutableTreeNode synonymNode = new DefaultMutableTreeNode(removeUnderscore(synonym));
+		    		synsetNode.add(synonymNode);
+		    	}
+	    	}
+	    }
+	    return rootNode;
+	}
+
+private DefaultMutableTreeNode FaustomakeTree(List<CASSWordSense> senses) {
+	
+	List<Set<String>> synsets = convertToSynonyms(senses);	
+	DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Synsets");
+	 
+	    for (CASSWordSense sense : senses) {
+	    	Set<String> synonyms = wsd.getlTool().getSynonyms(sense);
+	    	synonyms.remove(wsd.getTarget());
+	    	
+	    	if (synonyms.size() > 0) {
+		    	DefaultMutableTreeNode synsetNode = new DefaultMutableTreeNode(removeUnderscore(wsd.getlTool().getDefinition(sense).split(";")[0]));
+
 		    	rootNode.add(synsetNode);
 		    	
 		    	for (String synonym : synonyms) {
-		    		DefaultMutableTreeNode synonymNode = new DefaultMutableTreeNode(synonym);
+		    		DefaultMutableTreeNode synonymNode = new DefaultMutableTreeNode(removeUnderscore(synonym));
 		    		synsetNode.add(synonymNode);
 		    	}
 	    	}
