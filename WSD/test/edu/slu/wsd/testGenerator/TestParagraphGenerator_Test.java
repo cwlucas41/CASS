@@ -10,7 +10,7 @@ public class TestParagraphGenerator_Test {
 	
 	@Test
 	public void fieldsAreValid() {
-		Iterator<TestData> testParagraphs = new TestParagraphGenerator();
+		Iterator<TestData> testParagraphs = new TestParagraphGenerator(0);
 		while (testParagraphs.hasNext()) {
 			TestData testSentence = testParagraphs.next();
 			assertNotNull(testSentence.getLeftContext());
@@ -23,7 +23,7 @@ public class TestParagraphGenerator_Test {
 	
 	@Test
 	public void testFirstSentence() {
-		Iterator<TestData> testParagraphs = new TestParagraphGenerator();
+		Iterator<TestData> testParagraphs = new TestParagraphGenerator(0);
 		TestData testParagraph = testParagraphs.next();
 		System.out.println(testParagraph);
 	}

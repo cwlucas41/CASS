@@ -19,7 +19,7 @@ public class WSDBenchmark {
 		int n = 0;
 		double meanScore = 0;
 		
-		Iterator<TestData> tsg = new TestSentenceGenerator();
+		Iterator<TestData> tsg = new TestSentenceGenerator(0);
 		
 		while(tsg.hasNext()) {
 			n++;

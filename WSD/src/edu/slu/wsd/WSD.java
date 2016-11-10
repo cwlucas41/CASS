@@ -35,6 +35,14 @@ public class WSD {
 	public WSD(String leftContext, String target, String rightContext, Language language) {
 		lTool = new LanguageTool(language);
 		
+		//this.target = target; //lTool.tokenizeAndLemmatize(target).get(0); //lTool.lemmatize(target);
+		
+		List<String> words = lTool.tokenizeAndLemmatize(target);
+		String updatedTarget = "";
+		for (String word : words) {
+			updatedTarget += word + " ";
+		}
+		updatedTarget = updatedTarget.trim();
 		this.target = target;
 		
 		context = new ArrayList<String>();

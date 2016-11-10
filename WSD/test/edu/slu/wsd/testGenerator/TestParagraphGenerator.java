@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Random;
 
-import edu.mit.jsemcor.detokenize.DefaultDetokenizer;
 import edu.mit.jsemcor.element.IParagraph;
 import edu.mit.jsemcor.element.ISentence;
 import edu.mit.jsemcor.element.IWordform;
@@ -15,12 +13,8 @@ public class TestParagraphGenerator extends TestDataGenerator {
 	
 	private ListIterator<IParagraph> paragraphIter;
 	
-	private Random rand = new Random();
-	
-	private DefaultDetokenizer detokenizer =  new DefaultDetokenizer();
-	
-	public TestParagraphGenerator() {
-		super();
+	public TestParagraphGenerator(long seed) {
+		super(seed);
 		paragraphIter = getContextIter().next().getParagraphs().listIterator();
 	}
 	

@@ -16,7 +16,7 @@ public class SensesNotEmpty_Test {
 
 	@Test
 	public void systemTest() {
-		Iterator<TestData> tsg = new TestSentenceGenerator();
+		Iterator<TestData> tsg = new TestSentenceGenerator(0);
 		
 		int numCorrect = 0;
 		int numSentences = 0;
