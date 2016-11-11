@@ -153,12 +153,61 @@ public class Cass {
 	 * @return String array for senses containing array for synonyms
 	 */
 	
-	private String removeUnderscore(String original){
+	protected String removeUnderscore(String original){
 		String result = new String(original);
 		if(original.contains("_")){
 			result = original.replace("_", " ");
 		}
 		return result;
+	}
+	
+	private String StringSlice(String s, int start, int end){
+		String result = new String("");
+		String tempSinceSpace = new String();
+		for(int i=start; i < end; i++){
+			if(s.charAt(i) == ' '){				
+				result = result.concat(tempSinceSpace);
+				tempSinceSpace = "";
+			}
+			tempSinceSpace+=s.charAt(i);
+		}
+		if(result.isEmpty()){
+			result = tempSinceSpace;
+		}
+		return result;
+		
+	}
+	
+	
+	
+	protected String shortenSynopsis(String definition, Set<String> options){
+		final int chars = 25;
+		int counter = 0;
+		int charcount = 3;
+		String optionsStr = new String("(");
+		for(String option : options){
+			option = removeUnderscore(option);
+			if(counter < charcount){
+				optionsStr = optionsStr.concat(option);
+				if(counter < options.size()-1 && counter < charcount-1){
+					optionsStr = optionsStr.concat(", ");
+				}
+			}
+			counter+=1;
+		}
+		//optionsStr = StringSlice(optionsStr,0, optionsStr.length()-2);
+		optionsStr = optionsStr.concat(")");
+		if(definition.length() > 50 ){			
+			String shorten = new String("");
+			shorten = shorten.concat(StringSlice(definition,0,chars));
+			//shorten = shorten.concat("... ");
+			//shorten = shorten.concat(optionsStr);
+			optionsStr = optionsStr.concat(shorten);
+			return optionsStr;
+		}
+		//definition = definition.concat(optionsStr);
+		optionsStr = optionsStr.concat(definition);
+		return optionsStr;
 	}
 	
 	private DefaultMutableTreeNode makeTree(List<CASSWordSense> senses) {
@@ -193,8 +242,7 @@ private DefaultMutableTreeNode FaustomakeTree(List<CASSWordSense> senses) {
 	    	synonyms.remove(wsd.getTarget());
 	    	
 	    	if (synonyms.size() > 0) {
-		    	DefaultMutableTreeNode synsetNode = new DefaultMutableTreeNode(removeUnderscore(wsd.getlTool().getDefinition(sense).split(";")[0]));
-
+		    	DefaultMutableTreeNode synsetNode = new DefaultMutableTreeNode(shortenSynopsis(removeUnderscore(wsd.getlTool().getDefinition(sense).split(";")[0]),synonyms));
 		    	rootNode.add(synsetNode);
 		    	
 		    	for (String synonym : synonyms) {
