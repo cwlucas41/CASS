@@ -2,6 +2,7 @@ package edu.slu.cass;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ import edu.slu.wsd.languageTool.wordNet.CASSWordSense;
  */
 public class Cass {
 	
-	private WSD wsd;
+	WSD wsd;
 	JTree tree;
 	DefaultTreeModel dm;
 	JDialog dialog;
@@ -49,8 +50,6 @@ public class Cass {
 		default:
 			break;
 		}
-		
-		
 	}
 	
 	/**
@@ -59,19 +58,42 @@ public class Cass {
 	 * @param algorithm String
 	 * @return String array of senses containing synonyms
 	 */
-	public String getSynonyms(String algorithm) {
+	public List<CASSWordSense> getSynonyms(String algorithm) {
 		List<CASSWordSense> rankedSenses = null;
 		
 		switch (algorithm) {
 		case "Lesk":
-			rankedSenses = wsd.rankSensesUsing(Algorithm.LESK, 0);
+			rankedSenses = wsd.rankSensesUsing(Algorithm.LESK);
 			break;
 
 		default:
 			break;
 		}
 		
-		DefaultMutableTreeNode treeRoot = makeTree(rankedSenses);	    
+		return rankedSenses;
+	}
+	
+	public String pickSynonym(String algorithm) {
+		List<CASSWordSense> rankedSenses = getSynonyms(algorithm);
+		return showGUI(rankedSenses);
+	}
+	
+	List<Set<String>> convertToSynonyms(List<CASSWordSense> senses) {
+		List<Set<String>> result = new ArrayList<Set<String>>();
+		
+		for (CASSWordSense sense : senses) {
+			Set<String> synonyms = wsd.getlTool().getSynonyms(sense);
+			synonyms.remove(wsd.getTarget());
+			if (!synonyms.isEmpty()) {
+				result.add(synonyms);
+			}
+		}
+		
+		return result;
+	}
+	
+	private String showGUI(List<CASSWordSense> senses) {
+		DefaultMutableTreeNode treeRoot = makeTree(senses);	    
 	    
 	    JFrame frame = new JFrame("title");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,6 +104,7 @@ public class Cass {
 	    dm = new DefaultTreeModel(treeRoot);
 	    tree = new JTree(dm);
 	    tree.setRootVisible(false);
+	    tree.setShowsRootHandles(true);
 	    
 	    for (int i = 0; i < tree.getRowCount(); i++) {
 	    	tree.expandRow(i);
@@ -109,8 +132,8 @@ public class Cass {
 	    dialog.setVisible(true);
 	    
 	    String selection = tree.getLastSelectedPathComponent().toString();
-		
-		return selection;
+	    
+	    return selection;
 	}
 
 	/**
@@ -119,15 +142,16 @@ public class Cass {
 	 * @return String array for senses containing array for synonyms
 	 */
 	private DefaultMutableTreeNode makeTree(List<CASSWordSense> senses) {
+		
+		List<Set<String>> synsets = convertToSynonyms(senses);
 
-		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Synsets");
+		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode();
 	    
-	    for (CASSWordSense sense : senses) {
-	    	Set<String> synonyms = wsd.getlTool().getSynonyms(sense);
-	    	synonyms.remove(wsd.getTarget());
+	    for (int i = 0; i < synsets.size(); i++) {
+	    	Set<String> synonyms = synsets.get(i);
 	    	
 	    	if (synonyms.size() > 0) {
-		    	DefaultMutableTreeNode synsetNode = new DefaultMutableTreeNode(wsd.getlTool().getDefinition(sense).split(";")[0]);
+		    	DefaultMutableTreeNode synsetNode = new DefaultMutableTreeNode();
 		    	rootNode.add(synsetNode);
 		    	
 		    	for (String synonym : synonyms) {

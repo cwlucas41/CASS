@@ -13,7 +13,6 @@ import edu.slu.wsd.languageTool.wordNet.CASSWordSense;
 public class CustomLeskAlgorithm implements I_WSDAlgorithm {
 
 	private WSD wsd;
-	private double contextThreshold = 0.1;
 	
 	public CustomLeskAlgorithm(WSD wsd) {
 		this.wsd = wsd;
@@ -66,8 +65,6 @@ public class CustomLeskAlgorithm implements I_WSDAlgorithm {
 			List<Set<String>> listOfGlosses = new ArrayList<Set<String>>();
 			
 			Set<CASSWordSense> contextWordSenses = wsd.getlTool().getSenses(contextWord);
-			// apply filter so that algorithm runs faster
-			contextWordSenses = wsd.filterSensesToFrequencyThreshold(contextWordSenses, contextThreshold);
 			for (CASSWordSense contextWordSense : contextWordSenses) {
 				listOfGlosses.add(getGlossSet(contextWordSense));
 			}

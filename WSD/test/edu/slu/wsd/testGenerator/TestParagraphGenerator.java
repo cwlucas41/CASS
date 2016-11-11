@@ -18,6 +18,9 @@ public class TestParagraphGenerator extends TestDataGenerator {
 		paragraphIter = getContextIter().next().getParagraphs().listIterator();
 	}
 	
+	public TestParagraphGenerator() {
+		this(0);
+	}
 
 	@Override
 	public Iterator<TestData> iterator() {

@@ -16,7 +16,7 @@ public class SensesNotEmpty_Test {
 
 	@Test
 	public void systemTest() {
-		Iterator<TestData> tsg = new TestSentenceGenerator(0);
+		Iterator<TestData> tsg = new TestSentenceGenerator();
 		
 		int numCorrect = 0;
 		int numSentences = 0;
@@ -24,7 +24,7 @@ public class SensesNotEmpty_Test {
 		while (tsg.hasNext()) {
 			TestData ts = tsg.next();
 			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);
-			List<ScoredSense> results = wsd.scoreSensesUsing(Algorithm.RANDOM, 0);
+			List<ScoredSense> results = wsd.scoreSensesUsing(Algorithm.RANDOM);
 			
 			if (!results.isEmpty()) {
 				numCorrect++;

@@ -16,6 +16,10 @@ public class TestSentenceGenerator extends TestDataGenerator {
 		super(seed);
 		sentenceIter = getContextIter().next().getSentences().listIterator();
 	}
+	
+	public TestSentenceGenerator() {
+		this(0);
+	}
 
 	@Override
 	public Iterator<TestData> iterator() {
