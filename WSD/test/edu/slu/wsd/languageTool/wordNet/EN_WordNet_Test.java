@@ -16,7 +16,7 @@ import edu.slu.wsd.languageTool.wordNet.I_WordNet;
 public class EN_WordNet_Test {
 
 	I_WordNet wn = new EN_WordNet();
-	String testString = "bell";
+	String testString = "stab";
 	Set<CASSWordSense> senses = wn.getSenses(testString);
 	
 	private LanguageTool lTool;

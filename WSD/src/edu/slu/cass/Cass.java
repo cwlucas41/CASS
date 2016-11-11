@@ -3,6 +3,7 @@ package edu.slu.cass;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -38,6 +39,7 @@ public class Cass {
 	private String target;
 	private JOptionPane optPane;
 	private NodeSelectionSaver result;
+	private static final List<Character> removePunct = Arrays.asList('.', ',', '!', '?', '-', ')', '(', '[', ']', '{', '}', ';', ':', '/', '\\');
 	
 	/**
 	 * Constructor for LibreOfficeCass. Converts language String into Language Enumeration type.
@@ -47,6 +49,11 @@ public class Cass {
 	 * @param language - String representing language of test
 	 */
 	public Cass(String leftContext, String target, String rightContext, String language) {
+		
+		
+		if ((target != null) && (target.length() > 1) && (removePunct.contains(target.charAt(target.length() - 1)))) {
+			target = target.substring(0, target.length() - 1);
+	    }
 		
 		this.target = target;
 		result = new NodeSelectionSaver();

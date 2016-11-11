@@ -43,8 +43,10 @@ public class WSD {
 		this.target = updatedTarget;
 		
 		context = new ArrayList<String>();
-		context.addAll(lTool.tokenizeAndLemmatize(leftContext));
-		context.addAll(lTool.tokenizeAndLemmatize(rightContext));
+		if (leftContext != null)
+			context.addAll(lTool.tokenizeAndLemmatize(leftContext));
+		if (rightContext != null)
+			context.addAll(lTool.tokenizeAndLemmatize(rightContext));
 		}
 	
 	/**
@@ -102,6 +104,9 @@ public class WSD {
 		Set <CASSWordSense> relevantSenses;
 		
 		relevantSenses = getAllTargetSenses();
+		
+		if (context.isEmpty())
+			algorithm = Algorithm.FREQUENCY;
 		
 		switch (algorithm) {
 		case LESK:
