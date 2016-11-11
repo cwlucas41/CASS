@@ -30,7 +30,7 @@ public class ProjectTest extends UnoTestCase {
 
 	public void testSomething() {
         LOCASSImpl s= new LOCASSImpl(null);
-                String result = s.getSynonyms("Be sure that he took so little hurt from the evil, and escaped in the", "end", "because he began his ownership of the Ring so", "English", "Lesk");
+                String result = s.getSynonym("Be sure that he took so little hurt from the evil, and escaped in the", "end", "because he began his ownership of the Ring so", "English", "Lesk");
                 System.out.println(result);
     }
     

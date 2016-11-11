@@ -27,7 +27,7 @@ public class Cass_Test {
 	@Test
 	public void GUI() {
 			Cass s= new Cass("Be sure that he took so little hurt from the evil, and escaped in the", "End", "because he began his ownership of the Ring so", "English");
-			String result = s.pickSynonym("Lesk");
+			String result = s.getSynonym("Lesk");
 			System.out.println(result);
     }
 	

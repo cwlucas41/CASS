@@ -82,7 +82,7 @@ public class Cass {
 		return rankedSenses;
 	}
 	
-	public String pickSynonym(String algorithm) {
+	public String getSynonym(String algorithm) {
 		List<CASSWordSense> rankedSenses = getSynonyms(algorithm);
 		return showGUI(rankedSenses);
 	}
