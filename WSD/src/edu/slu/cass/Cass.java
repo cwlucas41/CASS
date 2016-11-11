@@ -210,31 +210,10 @@ public class Cass {
 		return optionsStr;
 	}
 	
-	private DefaultMutableTreeNode makeTree(List<CASSWordSense> senses) {
-		
-		List<Set<String>> synsets = convertToSynonyms(senses);
-
-		DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode();
-	    
-	    for (int i = 0; i < synsets.size(); i++) {
-	    	Set<String> synonyms = synsets.get(i);
-	    	
-	    	if (synonyms.size() > 0) {
-		    	DefaultMutableTreeNode synsetNode = new DefaultMutableTreeNode();
-rootNode.add(synsetNode);
-		    	
-		    	for (String synonym : synonyms) {
-		    		DefaultMutableTreeNode synonymNode = new DefaultMutableTreeNode(removeUnderscore(synonym));
-		    		synsetNode.add(synonymNode);
-		    	}
-	    	}
-	    }
-	    return rootNode;
-	}
-
-private DefaultMutableTreeNode FaustomakeTree(List<CASSWordSense> senses) {
 	
-	List<Set<String>> synsets = convertToSynonyms(senses);	
+
+private DefaultMutableTreeNode makeTree(List<CASSWordSense> senses) {
+	
 	DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Synsets");
 	 
 	    for (CASSWordSense sense : senses) {
