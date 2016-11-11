@@ -8,8 +8,6 @@ import edu.slu.wsd.algorithm.*;
 import edu.slu.wsd.languageTool.*;
 import edu.slu.wsd.languageTool.wordNet.CASSWordSense;
 
-import java.util.HashSet;
-
 /**
  * General purpose Word Sense Disambiguation class. It has been designed not only to 
  * give a best sense for a word, but also to rank senses of a word with respect to 
@@ -33,9 +31,16 @@ public class WSD {
 	 * @param language - Language of text, member of Language enumeration
 	 */
 	public WSD(String leftContext, String target, String rightContext, Language language) {
-		lTool = new LanguageTool(language);
 		
-		this.target = target;
+		lTool = new LanguageTool(language);
+				
+		List<String> words = lTool.tokenizeAndLemmatize(target);
+		String updatedTarget = "";
+		for (String word : words) {
+			updatedTarget += word + " ";
+		}
+		updatedTarget = updatedTarget.trim();
+		this.target = updatedTarget;
 		
 		context = new ArrayList<String>();
 		context.addAll(lTool.tokenizeAndLemmatize(leftContext));
@@ -65,12 +70,11 @@ public class WSD {
 	/**
 	 * public WSD method
 	 * @param algorithm - member of Algorithm enumeration representing which algorithm to run
-	 * @param frequencyThreshold for filtering senses
 	 * @return sorted List of senses scored with algorithm of choice
 	 */
-	public List<CASSWordSense> rankSensesUsing(Algorithm algorithm, double frequencyThreshold) {
+	public List<CASSWordSense> rankSensesUsing(Algorithm algorithm) {
 		
-		List<ScoredSense> scoredSenses = scoreSensesUsing(algorithm, frequencyThreshold);
+		List<ScoredSense> scoredSenses = scoreSensesUsing(algorithm);
 		List<CASSWordSense> rankedSenses = new ArrayList<CASSWordSense>();
 		
 		// convert ScoredSense to WordSense, discard score
@@ -88,21 +92,16 @@ public class WSD {
 	/**
 	 * Converts Algorithm parameter to WSD method call. Package visibility so that score information can be used in JUint tests.
 	 * @param algorithm - member of Algorithm enumeration representing which algorithm to run
-	 * @param frequencyThreshold for filtering senses
 	 * @return sorted List of ScoredSenses scored according to algorithm of choice
 	 */
-	List<ScoredSense> scoreSensesUsing(Algorithm algorithm, double frequencyThreshold) {
+	List<ScoredSense> scoreSensesUsing(Algorithm algorithm) {
 		
 		List<ScoredSense> scoredSenses = null;
 		I_WSDAlgorithm alg;
 		
 		Set <CASSWordSense> relevantSenses;
 		
-		if (frequencyThreshold != 0) {
-			relevantSenses = getFilteredTargetSenses(frequencyThreshold);
-		} else {
-			relevantSenses = getAllTargetSenses();
-		}
+		relevantSenses = getAllTargetSenses();
 		
 		switch (algorithm) {
 		case LESK:
@@ -137,35 +136,7 @@ public class WSD {
 		return scoredSenses;
 	}
 	
-	/**
-	 * filters senses to some frequency threshold
-	 * @param senses - input senses
-	 * @param threshold for filtering senses
-	 * @return filtered set of target senses
-	 */
-	public Set<CASSWordSense> filterSensesToFrequencyThreshold(Set<CASSWordSense> senses, double threshold) {
-		// filter senses, save to filteredSenses
-		
-		Set<CASSWordSense> filteredSenses = new HashSet<CASSWordSense>();
-		int total = 0;
-		for(CASSWordSense sense : senses){			
-			total += sense.getTagFrequency();
-		}
-		int minFrequency = (int)( total * threshold); // Floor of threshold of total usage
-		
-		for(CASSWordSense sense : senses){			
-			if(sense.getTagFrequency() >= minFrequency){
-				filteredSenses.add(sense);
-			}
-		}
-		return filteredSenses;
-	}
-	
 	private Set<CASSWordSense> getAllTargetSenses() {
 		return lTool.getSenses(target);
-	}
-	
-	private Set<CASSWordSense> getFilteredTargetSenses(double threshold) {
-		return filterSensesToFrequencyThreshold(getAllTargetSenses(), threshold);
 	}
 }

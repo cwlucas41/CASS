@@ -4,7 +4,7 @@
 module edu { module slu { module locass { 	
 
 	published interface XLOCASS {
-		string getSynonyms([in] string leftContext, [in] string target, [in] string rightContext, [in] string language, [in] string algorithm);
+		string getSynonym([in] string leftContext, [in] string target, [in] string rightContext, [in] string language, [in] string algorithm);
 	};
 
  }; }; };

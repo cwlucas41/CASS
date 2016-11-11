@@ -3,7 +3,9 @@ package edu.slu.wsd.testGenerator;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.Random;
 
+import edu.mit.jsemcor.detokenize.DefaultDetokenizer;
 import edu.mit.jsemcor.element.IContext;
 import edu.mit.jsemcor.main.IConcordanceSet;
 import edu.mit.jsemcor.main.Semcor;
@@ -12,8 +14,12 @@ public abstract class TestDataGenerator implements Iterable<TestData>, Iterator<
 
 	private IConcordanceSet semcor;
 	private Iterator<IContext> contextIter;
+	Random rand;
+	DefaultDetokenizer detokenizer =  new DefaultDetokenizer();
 	
-	public TestDataGenerator() {
+	public TestDataGenerator(long seed) {
+		
+		this.rand = new Random(seed);
 		
 		String path = "/usr/lib/cass/textResources/semcor3.0";
 		try {

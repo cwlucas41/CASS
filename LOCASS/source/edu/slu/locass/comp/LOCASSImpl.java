@@ -58,9 +58,9 @@ public final class LOCASSImpl extends WeakBase
         return m_serviceNames;
     }
     
-    public String getSynonyms(String leftContext, String target, String rightContext, String language, String algorithm) {
+    public String getSynonym(String leftContext, String target, String rightContext, String language, String algorithm) {
     	Cass loc = new Cass(leftContext, target, rightContext, language);
-    	return loc.getSynonyms(algorithm);
+    	return loc.getSynonym(algorithm);
 	}
 
 }
