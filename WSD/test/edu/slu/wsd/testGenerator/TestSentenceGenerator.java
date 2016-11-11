@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Random;
 
-import edu.mit.jsemcor.detokenize.DefaultDetokenizer;
 import edu.mit.jsemcor.element.ISentence;
 import edu.mit.jsemcor.element.IWordform;
 
@@ -14,13 +12,13 @@ public class TestSentenceGenerator extends TestDataGenerator {
 	
 	private ListIterator<ISentence> sentenceIter;
 	
-	private Random rand = new Random();
-	
-	private DefaultDetokenizer detokenizer =  new DefaultDetokenizer();
+	public TestSentenceGenerator(long seed) {
+		super(seed);
+		sentenceIter = getContextIter().next().getSentences().listIterator();
+	}
 	
 	public TestSentenceGenerator() {
-		super();
-		sentenceIter = getContextIter().next().getSentences().listIterator();
+		this(0);
 	}
 
 	@Override
