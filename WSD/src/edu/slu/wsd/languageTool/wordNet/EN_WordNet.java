@@ -78,15 +78,31 @@ public class EN_WordNet implements I_WordNet {
 	}
 
 	@Override
-	public Set<CASSWordSense> getSenses(String word) {
+	public Set<CASSWordSense> getSenses(String word, char partOfSpeech) {
 		Set<CASSWordSense> senses = new HashSet<CASSWordSense>();
 		
 		// getting WordNet indexes for all parts of speech
 		List<IIndexWord> indexWords = new ArrayList<IIndexWord>();
-		indexWords.add(dict.getIndexWord(word, POS.NOUN));
-		indexWords.add(dict.getIndexWord(word, POS.VERB));
-		indexWords.add(dict.getIndexWord(word, POS.ADJECTIVE));
-		indexWords.add(dict.getIndexWord(word, POS.ADVERB));
+		switch (partOfSpeech) {
+		case 'N':
+			indexWords.add(dict.getIndexWord(word, POS.NOUN));
+			break;
+		case 'V':
+			indexWords.add(dict.getIndexWord(word, POS.VERB));
+			break;
+		case 'J':
+			indexWords.add(dict.getIndexWord(word, POS.ADJECTIVE));
+			break;
+		case 'R':
+			indexWords.add(dict.getIndexWord(word, POS.ADVERB));
+			break;
+		default:
+			indexWords.add(dict.getIndexWord(word, POS.NOUN));
+			indexWords.add(dict.getIndexWord(word, POS.VERB));
+			indexWords.add(dict.getIndexWord(word, POS.ADJECTIVE));
+			indexWords.add(dict.getIndexWord(word, POS.ADVERB));
+			break;
+		}
 		
 		Set<IWordID> wordIDList = new HashSet<IWordID>();
 		for (IIndexWord indexWord : indexWords) {

@@ -10,10 +10,13 @@ import edu.stanford.nlp.simple.Sentence;
 public class EN_PartOfSpeech implements I_PartOfSpeech {
 	
 	@Override
-	public String getPOStag(String word) {
+	public String getPOStag(String leftContext, String target, String rightContext) { // any null checks needed?
 		String result = new String();
-		Sentence sen = new Sentence(word);
-		result = sen.posTag(0);		
+		Sentence frag = new Sentence(leftContext);
+		int index = frag.length();
+		frag = null; // the above can be done more efficiently
+		Sentence sen = new Sentence(leftContext + target + rightContext);
+		result = sen.posTag(index);		
 		return result;
 	}
 

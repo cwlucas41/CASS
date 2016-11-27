@@ -82,8 +82,8 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, I_WordNet, I_PartOfSp
 	}
 
 	@Override
-	public Set<CASSWordSense> getSenses(String word) {
-		return wordNet.getSenses(word);
+	public Set<CASSWordSense> getSenses(String word, char partOfSpeech) {
+		return wordNet.getSenses(word, partOfSpeech);
 	}
 
 	@Override
@@ -97,8 +97,8 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, I_WordNet, I_PartOfSp
 	}
 
 	@Override
-	public String getPOStag(String word) {
-		return pos.getPOStag(word);
+	public String getPOStag(String leftContext, String target, String rightContext) {
+		return pos.getPOStag(leftContext, target, rightContext);
 	}
 
 	/**

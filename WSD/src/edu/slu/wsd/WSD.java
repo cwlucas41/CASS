@@ -22,6 +22,8 @@ public class WSD {
 	private LanguageTool lTool;
 	private List<String> context;
 	private String target;
+	private String leftContext; // these are both needed for the POS tagger
+	private String rightContext;
 		
 	/**
 	 * Constructor for WSD. 
@@ -142,6 +144,8 @@ public class WSD {
 	}
 	
 	private Set<CASSWordSense> getAllTargetSenses() {
-		return lTool.getSenses(target);
+		String pos;
+		pos = lTool.getPOStag(leftContext, target, rightContext);
+		return lTool.getSenses(target, pos.charAt(0));
 	}
 }

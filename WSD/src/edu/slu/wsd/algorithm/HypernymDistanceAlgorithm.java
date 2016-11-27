@@ -64,7 +64,7 @@ public class HypernymDistanceAlgorithm implements I_WSDAlgorithm {
 		
 		// loop over all context words
 		for (String contextWord : wsd.getContext()) {
-			Set<CASSWordSense> contextWordSenses = wsd.getlTool().getSenses(contextWord);
+			Set<CASSWordSense> contextWordSenses = wsd.getlTool().getSenses(contextWord, ' '); //TODO: FIX
 			int contextWordBestScore = Integer.MAX_VALUE;
 			if (!contextWordSenses.isEmpty()) {
 				// loop over all senses of context word

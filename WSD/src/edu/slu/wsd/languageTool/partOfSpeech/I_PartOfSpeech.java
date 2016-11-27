@@ -12,6 +12,6 @@ public interface I_PartOfSpeech {
 	 * @param word A string representing a word in a sentence to get the Part of Speech tag associated with it
 	 * @return A string of The Part of Speech of word
 	 */			
-	public String getPOStag(String word);
+	public String getPOStag(String leftContext, String target, String rightContext);
 
 }

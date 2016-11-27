@@ -17,7 +17,7 @@ public class EN_WordNet_Test {
 
 	I_WordNet wn = new EN_WordNet();
 	String testString = "stab";
-	Set<CASSWordSense> senses = wn.getSenses(testString);
+	Set<CASSWordSense> senses = wn.getSenses(testString, 'N');
 	
 	private LanguageTool lTool;
 	
@@ -56,7 +56,7 @@ public class EN_WordNet_Test {
 			System.out.println(synonyms);
 			System.out.println("----------------");
 			for (String word : synonyms) {
-				String toPrint = lTool.getPOStag(word);
+				String toPrint = lTool.getPOStag("This is a test string to ", word, " you in the heart.");
 				assertNotNull(toPrint);
 				if (toPrint != null) {
 					System.out.println(toPrint);
@@ -83,7 +83,7 @@ public class EN_WordNet_Test {
 	
 	@Test
 	public void exampleHypernymsTest() {
-		Set<CASSWordSense> senses = wn.getSenses("basketball");
+		Set<CASSWordSense> senses = wn.getSenses("basketball", 'N');
 		
 		Set<String> actualHypernymSenseKeys = new HashSet<String>();
 		actualHypernymSenseKeys.add("ball%1:06:01::");
