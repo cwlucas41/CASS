@@ -17,10 +17,14 @@ public class ScoredSense implements Comparable<ScoredSense> {
 	
 	@Override
 	public int compareTo(ScoredSense o) {
-		if (Integer.compare(getScore(), o.getScore()) == 0)
-			return getSense().getId().compareTo(o.getSense().getId());
+		if (getSense().isCorrectPOS() == o.getSense().isCorrectPOS()) {
+			if (Integer.compare(getScore(), o.getScore()) == 0)
+				return getSense().getId().compareTo(o.getSense().getId());
+			else
+				return Integer.compare(getScore(), o.getScore());
+		}
 		else
-			return Integer.compare(getScore(), o.getScore());
+			return Boolean.compare(getSense().isCorrectPOS(), o.getSense().isCorrectPOS());
 	}
 	
 	public CASSWordSense getSense() {

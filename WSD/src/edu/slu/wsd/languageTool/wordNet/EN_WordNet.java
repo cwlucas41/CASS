@@ -83,24 +83,27 @@ public class EN_WordNet implements I_WordNet {
 		
 		// getting WordNet indexes for all parts of speech
 		List<IIndexWord> indexWords = new ArrayList<IIndexWord>();
+		indexWords.add(dict.getIndexWord(word, POS.NOUN));
+		indexWords.add(dict.getIndexWord(word, POS.VERB));
+		indexWords.add(dict.getIndexWord(word, POS.ADJECTIVE));
+		indexWords.add(dict.getIndexWord(word, POS.ADVERB));
+		
+		// convert POS format
+		String correctPOS = null;
 		switch (partOfSpeech) {
 		case 'N':
-			indexWords.add(dict.getIndexWord(word, POS.NOUN));
+			correctPOS = "noun";
 			break;
 		case 'V':
-			indexWords.add(dict.getIndexWord(word, POS.VERB));
+			correctPOS = "verb";
 			break;
 		case 'J':
-			indexWords.add(dict.getIndexWord(word, POS.ADJECTIVE));
+			correctPOS = "adjective";
 			break;
 		case 'R':
-			indexWords.add(dict.getIndexWord(word, POS.ADVERB));
+			correctPOS = "adverb";
 			break;
 		default:
-			indexWords.add(dict.getIndexWord(word, POS.NOUN));
-			indexWords.add(dict.getIndexWord(word, POS.VERB));
-			indexWords.add(dict.getIndexWord(word, POS.ADJECTIVE));
-			indexWords.add(dict.getIndexWord(word, POS.ADVERB));
 			break;
 		}
 		
@@ -119,9 +122,10 @@ public class EN_WordNet implements I_WordNet {
 			ISenseEntry senseEntry = dict.getSenseEntry(senseKey);
 			
 			CASSWordSense sense = new CASSWordSense(iword.getLemma(), senseKey.toString(), iword.getPOS().toString(), senseEntry.getTagCount());
+			if (iword.getPOS().toString() == correctPOS)
+				sense.isCorrect(true);
 			senses.add(sense);
 		}
-		
 		return senses;
 	}
 

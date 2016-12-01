@@ -56,9 +56,9 @@ public class EN_WordNet_Test {
 			System.out.println(synonyms);
 			System.out.println("----------------");
 			for (String word : synonyms) {
-				String toPrint = lTool.getPOStag("This is a test string to ", word, " you in the heart.");
+				char toPrint = lTool.getPOStag("This is a test string to ", word, " you in the heart.");
 				assertNotNull(toPrint);
-				if (toPrint != null) {
+				if (toPrint != '\0') {
 					System.out.println(toPrint);
 					System.out.println(" ");
 				}

@@ -24,6 +24,7 @@ public class WSD {
 	private String target;
 	private String leftContext; // these are both needed for the POS tagger
 	private String rightContext;
+	private char partOfSpeech;
 		
 	/**
 	 * Constructor for WSD. 
@@ -49,7 +50,9 @@ public class WSD {
 			context.addAll(lTool.tokenizeAndLemmatize(leftContext));
 		if (rightContext != null)
 			context.addAll(lTool.tokenizeAndLemmatize(rightContext));
-		}
+		
+		partOfSpeech = lTool.getPOStag(leftContext, target, rightContext);
+	}
 	
 	/**
 	 * Gets the Language Tool of the class. The language tool is initialized to the language of the WSD class.
@@ -61,6 +64,10 @@ public class WSD {
 	
 	public String getTarget() {
 		return target;
+	}
+	
+	public char getPOS() {
+		return partOfSpeech;
 	}
 
 	/**
@@ -144,8 +151,8 @@ public class WSD {
 	}
 	
 	private Set<CASSWordSense> getAllTargetSenses() {
-		String pos;
+		char pos;
 		pos = lTool.getPOStag(leftContext, target, rightContext);
-		return lTool.getSenses(target, pos.charAt(0));
+		return lTool.getSenses(target, pos);
 	}
 }
