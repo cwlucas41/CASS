@@ -51,7 +51,10 @@ public class WSD {
 		if (rightContext != null)
 			context.addAll(lTool.tokenizeAndLemmatize(rightContext));
 		
-		partOfSpeech = lTool.getPOStag(leftContext, target, rightContext);
+		int index = 0;
+		if (leftContext != null)
+			lTool.tokenize(leftContext).size();
+		partOfSpeech = lTool.getPOStag(leftContext, target, rightContext, index);
 	}
 	
 	/**
@@ -152,7 +155,10 @@ public class WSD {
 	
 	private Set<CASSWordSense> getAllTargetSenses() {
 		char pos;
-		pos = lTool.getPOStag(leftContext, target, rightContext);
+		int index = 0;
+		if (leftContext != null)
+			lTool.tokenize(leftContext).size();
+		pos = lTool.getPOStag(leftContext, target, rightContext, index);
 		return lTool.getSenses(target, pos);
 	}
 }

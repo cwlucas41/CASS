@@ -97,9 +97,9 @@ public class LanguageTool implements I_Lemma, I_Tokenizer, I_WordNet, I_PartOfSp
 	}
 
 	@Override
-	public char getPOStag(String leftContext, String target, String rightContext) {
+	public char getPOStag(String leftContext, String target, String rightContext, int targetIndex) {
 		try {
-			return pos.getPOStag(leftContext, target, rightContext);
+			return pos.getPOStag(leftContext, target, rightContext, targetIndex);
 		}
 		catch (IllegalStateException e) {
 			return ' ';
