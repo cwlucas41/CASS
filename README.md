@@ -16,7 +16,7 @@ How to add a button for a macro in an OpenOffice document https://help.libreoffi
 If you wish to fork and continue development on CASS you must still install all the files in the same way as described above. The java implementation of CASS will be expecting files to exist in these directories.
 
 
-#Licesne
+#License
 CASS is an open source project that abides by GNU open source license:
 
                GNU LESSER GENERAL PUBLIC LICENSE
