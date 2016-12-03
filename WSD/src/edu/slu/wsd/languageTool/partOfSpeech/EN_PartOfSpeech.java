@@ -1,7 +1,5 @@
 package edu.slu.wsd.languageTool.partOfSpeech;
 
-import java.util.Collections;
-
 import edu.stanford.nlp.simple.Sentence;
 
 /**
@@ -14,13 +12,6 @@ public class EN_PartOfSpeech implements I_PartOfSpeech {
 	@Override
 	public char getPOStag(String leftContext, String target, String rightContext, int targetIndex) { // any null checks needed?
 		String result = new String();
-		Sentence frag;
-		if (leftContext != null)
-			frag = new Sentence(leftContext);
-		else
-			return ' '; // may not be the best solution
-		//System.out.println(frag.lemmas());
-		frag = null; // the above can be done more efficiently
 		Sentence sen = new Sentence(leftContext + " " + target + " " + rightContext);
 		//System.out.println(leftContext);
 		//System.out.println(target);
