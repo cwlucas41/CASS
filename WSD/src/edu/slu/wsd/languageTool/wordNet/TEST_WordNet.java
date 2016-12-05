@@ -14,7 +14,7 @@ public class TEST_WordNet implements I_WordNet {
 	}
 
 	@Override
-	public Set<CASSWordSense> getSenses(String word) {
+	public Set<CASSWordSense> getSenses(String word, char pos) {
 		Set<CASSWordSense> set = new HashSet<>(numberOfSenses);
 		for (int i = 0; i < numberOfSenses; i++) {
 			set.add(new CASSWordSense(null, word + i, null, 0));

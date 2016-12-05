@@ -64,7 +64,7 @@ public class CustomLeskAlgorithm implements I_WSDAlgorithm {
 		for (String contextWord : context) {
 			List<Set<String>> listOfGlosses = new ArrayList<Set<String>>();
 			
-			Set<CASSWordSense> contextWordSenses = wsd.getlTool().getSenses(contextWord);
+			Set<CASSWordSense> contextWordSenses = wsd.getlTool().getSenses(contextWord, ' '); // TODO: FIX
 			for (CASSWordSense contextWordSense : contextWordSenses) {
 				listOfGlosses.add(getGlossSet(contextWordSense));
 			}

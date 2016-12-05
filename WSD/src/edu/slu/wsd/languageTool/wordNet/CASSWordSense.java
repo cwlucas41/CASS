@@ -6,12 +6,14 @@ public class CASSWordSense {
 	private String target;
 	private String part_of_speech;
 	private int tagFrequency;
+	private boolean isCorrectPOS;
 	
 	public CASSWordSense(String target, String id, String pos, int tagFrequency) {
 		this.target = target;
 		this.full_id = id;
 		this.part_of_speech = pos;
 		this.tagFrequency = tagFrequency;
+		this.isCorrectPOS = false;
 	}
 
 	public String getTarget() {
@@ -28,5 +30,13 @@ public class CASSWordSense {
 	
 	public Integer getTagFrequency() {
 		return tagFrequency;
+	}
+	
+	public void isCorrect(boolean isCorrect) {
+		isCorrectPOS = isCorrect;
+	}
+	
+	public boolean isCorrectPOS() {
+		return isCorrectPOS;
 	}
 }

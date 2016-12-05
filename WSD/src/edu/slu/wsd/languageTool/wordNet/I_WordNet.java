@@ -26,7 +26,7 @@ public interface I_WordNet {
 	 * @param word String lemma of the word being queried
 	 * @return Set of CASSWordSense objects which share a lemma with the argument
 	 */
-	Set<CASSWordSense> getSenses(String word);
+	Set<CASSWordSense> getSenses(String word, char partOfSpeech);
 	
 	/**
 	 * Returns the definition of the word sense provided in the argument.

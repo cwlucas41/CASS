@@ -78,7 +78,7 @@ public class EN_WordNet implements I_WordNet {
 	}
 
 	@Override
-	public Set<CASSWordSense> getSenses(String word) {
+	public Set<CASSWordSense> getSenses(String word, char partOfSpeech) {
 		Set<CASSWordSense> senses = new HashSet<CASSWordSense>();
 		
 		// getting WordNet indexes for all parts of speech
@@ -87,6 +87,25 @@ public class EN_WordNet implements I_WordNet {
 		indexWords.add(dict.getIndexWord(word, POS.VERB));
 		indexWords.add(dict.getIndexWord(word, POS.ADJECTIVE));
 		indexWords.add(dict.getIndexWord(word, POS.ADVERB));
+		
+		// convert POS format
+		String correctPOS = null;
+		switch (partOfSpeech) {
+		case 'N':
+			correctPOS = "noun";
+			break;
+		case 'V':
+			correctPOS = "verb";
+			break;
+		case 'J':
+			correctPOS = "adjective";
+			break;
+		case 'R':
+			correctPOS = "adverb";
+			break;
+		default:
+			break;
+		}
 		
 		Set<IWordID> wordIDList = new HashSet<IWordID>();
 		for (IIndexWord indexWord : indexWords) {
@@ -103,9 +122,10 @@ public class EN_WordNet implements I_WordNet {
 			ISenseEntry senseEntry = dict.getSenseEntry(senseKey);
 			
 			CASSWordSense sense = new CASSWordSense(iword.getLemma(), senseKey.toString(), iword.getPOS().toString(), senseEntry.getTagCount());
+			if (iword.getPOS().toString() == correctPOS)
+				sense.isCorrect(true);
 			senses.add(sense);
 		}
-		
 		return senses;
 	}
 

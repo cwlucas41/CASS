@@ -27,7 +27,7 @@ public class WSDBenchmark {
 			WSD wsd = new WSD(ts.getLeftContext(), ts.getTarget(), ts.getRightContext(), Language.EN);				
 			LanguageTool lt = new LanguageTool(Language.EN);
 			
-			if (!lt.getSenses(ts.getTarget()).isEmpty()) {				
+			if (!lt.getSenses(ts.getTarget(), ' ').isEmpty()) {				
 				List<ScoredSense> results = wsd.scoreSensesUsing(algorithm);
 				
 				int numCorrectAnswers = ts.getSenses().size();
