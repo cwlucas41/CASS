@@ -7,7 +7,7 @@ CASS is a context sensitive Synonym Suggester that makes use of WordNet as a kno
 #Installation Guide
 (Requires only minimal configuration and tweaking):
 
-1.Install the .oxt file by using your extension manager in open office (under tools->extension manager) Link to .oxt https://drive.google.com/uc?export=download&id=0BxoeFOWirXrNU0VBNFVyT2NNUmM 2. Move the following directory folder to /usr/lib/ https://drive.google.com/uc?export=download&id=0BxoeFOWirXrNajJmeXhwcWtTVlE
+1.Install the .oxt file by using your extension manager in open office (under tools->extension manager) Link to .oxt https://drive.google.com/uc?export=download&id=0BxoeFOWirXrNR2ZiYkYtcDlvbVU 2. Move the following directory folder to /usr/lib/ https://drive.google.com/uc?export=download&id=0BxoeFOWirXrNajJmeXhwcWtTVlE
 
 2.Once the extension is installed you will be able to execute it, and get your smarter suggestions, by running the macro called CASS (find under tool->macro->run macro)
 
